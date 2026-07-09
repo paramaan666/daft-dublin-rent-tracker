@@ -2,6 +2,17 @@ name: Update Daft tracker and publish Pages
 
 'on':
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "data/**"
+      - "site/**"
+      - "seeds/**"
+      - "src/**"
+      - "config.yaml"
+      - "config.example.yaml"
+      - ".github/workflows/update-and-publish.yml"
   schedule:
     # GitHub schedules run in UTC by default. The timezone field is supported by current GitHub Actions docs.
     - cron: "15 6 * * *"
