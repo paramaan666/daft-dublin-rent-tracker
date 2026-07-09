@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-09T20:09:20+00:00",
+  "updated_at": "2026-07-09T20:16:38+00:00",
   "filters": {
     "locations": [
       "Dublin 1",
@@ -25,7 +25,7 @@
   },
   "listings": [
     {
-      "id": "daft-26611573",
+      "id": "daft-6611573",
       "status": "active",
       "needs_review": true,
       "review_reasons": [
@@ -54,7 +54,7 @@
       "change_history": []
     },
     {
-      "id": "daft-26557212",
+      "id": "daft-6557212",
       "status": "active",
       "needs_review": false,
       "review_reasons": [],
@@ -81,7 +81,7 @@
       "change_history": []
     },
     {
-      "id": "daft-26616306",
+      "id": "daft-6616306",
       "status": "active",
       "needs_review": false,
       "review_reasons": [],
@@ -108,7 +108,7 @@
       "change_history": []
     },
     {
-      "id": "daft-26616448",
+      "id": "daft-6616448",
       "status": "active",
       "needs_review": false,
       "review_reasons": [],
@@ -135,16 +135,18 @@
       "change_history": []
     },
     {
-      "id": "daft-26584957",
+      "id": "daft-6584957",
       "status": "active",
-      "needs_review": false,
-      "review_reasons": [],
+      "needs_review": true,
+      "review_reasons": [
+        "double_bed_count_not_visible_in_email"
+      ],
       "title": "North Circular Road, Dublin 7, North Circular Road, Dublin 7",
       "location": "North Circular Road, Dublin 7",
       "postcode": "Dublin 7",
       "price_eur": 1350,
       "rent_period": "month",
-      "double_beds": 7,
+      "double_beds": null,
       "url": "https://www.daft.ie/for-rent/north-circular-road-dublin-7-north-circular-road-dublin-7/6584957",
       "thumbnail_url": null,
       "image_urls": [],
@@ -162,7 +164,7 @@
       "change_history": []
     },
     {
-      "id": "daft-26591721",
+      "id": "daft-6591721",
       "status": "active",
       "needs_review": false,
       "review_reasons": [],
@@ -218,7 +220,7 @@
       "change_history": []
     },
     {
-      "id": "daft-26522594",
+      "id": "daft-6522594",
       "status": "active",
       "needs_review": false,
       "review_reasons": [],
@@ -274,7 +276,7 @@
       "change_history": []
     },
     {
-      "id": "daft-26577262",
+      "id": "daft-6577262",
       "status": "active",
       "needs_review": false,
       "review_reasons": [],
@@ -301,7 +303,7 @@
       "change_history": []
     },
     {
-      "id": "daft-26575592",
+      "id": "daft-6575592",
       "status": "active",
       "needs_review": false,
       "review_reasons": [],

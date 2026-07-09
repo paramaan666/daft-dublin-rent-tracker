@@ -188,7 +188,7 @@ def write_outputs(data_dir: str | Path, store: dict[str, Any]) -> None:
     data_path = Path(data_dir)
     write_json(data_path / "listings.json", store)
     with (data_path / "listings.csv").open("w", encoding="utf-8", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=LISTING_FIELDNAMES)
+        writer = csv.DictWriter(f, fieldnames=LISTING_FIELDNAMES, lineterminator="\n")
         writer.writeheader()
         for item in store.get("listings", []):
             row = {field: item.get(field) for field in LISTING_FIELDNAMES}

@@ -19,8 +19,5 @@ Main files updated:
 - `site/data/listings.csv`
 - `seeds/listings_seed.csv`
 
-Audit file:
-- `seeds/visible_daft_candidates_review.csv`
-
 Important limitation:
 This is not a complete crawler of all Daft results. It is a manual bootstrap seed. From now on, the scheduled Gmail/Daft alert workflow should keep adding new listings as alert emails arrive.
