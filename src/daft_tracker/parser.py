@@ -27,6 +27,11 @@ DOUBLE_BEDS_RE = re.compile(
     r"(?:(?P<count>\d+)\s*)?(?:double\s+(?:bed(?:room)?s?|room)s?|manželsk(?:á|e|é)\s+postel(?:e|í)?)",
     re.IGNORECASE,
 )
+COUPLE_UNSUITABLE_RE = re.compile(
+    r"\b(?:no\s+couples?|couples?\s+not\s+(?:allowed|accepted|considered)|not\s+suitable\s+for\s+(?:a\s+)?couple|single\s+occupancy|sole\s+occupancy|(?:one|1)\s+person\s+only|single\s+(?:person|tenant)\s+only|(?:one|1)\s+tenant\s+only)\b",
+    re.IGNORECASE,
+)
+SINGLE_BED_RE = re.compile(r"\b(?:single\s+(?:bed(?:room)?|room)|box\s+room)\b", re.IGNORECASE)
 BEDROOM_RE = re.compile(r"\b(?P<count>[1-9])\s*(?:bed|bedroom)s?\b", re.IGNORECASE)
 AD_ID_RE = re.compile(r"(?:^|/)(?P<id>[1-9][0-9]{4,})(?:[/?#]|$)")
 TRACKING_PARAMS = {"utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid", "gclid"}
@@ -112,7 +117,13 @@ def extract_postcode(text: str) -> tuple[str | None, str | None]:
 
 
 def extract_double_beds(text: str) -> int | None:
-    match = DOUBLE_BEDS_RE.search(text or "")
+    text = text or ""
+    if COUPLE_UNSUITABLE_RE.search(text):
+        return 0
+    if SINGLE_BED_RE.search(text) and not DOUBLE_BEDS_RE.search(text):
+        return 0
+
+    match = DOUBLE_BEDS_RE.search(text)
     if match:
         raw = match.group("count")
         if raw:
@@ -176,6 +187,9 @@ def parse_email_message(
             img = clean_url(img)
             if img not in image_urls:
                 image_urls.append(img)
+        double_beds = extract_double_beds(snippet)
+        if double_beds is None:
+            double_beds = extract_double_beds(body_text)
 
         listing = ParsedListing(
             id=listing_id,
@@ -184,7 +198,7 @@ def parse_email_message(
             postcode=postcode,
             location=location,
             price_eur=extract_price(snippet) or extract_price(body_text),
-            double_beds=extract_double_beds(snippet) or extract_double_beds(body_text),
+            double_beds=double_beds,
             image_urls=image_urls[:10],
             thumbnail_url=image_urls[0] if image_urls else None,
             source_message_id=message_id,

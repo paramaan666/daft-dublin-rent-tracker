@@ -80,7 +80,7 @@
         `<span class="badge ${x.status === 'active' ? '' : 'inactive'}">${esc(x.status || 'active')}</span>`,
         x.needs_review ? `<span class="badge warning" title="${esc(reasons)}">kontrola</span>` : '',
         x.postcode ? `<span class="badge">${esc(x.postcode)}</span>` : '',
-        x.double_beds ? `<span class="badge">double beds: ${esc(x.double_beds)}</span>` : ''
+        x.double_beds ? `<span class="badge">ověřený double: ${esc(x.double_beds)}</span>` : ''
       ].join('');
       return `<article class="card">
         <div class="thumb">${x.thumbnail_url ? `<img src="${esc(x.thumbnail_url)}" alt="" loading="lazy">` : 'bez fotky'}</div>

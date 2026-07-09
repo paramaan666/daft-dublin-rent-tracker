@@ -14,6 +14,8 @@ Výchozí konfigurace v `config.example.yaml` odpovídá zadání:
 
 Daft emaily někdy neobsahují všechny detaily. Když email neobsahuje postcode nebo typ postele, položka zůstane v datasetu s `needs_review=true`, protože primární filtr má být nastavený už v Daft Saved Search.
 
+Nabídky, které jsou v emailu jasně označené jako `single room`, `single occupancy`, `one person only`, `no couples` nebo podobně, se zahodí automaticky.
+
 ## Co se publikuje
 
 Po každém běhu vzniknou:
