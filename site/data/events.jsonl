@@ -55,3 +55,7 @@
 {"at": "2026-07-09T20:55:23+00:00", "type": "new_listing", "listing_id": "daft-3248977", "url": "https://www.daft.ie/for-rent/the-belfry-student-accommodation-365-collins-avenue-whitehall-co-dublin/3248977", "price_eur": 786}
 {"at": "2026-07-09T20:55:23+00:00", "type": "new_listing", "listing_id": "daft-2626696", "url": "https://www.daft.ie/for-rent/hazelwood-student-village-north-wood-santry-santry-co-dublin/2626696", "price_eur": 1500}
 {"at": "2026-07-09T21:05:56+00:00", "type": "new_listing", "listing_id": "daft-6529240", "url": "https://www.daft.ie/for-rent/flat-9-102-north-circular-road-stoneybatter-dublin-7/6529240", "price_eur": 1700}
+{"at": "2026-07-09T21:06:35+00:00", "type": "removed_from_manual_seed", "listing_id": "daft-6507487", "url": "https://www.daft.ie/for-rent/102-rathmines-road-lower-rathmines-dublin-6/6507487"}
+{"at": "2026-07-09T21:06:35+00:00", "type": "removed_from_manual_seed", "listing_id": "daft-6522594", "url": "https://www.daft.ie/for-rent/flat-city-end-south-circular-road-dublin-8-portobello-dublin-8/6522594"}
+{"at": "2026-07-09T21:06:35+00:00", "type": "removed_from_manual_seed", "listing_id": "daft-6575592", "url": "https://www.daft.ie/for-rent/apartment-5-dunville-avenue-ranelagh-dublin-6/6575592"}
+{"at": "2026-07-09T21:06:35+00:00", "type": "listing_updated", "listing_id": "daft-6529240", "changes": {"status": {"old": "active", "new": "price_above_filter"}}}

@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-09T21:05:56+00:00",
+  "updated_at": "2026-07-09T21:06:35+00:00",
   "filters": {
     "locations": [
       "Dublin 1",
@@ -812,35 +812,6 @@
       ]
     },
     {
-      "id": "daft-6507487",
-      "status": "active",
-      "needs_review": true,
-      "review_reasons": [
-        "double_bed_count_not_visible_in_email"
-      ],
-      "title": "102 Rathmines Road Lower, Rathmines, Dublin 6",
-      "location": "Rathmines, Dublin 6",
-      "postcode": "Dublin 6",
-      "price_eur": 1400,
-      "rent_period": "month",
-      "double_beds": null,
-      "url": "https://www.daft.ie/for-rent/102-rathmines-road-lower-rathmines-dublin-6/6507487",
-      "thumbnail_url": null,
-      "image_urls": [],
-      "source": "manual_seed",
-      "source_message_ids": [],
-      "source_subjects": [],
-      "first_seen": "2026-07-09",
-      "last_seen": "2026-07-09",
-      "price_history": [
-        {
-          "seen_at": "2026-07-09",
-          "price_eur": 1400
-        }
-      ],
-      "change_history": []
-    },
-    {
       "id": "daft-6614745",
       "status": "active",
       "needs_review": false,
@@ -921,33 +892,6 @@
         {
           "seen_at": "2026-07-09",
           "price_eur": 1425
-        }
-      ],
-      "change_history": []
-    },
-    {
-      "id": "daft-6522594",
-      "status": "active",
-      "needs_review": false,
-      "review_reasons": [],
-      "title": "city end, south circular road, Portobello, Dublin 8",
-      "location": "Portobello, Dublin 8",
-      "postcode": "Dublin 8",
-      "price_eur": 1440,
-      "rent_period": "month",
-      "double_beds": 1,
-      "url": "https://www.daft.ie/for-rent/flat-city-end-south-circular-road-dublin-8-portobello-dublin-8/6522594",
-      "thumbnail_url": null,
-      "image_urls": [],
-      "source": "manual_seed",
-      "source_message_ids": [],
-      "source_subjects": [],
-      "first_seen": "2026-07-09",
-      "last_seen": "2026-07-09",
-      "price_history": [
-        {
-          "seen_at": "2026-07-09",
-          "price_eur": 1440
         }
       ],
       "change_history": []
@@ -1119,33 +1063,6 @@
       "rent_period": "month",
       "double_beds": 1,
       "url": "https://www.daft.ie/for-rent/echlin-buildings-echlin-street-dublin-8/6577262",
-      "thumbnail_url": null,
-      "image_urls": [],
-      "source": "manual_seed",
-      "source_message_ids": [],
-      "source_subjects": [],
-      "first_seen": "2026-07-09",
-      "last_seen": "2026-07-09",
-      "price_history": [
-        {
-          "seen_at": "2026-07-09",
-          "price_eur": 1500
-        }
-      ],
-      "change_history": []
-    },
-    {
-      "id": "daft-6575592",
-      "status": "active",
-      "needs_review": false,
-      "review_reasons": [],
-      "title": "5 Dunville Avenue, Ranelagh, Dublin 6",
-      "location": "Ranelagh, Dublin 6",
-      "postcode": "Dublin 6",
-      "price_eur": 1500,
-      "rent_period": "month",
-      "double_beds": 1,
-      "url": "https://www.daft.ie/for-rent/apartment-5-dunville-avenue-ranelagh-dublin-6/6575592",
       "thumbnail_url": null,
       "image_urls": [],
       "source": "manual_seed",
@@ -1561,10 +1478,11 @@
     },
     {
       "id": "daft-6529240",
-      "status": "active",
+      "status": "price_above_filter",
       "needs_review": true,
       "review_reasons": [
-        "current_detail_price_above_filter"
+        "current_detail_price_above_filter",
+        "non_active_manual_status"
       ],
       "title": "Flat 9, 102 North Circular Road, Stoneybatter, Dublin 7",
       "location": "Stoneybatter, Dublin 7",
@@ -1586,7 +1504,17 @@
           "price_eur": 1700
         }
       ],
-      "change_history": []
+      "change_history": [
+        {
+          "at": "2026-07-09T21:06:35+00:00",
+          "changes": {
+            "status": {
+              "old": "active",
+              "new": "price_above_filter"
+            }
+          }
+        }
+      ]
     }
   ]
 }
