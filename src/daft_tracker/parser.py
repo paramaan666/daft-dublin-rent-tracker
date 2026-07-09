@@ -52,6 +52,8 @@ class ParsedListing:
     source_message_id: str | None = None
     source_subject: str | None = None
     seen_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat(timespec="seconds"))
+    status: str = "active"
+    rent_period: str = "month"
     needs_review: bool = False
     review_reasons: list[str] = field(default_factory=list)
 
@@ -210,14 +212,18 @@ def parse_email_message(
 
 
 def apply_filters(listing: ParsedListing, cfg: TrackerConfig) -> ParsedListing | None:
-    reasons: list[str] = []
+    reasons: list[str] = list(listing.review_reasons or [])
+    preserve_manual_non_active = listing.source == "manual_seed" and listing.status not in ("active", "")
 
     if listing.price_eur is None:
         if not cfg.include_unknown_price:
             return None
         reasons.append("price_not_visible_in_email")
     elif listing.price_eur > cfg.max_monthly_rent_eur:
-        return None
+        if preserve_manual_non_active:
+            reasons.append("current_detail_price_above_filter")
+        else:
+            return None
 
     if listing.postcode is None:
         if not cfg.include_unknown_location:
@@ -231,11 +237,18 @@ def apply_filters(listing: ParsedListing, cfg: TrackerConfig) -> ParsedListing |
             return None
         reasons.append("double_bed_count_not_visible_in_email")
     elif listing.double_beds < cfg.min_double_beds:
-        return None
+        if preserve_manual_non_active:
+            reasons.append("double_bed_below_filter")
+        else:
+            return None
 
-    listing.needs_review = bool(reasons)
-    listing.review_reasons = reasons
+    listing.needs_review = listing.needs_review or bool(reasons) or listing.status != "active"
+    listing.review_reasons = list(dict.fromkeys(reasons))
     return listing
+
+
+def _bool_from_csv(value: str | None) -> bool:
+    return str(value or "").strip().lower() in {"1", "true", "yes", "y", "ano"}
 
 
 def parse_seed_csv(path: str | Path, now_iso: str | None = None) -> list[ParsedListing]:
@@ -256,6 +269,10 @@ def parse_seed_csv(path: str | Path, now_iso: str | None = None) -> list[ParsedL
             price = row.get("price_eur") or None
             beds = row.get("double_beds") or None
             image = row.get("thumbnail_url") or None
+            status = (row.get("status") or "active").strip() or "active"
+            rent_period = (row.get("rent_period") or "month").strip().lower() or "month"
+            raw_reasons = row.get("review_reasons") or ""
+            review_reasons = [r.strip() for r in re.split(r"[;|]", raw_reasons) if r.strip()]
             listings.append(ParsedListing(
                 id=listing_id,
                 url=url,
@@ -269,7 +286,9 @@ def parse_seed_csv(path: str | Path, now_iso: str | None = None) -> list[ParsedL
                 source="manual_seed",
                 source_message_id=None,
                 seen_at=row.get("last_seen") or row.get("first_seen") or now_iso,
-                needs_review=False,
-                review_reasons=[],
+                status=status,
+                rent_period=rent_period,
+                needs_review=_bool_from_csv(row.get("needs_review")) or status != "active" or bool(review_reasons),
+                review_reasons=review_reasons,
             ))
     return listings
