@@ -11,7 +11,9 @@
     h1 { margin: 0 0 8px; font-size: clamp(28px, 4vw, 42px); }
     .meta { color: #475569; }
     .toolbar { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0; }
-    input, select { padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 15px; background: white; }
+    input, select, button.action { padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 15px; background: white; }
+    button.action { cursor: pointer; color: #334155; }
+    button.action:hover { background: #f1f5f9; }
     main { max-width: 1100px; margin: 0 auto; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
     .card { background: white; border: 1px solid #e2e8f0; border-radius: 18px; overflow: hidden; box-shadow: 0 1px 2px rgba(15, 23, 42, .06); }
@@ -25,7 +27,8 @@
     .badge { border-radius: 999px; padding: 4px 8px; font-size: 12px; background: #eef2ff; color: #3730a3; }
     .warning { background: #fff7ed; color: #9a3412; }
     .inactive { background: #f1f5f9; color: #475569; }
-    a.button { display: inline-block; margin-top: 10px; padding: 9px 12px; background: #111827; color: white; border-radius: 10px; text-decoration: none; }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    a.button { display: inline-block; padding: 9px 12px; background: #111827; color: white; border-radius: 10px; text-decoration: none; }
     .links { display: flex; gap: 12px; margin-top: 12px; }
     .links a { color: #2563eb; }
   </style>
@@ -39,31 +42,44 @@
       <input id="search" placeholder="Hledat lokalitu / název…" />
       <select id="status">
         <option value="active">Jen aktivní</option>
-        <option value="all">Vše</option>
+        <option value="all">Vše viditelné</option>
         <option value="needs_review">Potřebuje kontrolu</option>
         <option value="possibly_removed">Možná pryč</option>
+        <option value="hidden">Skryté</option>
       </select>
     </div>
   </header>
   <main><div class="grid" id="grid"></div></main>
   <script>
     let listings = [];
+    let updatedAt = '';
+    const hiddenStorageKey = 'daft-hidden-listing-ids-v1';
+    const hiddenIds = new Set(loadHiddenIds());
     const euro = new Intl.NumberFormat('en-IE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
     async function load() {
       const res = await fetch('data/listings.json', { cache: 'no-store' });
       const payload = await res.json();
       listings = payload.listings || [];
-      const active = listings.filter(x => x.status === 'active').length;
-      document.getElementById('meta').textContent = `${active} aktivních / ${listings.length} celkem. Aktualizováno: ${payload.updated_at || 'zatím nikdy'}.`;
+      updatedAt = payload.updated_at || 'zatím nikdy';
       render();
     }
     function render() {
       const q = document.getElementById('search').value.toLowerCase().trim();
       const status = document.getElementById('status').value;
+      const active = listings.filter(x => x.status === 'active').length;
+      const visibleActive = listings.filter(x => x.status === 'active' && !isHidden(x)).length;
+      const hidden = listings.filter(isHidden).length;
+      document.getElementById('meta').textContent = `${visibleActive} viditelných aktivních / ${active} aktivních / ${listings.length} celkem. Skryté: ${hidden}. Aktualizováno: ${updatedAt}.`;
       let rows = listings.filter(x => {
-        if (status === 'active' && x.status !== 'active') return false;
-        if (status === 'needs_review' && !x.needs_review) return false;
-        if (status === 'possibly_removed' && x.status !== 'possibly_removed') return false;
+        const hiddenListing = isHidden(x);
+        if (status === 'hidden') {
+          if (!hiddenListing) return false;
+        } else {
+          if (hiddenListing) return false;
+          if (status === 'active' && x.status !== 'active') return false;
+          if (status === 'needs_review' && !x.needs_review) return false;
+          if (status === 'possibly_removed' && x.status !== 'possibly_removed') return false;
+        }
         if (q) {
           const hay = `${x.title || ''} ${x.location || ''} ${x.postcode || ''}`.toLowerCase();
           if (!hay.includes(q)) return false;
@@ -73,11 +89,42 @@
       document.getElementById('grid').innerHTML = rows.map(card).join('') || '<p>Žádné nabídky pro zvolený filtr.</p>';
     }
     function esc(s) { return String(s ?? '').replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch])); }
+    function loadHiddenIds() {
+      try {
+        const ids = JSON.parse(localStorage.getItem(hiddenStorageKey) || '[]');
+        return Array.isArray(ids) ? ids : [];
+      } catch {
+        return [];
+      }
+    }
+    function saveHiddenIds() {
+      localStorage.setItem(hiddenStorageKey, JSON.stringify([...hiddenIds]));
+    }
+    function listingKey(x) {
+      return x.id || x.url;
+    }
+    function isHidden(x) {
+      return hiddenIds.has(listingKey(x));
+    }
+    function hideListing(id) {
+      hiddenIds.add(id);
+      saveHiddenIds();
+      render();
+    }
+    function restoreListing(id) {
+      hiddenIds.delete(id);
+      saveHiddenIds();
+      render();
+    }
     function card(x) {
       const price = x.price_eur ? euro.format(x.price_eur) + ' / měsíc' : 'Cena neznámá';
       const reasons = (x.review_reasons || []).join(', ');
+      const id = listingKey(x);
+      const idArg = esc(JSON.stringify(id));
+      const hiddenListing = isHidden(x);
       const badges = [
         `<span class="badge ${x.status === 'active' ? '' : 'inactive'}">${esc(x.status || 'active')}</span>`,
+        hiddenListing ? `<span class="badge inactive">skryté</span>` : '',
         x.needs_review ? `<span class="badge warning" title="${esc(reasons)}">kontrola</span>` : '',
         x.postcode ? `<span class="badge">${esc(x.postcode)}</span>` : '',
         x.double_beds ? `<span class="badge">ověřený double: ${esc(x.double_beds)}</span>` : ''
@@ -90,7 +137,12 @@
           <div class="muted">${esc(x.location || x.postcode || 'lokalita neviditelná v emailu')}</div>
           <div class="badges">${badges}</div>
           <div class="muted">První: ${esc(x.first_seen || '')}<br>Poslední signál: ${esc(x.last_seen || '')}</div>
-          <a class="button" href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">Otevřít na Daft</a>
+          <div class="actions">
+            <a class="button" href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">Otevřít na Daft</a>
+            ${hiddenListing
+              ? `<button class="action" type="button" onclick="restoreListing(${idArg})">Obnovit</button>`
+              : `<button class="action" type="button" onclick="hideListing(${idArg})">Skrýt</button>`}
+          </div>
         </div>
       </article>`;
     }
