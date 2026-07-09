@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
 import csv
@@ -14,7 +13,7 @@ from .parser import ParsedListing
 
 LISTING_FIELDNAMES = [
     "id", "status", "needs_review", "review_reasons", "title", "location", "postcode",
-    "price_eur", "double_beds", "url", "thumbnail_url", "first_seen", "last_seen",
+    "price_eur", "rent_period", "double_beds", "url", "thumbnail_url", "first_seen", "last_seen",
 ]
 
 
@@ -69,14 +68,14 @@ def to_listing_record(parsed: ParsedListing, cfg: TrackerConfig) -> dict[str, An
     first_seen = parsed.seen_at or now_iso()
     record = {
         "id": parsed.id,
-        "status": "active",
-        "needs_review": parsed.needs_review,
-        "review_reasons": parsed.review_reasons,
+        "status": parsed.status or "active",
+        "needs_review": parsed.needs_review or (parsed.status not in ("active", "")),
+        "review_reasons": list(parsed.review_reasons or []),
         "title": parsed.title,
         "location": parsed.location,
         "postcode": parsed.postcode,
         "price_eur": parsed.price_eur,
-        "rent_period": "month",
+        "rent_period": parsed.rent_period or "month",
         "double_beds": parsed.double_beds,
         "url": parsed.url,
         "thumbnail_url": parsed.thumbnail_url,
@@ -87,7 +86,7 @@ def to_listing_record(parsed: ParsedListing, cfg: TrackerConfig) -> dict[str, An
         "first_seen": first_seen,
         "last_seen": parsed.seen_at or first_seen,
         "price_history": [
-            {"seen_at": parsed.seen_at or first_seen, "price_eur": parsed.price_eur}
+            {"seen_at": parsed.seen_at or first_seen, "price_eur": parsed.price_eur, "rent_period": parsed.rent_period or "month"}
         ] if parsed.price_eur is not None else [],
         "change_history": [],
     }
@@ -101,10 +100,27 @@ def merge_listings(
     data_dir: str | Path,
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     ts = now_iso()
+    parsed_items = list(parsed_listings)
     existing: dict[str, dict[str, Any]] = {item["id"]: item for item in store.get("listings", []) if item.get("id")}
     events: list[dict[str, Any]] = []
 
-    for parsed in parsed_listings:
+    # A manual seed is a full snapshot of the manually maintained base-filter universe.
+    # Remove older manual_seed rows that no longer appear in the current seed file so
+    # future Gmail alerts do not coexist with stale/orphaned manual IDs.
+    seed_ids = {item.id for item in parsed_items if item.source == "manual_seed" and item.id}
+    if seed_ids:
+        for listing_id, item in list(existing.items()):
+            if str(item.get("source") or "").startswith("manual") and listing_id not in seed_ids:
+                existing.pop(listing_id)
+                events.append({
+                    "at": ts,
+                    "type": "removed_from_manual_seed",
+                    "listing_id": listing_id,
+                    "url": item.get("url"),
+                })
+
+    for parsed in parsed_items:
+        parsed_status = parsed.status or "active"
         current = existing.get(parsed.id)
         if current is None:
             current = to_listing_record(parsed, cfg)
@@ -113,11 +129,11 @@ def merge_listings(
             continue
 
         changed_fields: dict[str, dict[str, Any]] = {}
-        if current.get("status") != "active":
-            changed_fields["status"] = {"old": current.get("status"), "new": "active"}
-            current["status"] = "active"
+        if current.get("status") != parsed_status:
+            changed_fields["status"] = {"old": current.get("status"), "new": parsed_status}
+            current["status"] = parsed_status
 
-        for field in ["title", "location", "postcode", "double_beds", "thumbnail_url", "url"]:
+        for field in ["title", "location", "postcode", "double_beds", "thumbnail_url", "url", "rent_period"]:
             value = getattr(parsed, field)
             if value and value != current.get(field):
                 changed_fields[field] = {"old": current.get(field), "new": value}
@@ -135,12 +151,18 @@ def merge_listings(
         if parsed.price_eur is not None and parsed.price_eur != current.get("price_eur"):
             changed_fields["price_eur"] = {"old": current.get("price_eur"), "new": parsed.price_eur}
             current["price_eur"] = parsed.price_eur
-            current.setdefault("price_history", []).append({"seen_at": parsed.seen_at or ts, "price_eur": parsed.price_eur})
+            current.setdefault("price_history", []).append({
+                "seen_at": parsed.seen_at or ts,
+                "price_eur": parsed.price_eur,
+                "rent_period": parsed.rent_period or current.get("rent_period") or "month",
+            })
             events.append({"at": ts, "type": "price_changed", "listing_id": parsed.id, "change": changed_fields["price_eur"]})
 
         current["last_seen"] = parsed.seen_at or ts
-        current["needs_review"] = parsed.needs_review or current.get("needs_review", False)
-        merged_reasons = list(dict.fromkeys((current.get("review_reasons") or []) + parsed.review_reasons))
+        current["needs_review"] = parsed.needs_review or current.get("needs_review", False) or parsed_status != "active"
+        merged_reasons = list(dict.fromkeys((current.get("review_reasons") or []) + (parsed.review_reasons or [])))
+        if parsed_status != "active" and "non_active_manual_status" not in merged_reasons:
+            merged_reasons.append("non_active_manual_status")
         current["review_reasons"] = merged_reasons
         if parsed.source_message_id and parsed.source_message_id not in current.setdefault("source_message_ids", []):
             current["source_message_ids"].append(parsed.source_message_id)
