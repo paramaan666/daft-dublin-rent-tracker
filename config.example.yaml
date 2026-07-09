@@ -1,0 +1,33 @@
+# Daft Dublin rent tracker configuration
+# Keep Daft filtering in Daft Saved Search itself. This config is a second safety layer.
+
+locations:
+  - Dublin 1
+  - Dublin 2
+  - Dublin 4
+  - Dublin 6
+  - Dublin 7
+  - Dublin 8
+  - Dublin 9
+  - Dublin 10
+  - Dublin 12
+  - Dublin 14
+  - Dublin 16
+
+max_monthly_rent_eur: 1500
+min_double_beds: 1
+
+# Daft alert emails sometimes omit postcode/bed type in the email body.
+# Because the saved search is already filtered on Daft, these defaults keep likely matches
+# but mark them as needs_review=true when a field is not visible in the email.
+include_unknown_location: true
+include_unknown_bed_count: true
+include_unknown_price: false
+
+# Messages older than this are ignored by the Gmail query.
+gmail_query: 'from:(daft.ie) newer_than:30d (rent OR rental OR property OR Daft)'
+gmail_max_messages: 50
+
+# Without Daft API or crawling, disappearance cannot be proven. Listings only become
+# possibly_removed after this many days with no repeat signal.
+stale_after_days: 45

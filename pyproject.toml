@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "daft-dublin-rent-tracker"
+version = "0.1.0"
+description = "Daft.ie Dublin rent alert tracker based on Gmail alerts and GitHub Pages"
+requires-python = ">=3.11"
+dependencies = [
+  "beautifulsoup4>=4.12",
+  "PyYAML>=6.0",
+  "google-api-python-client>=2.130",
+  "google-auth>=2.29",
+  "google-auth-oauthlib>=1.2",
+  "python-dateutil>=2.9",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+dafft = "daft_tracker.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
