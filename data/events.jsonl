@@ -59,3 +59,6 @@
 {"at": "2026-07-09T21:06:35+00:00", "type": "removed_from_manual_seed", "listing_id": "daft-6522594", "url": "https://www.daft.ie/for-rent/flat-city-end-south-circular-road-dublin-8-portobello-dublin-8/6522594"}
 {"at": "2026-07-09T21:06:35+00:00", "type": "removed_from_manual_seed", "listing_id": "daft-6575592", "url": "https://www.daft.ie/for-rent/apartment-5-dunville-avenue-ranelagh-dublin-6/6575592"}
 {"at": "2026-07-09T21:06:35+00:00", "type": "listing_updated", "listing_id": "daft-6529240", "changes": {"status": {"old": "active", "new": "price_above_filter"}}}
+{"at": "2026-07-09T21:07:17+00:00", "type": "listing_updated", "listing_id": "daft-6553956", "changes": {"rent_period": {"old": "month", "new": "week"}}}
+{"at": "2026-07-09T21:07:17+00:00", "type": "listing_updated", "listing_id": "daft-6139765", "changes": {"rent_period": {"old": "month", "new": "week"}}}
+{"at": "2026-07-09T21:07:17+00:00", "type": "listing_updated", "listing_id": "daft-6035838", "changes": {"rent_period": {"old": "month", "new": "week"}}}

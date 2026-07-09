@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-09T21:06:35+00:00",
+  "updated_at": "2026-07-09T21:07:17+00:00",
   "filters": {
     "locations": [
       "Dublin 1",
@@ -29,13 +29,17 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "student_accommodation",
+        "weekly_rent",
+        "single_bed_description",
+        "double_bed_not_confirmed"
       ],
       "title": "Mayor Square, Mayor Street Lower, IFSC, Dublin 1",
       "location": "IFSC, Dublin 1",
       "postcode": "Dublin 1",
       "price_eur": 250,
-      "rent_period": "month",
+      "rent_period": "week",
       "double_beds": null,
       "url": "https://www.daft.ie/for-rent/mayor-square-mayor-street-lower-ifsc-dublin-1/6035838",
       "thumbnail_url": null,
@@ -51,20 +55,34 @@
           "price_eur": 250
         }
       ],
-      "change_history": []
+      "change_history": [
+        {
+          "at": "2026-07-09T21:07:17+00:00",
+          "changes": {
+            "rent_period": {
+              "old": "month",
+              "new": "week"
+            }
+          }
+        }
+      ]
     },
     {
       "id": "daft-6139765",
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "student_accommodation",
+        "weekly_rent",
+        "single_or_studio_options",
+        "double_bed_not_confirmed"
       ],
       "title": "Stoneybatter Place, Rope Walk, Stoneybatter, Dublin 7",
       "location": "Stoneybatter, Dublin 7",
       "postcode": "Dublin 7",
       "price_eur": 303,
-      "rent_period": "month",
+      "rent_period": "week",
       "double_beds": null,
       "url": "https://www.daft.ie/for-rent/stoneybatter-place-rope-walk-20-stoneybatter-dublin-7-d07-np2k-dublin-7/6139765",
       "thumbnail_url": null,
@@ -80,18 +98,33 @@
           "price_eur": 303
         }
       ],
-      "change_history": []
+      "change_history": [
+        {
+          "at": "2026-07-09T21:07:17+00:00",
+          "changes": {
+            "rent_period": {
+              "old": "month",
+              "new": "week"
+            }
+          }
+        }
+      ]
     },
     {
       "id": "daft-6553956",
       "status": "active",
-      "needs_review": false,
-      "review_reasons": [],
+      "needs_review": true,
+      "review_reasons": [
+        "student_accommodation",
+        "weekly_rent",
+        "shared_or_development",
+        "verify_room_type"
+      ],
       "title": "Grangegorman, Grangegorman Lower, Dublin 7",
       "location": "Grangegorman Lower, Dublin 7",
       "postcode": "Dublin 7",
       "price_eur": 326,
-      "rent_period": "month",
+      "rent_period": "week",
       "double_beds": 1,
       "url": "https://www.daft.ie/for-rent/grangegorman-grangegorman-lower-dublin-7/6553956",
       "thumbnail_url": null,
@@ -107,14 +140,28 @@
           "price_eur": 326
         }
       ],
-      "change_history": []
+      "change_history": [
+        {
+          "at": "2026-07-09T21:07:17+00:00",
+          "changes": {
+            "rent_period": {
+              "old": "month",
+              "new": "week"
+            }
+          }
+        }
+      ]
     },
     {
       "id": "daft-5382570",
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "student_accommodation",
+        "shared_accommodation",
+        "single_or_shared_rooms",
+        "double_bed_not_confirmed"
       ],
       "title": "Archway Court Student Accommodation, Mountjoy St, Dublin 1",
       "location": "Mountjoy St, Dublin 1",
@@ -141,8 +188,13 @@
     {
       "id": "daft-6613117",
       "status": "active",
-      "needs_review": false,
-      "review_reasons": [],
+      "needs_review": true,
+      "review_reasons": [
+        "confirmed_double_bedroom",
+        "house_share",
+        "not_whole_property",
+        "bills_not_included"
+      ],
       "title": "103 The Thatch Road, Beaumont, Dublin 9",
       "location": "Beaumont, Dublin 9",
       "postcode": "Dublin 9",
@@ -170,7 +222,10 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "student_accommodation",
+        "twin_single_beds",
+        "not_double"
       ],
       "title": "The Belfry Student Accommodation, 365 Collins Avenue, Whitehall, Dublin 9",
       "location": "Whitehall, Dublin 9",
@@ -199,7 +254,10 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "house_share",
+        "not_whole_property",
+        "double_bed_not_confirmed"
       ],
       "title": "Emerald Street, Dublin 1 [house share]",
       "location": "Emerald Street, Dublin 1",
@@ -226,8 +284,12 @@
     {
       "id": "daft-6557212",
       "status": "active",
-      "needs_review": false,
-      "review_reasons": [],
+      "needs_review": true,
+      "review_reasons": [
+        "confirmed_double_room",
+        "house_share",
+        "not_whole_property"
+      ],
       "title": "(Double Room/House Share) Colepark Road, Ballyfermot, Dublin 10 – ROOM I",
       "location": "Ballyfermot, Dublin 10",
       "postcode": "Dublin 10",
@@ -253,8 +315,13 @@
     {
       "id": "daft-6616306",
       "status": "active",
-      "needs_review": false,
-      "review_reasons": [],
+      "needs_review": true,
+      "review_reasons": [
+        "description_mentions_double_bed_area",
+        "studio_style_metadata",
+        "utilities_extra",
+        "verify_before_contacting"
+      ],
       "title": "Cedarbrook Place, Cherry Orchard, Dublin 10",
       "location": "Cherry Orchard, Dublin 10",
       "postcode": "Dublin 10",
@@ -282,7 +349,10 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "studio_or_single_bed_metadata",
+        "single_bedroom_metadata",
+        "double_bed_not_confirmed"
       ],
       "title": "Cherryfield, Dublin 12, Walkinstown, Dublin 12",
       "location": "Walkinstown, Dublin 12",
@@ -311,7 +381,10 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "studio_or_single_bed_metadata",
+        "single_bedroom_metadata",
+        "double_bed_not_confirmed"
       ],
       "title": "Flat 7, 67 Rathgar Road, Rathgar, Dublin 6",
       "location": "Rathgar, Dublin 6",
@@ -338,8 +411,13 @@
     {
       "id": "daft-6610003",
       "status": "active",
-      "needs_review": false,
-      "review_reasons": [],
+      "needs_review": true,
+      "review_reasons": [
+        "description_mentions_double_bed",
+        "studio_or_single_bed_metadata",
+        "single_bedroom_metadata",
+        "one_person_studio"
+      ],
       "title": "Dromawling, Beaumont, Dublin 9, Beaumont, Dublin 9",
       "location": "Beaumont, Dublin 9",
       "postcode": "Dublin 9",
@@ -367,7 +445,10 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "studio_or_single_bed_metadata",
+        "single_bedroom_metadata",
+        "double_bed_not_confirmed"
       ],
       "title": "Dodder Park Road, Rathfarnham, Co. Dublin",
       "location": "Rathfarnham, Dublin 14",
@@ -423,7 +504,10 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "single_bedroom_metadata",
+        "attached_to_family_home",
+        "double_bed_not_confirmed"
       ],
       "title": "Rathfarnham, Templeogue, Dublin 14",
       "location": "Rathfarnham / Templeogue, Dublin 14",
@@ -452,7 +536,10 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "studio_or_single_bed_metadata",
+        "single_bedroom_metadata",
+        "double_bed_not_confirmed"
       ],
       "title": "Cromwellsfort Road, Dublin 12, Crumlin, Dublin 12",
       "location": "Crumlin, Dublin 12",
@@ -481,7 +568,10 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "detail_unavailable_cache_miss",
+        "studio_or_single_bed_metadata",
+        "double_bed_not_confirmed"
       ],
       "title": "Flat 9, 1 Church Avenue, Rathmines, Dublin 6",
       "location": "Rathmines, Dublin 6",
@@ -508,8 +598,13 @@
     {
       "id": "daft-6616448",
       "status": "active",
-      "needs_review": false,
-      "review_reasons": [],
+      "needs_review": true,
+      "review_reasons": [
+        "description_mentions_double_bed_area",
+        "studio_style_metadata",
+        "utilities_extra",
+        "verify_before_contacting"
+      ],
       "title": "Cedarbrook Place, Cherry Orchard, Dublin 10",
       "location": "Cherry Orchard, Dublin 10",
       "postcode": "Dublin 10",
@@ -537,7 +632,10 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "studio_or_single_bed_metadata",
+        "single_bedroom_metadata",
+        "double_bed_not_confirmed"
       ],
       "title": "Leinster Square, Rathgar, Dublin 6",
       "location": "Rathgar, Dublin 6",
@@ -566,7 +664,10 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "studio_or_single_bed_metadata",
+        "single_bedroom_metadata",
+        "double_bed_not_confirmed"
       ],
       "title": "46 Beechwood Avenue Lower, Ranelagh, Dublin 6",
       "location": "Ranelagh, Dublin 6",
@@ -595,7 +696,11 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "studio_or_single_bed_metadata",
+        "single_bedroom_metadata",
+        "description_mentions_single_bed",
+        "not_double"
       ],
       "title": "Rathmines, Dublin 6",
       "location": "Rathmines, Dublin 6",
@@ -624,7 +729,11 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "studio_or_single_bed_metadata",
+        "single_bedroom_metadata",
+        "wall_bed",
+        "double_bed_not_confirmed"
       ],
       "title": "44 Merton Drive, Ranelagh, Dublin 6",
       "location": "Ranelagh, Dublin 6",
@@ -653,7 +762,11 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "studio_or_single_bed_metadata",
+        "single_bedroom_metadata",
+        "description_mentions_single",
+        "not_double"
       ],
       "title": "Harrington Street, Portobello, Dublin 8",
       "location": "Portobello, Dublin 8",
@@ -682,7 +795,10 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "studio_or_single_bed_metadata",
+        "single_bedroom_metadata",
+        "double_bed_not_confirmed"
       ],
       "title": "5 Nelson Street, North Circular Road, Dublin 7",
       "location": "North Circular Road, Dublin 7",
@@ -711,7 +827,10 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "metadata_double_bedroom_7_shared_residence",
+        "house_share_or_multi_room",
+        "verify_specific_room"
       ],
       "title": "North Circular Road, Dublin 7, North Circular Road, Dublin 7",
       "location": "North Circular Road, Dublin 7",
@@ -750,7 +869,10 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "detail_unavailable_cache_miss",
+        "studio_or_single_bed_metadata",
+        "double_bed_not_confirmed"
       ],
       "title": "North Circular Road, Dublin 7",
       "location": "North Circular Road, Dublin 7",
@@ -814,8 +936,12 @@
     {
       "id": "daft-6614745",
       "status": "active",
-      "needs_review": false,
-      "review_reasons": [],
+      "needs_review": true,
+      "review_reasons": [
+        "description_mentions_double_bed",
+        "communal_kitchen",
+        "studio_or_room_share_verify"
+      ],
       "title": "144 Church Street, Smithfield, Dublin 7",
       "location": "Smithfield, Dublin 7",
       "postcode": "Dublin 7",
@@ -843,7 +969,10 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "studio_or_single_bed_metadata",
+        "single_bedroom_metadata",
+        "double_bed_not_confirmed"
       ],
       "title": "Rathdown Road, Dublin 7",
       "location": "Dublin 7",
@@ -872,7 +1001,10 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "detail_unavailable_cache_miss",
+        "studio_or_single_bed_metadata",
+        "double_bed_not_confirmed"
       ],
       "title": "Charleville Road, North Circular Road, Dublin 7",
       "location": "North Circular Road, Dublin 7",
@@ -901,7 +1033,10 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "detail_unavailable_cache_miss",
+        "studio_or_single_bed_metadata",
+        "double_bed_not_confirmed"
       ],
       "title": "North Circular Road, Dublin 1",
       "location": "North Circular Road, Dublin 1",
@@ -930,7 +1065,9 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "detail_unavailable_cache_miss",
+        "double_bed_not_confirmed"
       ],
       "title": "172 Benmadigan Road, Drimnagh, Dublin 12",
       "location": "Drimnagh, Dublin 12",
@@ -969,7 +1106,9 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "single_bedroom_metadata",
+        "double_bed_not_confirmed"
       ],
       "title": "Flat 6, 238 North Circular Road, North Circular Road, Dublin 7",
       "location": "North Circular Road, Dublin 7",
@@ -998,7 +1137,10 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "detail_unavailable_cache_miss",
+        "studio_or_single_bed_metadata",
+        "double_bed_not_confirmed"
       ],
       "title": "9 Orwell Road, Rathgar, Dublin 6",
       "location": "Rathgar, Dublin 6",
@@ -1027,7 +1169,10 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "studio_or_single_bed_metadata",
+        "single_bedroom_metadata",
+        "double_bed_not_confirmed"
       ],
       "title": "North Circular Road, Dublin 7",
       "location": "North Circular Road, Dublin 7",
@@ -1083,7 +1228,9 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "detail_unavailable_cache_miss",
+        "double_bed_not_confirmed"
       ],
       "title": "Apartment 1, 55 Rathmines Road Upper, Rathgar, Dublin 6",
       "location": "Rathgar, Dublin 6",
@@ -1112,7 +1259,9 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "detail_unavailable_cache_miss",
+        "double_bed_not_confirmed"
       ],
       "title": "Flat 2, 53 Belgrave Square North, Rathmines, Dublin 6",
       "location": "Rathmines, Dublin 6",
@@ -1141,7 +1290,9 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "detail_unavailable_cache_miss",
+        "double_bed_not_confirmed"
       ],
       "title": "Flat 3, 53 Belgrave Square North, Rathmines, Dublin 6",
       "location": "Rathmines, Dublin 6",
@@ -1170,7 +1321,10 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "detail_unavailable_cache_miss",
+        "price_assumed_within_uploaded_base_filter",
+        "double_bed_not_confirmed"
       ],
       "title": "Portobello Dock, Portobello, Dublin 8",
       "location": "Portobello Dock, Portobello, Dublin 8",
@@ -1199,7 +1353,10 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "detail_unavailable_cache_miss",
+        "studio_or_single_bed_metadata",
+        "double_bed_not_confirmed"
       ],
       "title": "South Circular Road, Dublin 8, Dolphin's Barn, Dublin 8",
       "location": "Dolphin's Barn, Dublin 8",
@@ -1228,7 +1385,10 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "studio_or_single_bed_metadata",
+        "single_bedroom_metadata",
+        "double_bed_not_confirmed"
       ],
       "title": "Richmond Hill, Dublin 6, Rathmines, Dublin 6",
       "location": "Rathmines, Dublin 6",
@@ -1255,8 +1415,13 @@
     {
       "id": "daft-6613255",
       "status": "active",
-      "needs_review": false,
-      "review_reasons": [],
+      "needs_review": true,
+      "review_reasons": [
+        "description_mentions_double_bed",
+        "studio_or_single_bed_metadata",
+        "single_bedroom_metadata",
+        "verify_before_contacting"
+      ],
       "title": "Ranelagh Road, Dublin 6, Ranelagh, Dublin 6",
       "location": "Ranelagh, Dublin 6",
       "postcode": "Dublin 6",
@@ -1282,8 +1447,13 @@
     {
       "id": "daft-6612884",
       "status": "active",
-      "needs_review": false,
-      "review_reasons": [],
+      "needs_review": true,
+      "review_reasons": [
+        "description_mentions_double_bed",
+        "studio_or_single_bed_metadata",
+        "single_bedroom_metadata",
+        "verify_before_contacting"
+      ],
       "title": "Apartment 6, 55 Rathmines Road Upper, Rathmines, Dublin 6",
       "location": "Rathmines, Dublin 6",
       "postcode": "Dublin 6",
@@ -1311,7 +1481,11 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "detail_redirected_to_search",
+        "possibly_removed_or_changed",
+        "studio_or_single_bed_metadata",
+        "double_bed_not_confirmed"
       ],
       "title": "40 Leinster Road, Rathmines, Dublin 6",
       "location": "Rathmines, Dublin 6",
@@ -1340,7 +1514,10 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "studio_or_single_bed_metadata",
+        "single_bedroom_metadata",
+        "double_bed_not_confirmed"
       ],
       "title": "Flat 6, 2 Maxwell Road, Dublin 6, Rathgar, Dublin 6",
       "location": "Rathgar, Dublin 6",
@@ -1396,7 +1573,11 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "studio_or_single_bed_metadata",
+        "single_bedroom_metadata",
+        "wall_bed",
+        "double_bed_not_confirmed"
       ],
       "title": "Flat 3, 37 Leeson Street Upper, Ballsbridge, Dublin 4",
       "location": "Ballsbridge, Dublin 4",
@@ -1423,8 +1604,13 @@
     {
       "id": "daft-6551651",
       "status": "active",
-      "needs_review": false,
-      "review_reasons": [],
+      "needs_review": true,
+      "review_reasons": [
+        "detail_unavailable_cache_miss",
+        "title_mentions_double_room",
+        "house_share_possible",
+        "price_assumed_within_uploaded_base_filter"
+      ],
       "title": "Crumlin Road, Dublin 12 [double room]",
       "location": "Crumlin Road, Dublin 12",
       "postcode": "Dublin 12",
@@ -1452,7 +1638,11 @@
       "status": "active",
       "needs_review": true,
       "review_reasons": [
-        "double_bed_count_not_visible_in_email"
+        "double_bed_count_not_visible_in_email",
+        "detail_unavailable_cache_miss",
+        "student_accommodation_possible",
+        "price_assumed_within_uploaded_base_filter",
+        "double_bed_not_confirmed"
       ],
       "title": "Hazelwood Student Village, North Wood, Santry, Dublin 9",
       "location": "Santry, Dublin 9",
@@ -1482,7 +1672,8 @@
       "needs_review": true,
       "review_reasons": [
         "current_detail_price_above_filter",
-        "non_active_manual_status"
+        "non_active_manual_status",
+        "exclude_from_active_view"
       ],
       "title": "Flat 9, 102 North Circular Road, Stoneybatter, Dublin 7",
       "location": "Stoneybatter, Dublin 7",
