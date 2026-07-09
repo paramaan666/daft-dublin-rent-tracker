@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-09T20:56:09+00:00",
+  "updated_at": "2026-07-09T21:05:56+00:00",
   "filters": {
     "locations": [
       "Dublin 1",
@@ -1555,6 +1555,35 @@
         {
           "seen_at": "2026-07-09",
           "price_eur": 1500
+        }
+      ],
+      "change_history": []
+    },
+    {
+      "id": "daft-6529240",
+      "status": "active",
+      "needs_review": true,
+      "review_reasons": [
+        "current_detail_price_above_filter"
+      ],
+      "title": "Flat 9, 102 North Circular Road, Stoneybatter, Dublin 7",
+      "location": "Stoneybatter, Dublin 7",
+      "postcode": "Dublin 7",
+      "price_eur": 1700,
+      "rent_period": "month",
+      "double_beds": 1,
+      "url": "https://www.daft.ie/for-rent/flat-9-102-north-circular-road-stoneybatter-dublin-7/6529240",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "manual_seed",
+      "source_message_ids": [],
+      "source_subjects": [],
+      "first_seen": "2026-07-09",
+      "last_seen": "2026-07-09",
+      "price_history": [
+        {
+          "seen_at": "2026-07-09",
+          "price_eur": 1700
         }
       ],
       "change_history": []
