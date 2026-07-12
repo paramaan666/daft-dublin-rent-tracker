@@ -62,3 +62,4 @@
 {"at": "2026-07-09T21:07:17+00:00", "type": "listing_updated", "listing_id": "daft-6553956", "changes": {"rent_period": {"old": "month", "new": "week"}}}
 {"at": "2026-07-09T21:07:17+00:00", "type": "listing_updated", "listing_id": "daft-6139765", "changes": {"rent_period": {"old": "month", "new": "week"}}}
 {"at": "2026-07-09T21:07:17+00:00", "type": "listing_updated", "listing_id": "daft-6035838", "changes": {"rent_period": {"old": "month", "new": "week"}}}
+{"at": "2026-07-12T06:44:52+00:00", "type": "new_listing", "listing_id": "daft-6610076", "url": "https://www.daft.ie/for-rent/short-term-let-fully-furnished-2-bed-apartment-dublin-8-available-immediately-inchicore-dublin-8/6610076?ea=1", "price_eur": 625}

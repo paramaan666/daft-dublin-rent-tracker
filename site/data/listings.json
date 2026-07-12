@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-11T06:25:01+00:00",
+  "updated_at": "2026-07-12T06:44:52+00:00",
   "filters": {
     "locations": [
       "Dublin 1",
@@ -181,6 +181,40 @@
         {
           "seen_at": "2026-07-09",
           "price_eur": 550
+        }
+      ],
+      "change_history": []
+    },
+    {
+      "id": "daft-6610076",
+      "status": "active",
+      "needs_review": true,
+      "review_reasons": [
+        "double_bed_count_not_visible_in_email"
+      ],
+      "title": "Property Alert",
+      "location": "Dublin 8",
+      "postcode": "Dublin 8",
+      "price_eur": 625,
+      "rent_period": "month",
+      "double_beds": null,
+      "url": "https://www.daft.ie/for-rent/short-term-let-fully-furnished-2-bed-apartment-dublin-8-available-immediately-inchicore-dublin-8/6610076?ea=1",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "daft_email",
+      "source_message_ids": [
+        "19f5176d53b348b8"
+      ],
+      "source_subjects": [
+        "Inchicore, Apartment To Let, €625 per month"
+      ],
+      "first_seen": "2026-07-11T13:56:09+00:00",
+      "last_seen": "2026-07-11T13:56:09+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-11T13:56:09+00:00",
+          "price_eur": 625,
+          "rent_period": "month"
         }
       ],
       "change_history": []
