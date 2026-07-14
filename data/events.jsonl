@@ -64,3 +64,7 @@
 {"at": "2026-07-09T21:07:17+00:00", "type": "listing_updated", "listing_id": "daft-6035838", "changes": {"rent_period": {"old": "month", "new": "week"}}}
 {"at": "2026-07-12T06:44:52+00:00", "type": "new_listing", "listing_id": "daft-6610076", "url": "https://www.daft.ie/for-rent/short-term-let-fully-furnished-2-bed-apartment-dublin-8-available-immediately-inchicore-dublin-8/6610076?ea=1", "price_eur": 625}
 {"at": "2026-07-13T07:35:09+00:00", "type": "new_listing", "listing_id": "daft-6606572", "url": "https://www.daft.ie/for-rent/flat-2-31-cabra-park-phibsborough-dublin-7/6606572?ea=1", "price_eur": 1500}
+{"at": "2026-07-14T06:22:45+00:00", "type": "new_listing", "listing_id": "daft-6619850", "url": "https://www.daft.ie/for-rent/walkinstown-crescent-dublin-12-walkinstown-dublin-12/6619850?ea=1", "price_eur": 1500}
+{"at": "2026-07-14T06:22:45+00:00", "type": "new_listing", "listing_id": "daft-6619760", "url": "https://www.daft.ie/for-rent/prussia-street-dublin-7/6619760?ea=1", "price_eur": 650}
+{"at": "2026-07-14T06:22:45+00:00", "type": "new_listing", "listing_id": "daft-6619596", "url": "https://www.daft.ie/for-rent/grosvenor-lodge-rathmines-dublin-6-rathmines-dublin-6/6619596?ea=1", "price_eur": 285}
+{"at": "2026-07-14T06:22:45+00:00", "type": "new_listing", "listing_id": "daft-6619516", "url": "https://www.daft.ie/for-rent/flat-6-197-north-circular-road-north-circular-road-dublin-7/6619516?ea=1", "price_eur": 1500}

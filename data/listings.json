@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-13T07:35:09+00:00",
+  "updated_at": "2026-07-14T06:22:45+00:00",
   "filters": {
     "locations": [
       "Dublin 1",
@@ -66,6 +66,40 @@
           }
         }
       ]
+    },
+    {
+      "id": "daft-6619596",
+      "status": "active",
+      "needs_review": true,
+      "review_reasons": [
+        "double_bed_count_not_visible_in_email"
+      ],
+      "title": "Property Alert",
+      "location": "Dublin 6",
+      "postcode": "Dublin 6",
+      "price_eur": 285,
+      "rent_period": "month",
+      "double_beds": null,
+      "url": "https://www.daft.ie/for-rent/grosvenor-lodge-rathmines-dublin-6-rathmines-dublin-6/6619596?ea=1",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "daft_email",
+      "source_message_ids": [
+        "19f5b0a89a51511f"
+      ],
+      "source_subjects": [
+        "Rathmines, Apartment To Let, €285 per month"
+      ],
+      "first_seen": "2026-07-13T10:34:04+00:00",
+      "last_seen": "2026-07-13T10:34:04+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-13T10:34:04+00:00",
+          "price_eur": 285,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
     },
     {
       "id": "daft-6139765",
@@ -214,6 +248,40 @@
         {
           "seen_at": "2026-07-11T13:56:09+00:00",
           "price_eur": 625,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
+      "id": "daft-6619760",
+      "status": "active",
+      "needs_review": true,
+      "review_reasons": [
+        "double_bed_count_not_visible_in_email"
+      ],
+      "title": "Property Alert",
+      "location": "Dublin 7",
+      "postcode": "Dublin 7",
+      "price_eur": 650,
+      "rent_period": "month",
+      "double_beds": null,
+      "url": "https://www.daft.ie/for-rent/prussia-street-dublin-7/6619760?ea=1",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "daft_email",
+      "source_message_ids": [
+        "19f5b57d87642952"
+      ],
+      "source_subjects": [
+        "Dublin 7, Apartment To Let, €650 per month"
+      ],
+      "first_seen": "2026-07-13T11:58:30+00:00",
+      "last_seen": "2026-07-13T11:58:30+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-13T11:58:30+00:00",
+          "price_eur": 650,
           "rent_period": "month"
         }
       ],
@@ -1728,6 +1796,74 @@
       "price_history": [
         {
           "seen_at": "2026-07-12T09:59:13+00:00",
+          "price_eur": 1500,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
+      "id": "daft-6619516",
+      "status": "active",
+      "needs_review": true,
+      "review_reasons": [
+        "double_bed_count_not_visible_in_email"
+      ],
+      "title": "Property Alert",
+      "location": "Dublin 7",
+      "postcode": "Dublin 7",
+      "price_eur": 1500,
+      "rent_period": "month",
+      "double_beds": null,
+      "url": "https://www.daft.ie/for-rent/flat-6-197-north-circular-road-north-circular-road-dublin-7/6619516?ea=1",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "daft_email",
+      "source_message_ids": [
+        "19f5adfe4acec268"
+      ],
+      "source_subjects": [
+        "North Circular Road, Apartment To Let, €1,500 per month"
+      ],
+      "first_seen": "2026-07-13T09:47:30+00:00",
+      "last_seen": "2026-07-13T09:47:30+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-13T09:47:30+00:00",
+          "price_eur": 1500,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
+      "id": "daft-6619850",
+      "status": "active",
+      "needs_review": true,
+      "review_reasons": [
+        "double_bed_count_not_visible_in_email"
+      ],
+      "title": "Property Alert",
+      "location": "Dublin 12",
+      "postcode": "Dublin 12",
+      "price_eur": 1500,
+      "rent_period": "month",
+      "double_beds": null,
+      "url": "https://www.daft.ie/for-rent/walkinstown-crescent-dublin-12-walkinstown-dublin-12/6619850?ea=1",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "daft_email",
+      "source_message_ids": [
+        "19f5bab556244bda"
+      ],
+      "source_subjects": [
+        "Walkinstown, Apartment To Let, €1,500 per month"
+      ],
+      "first_seen": "2026-07-13T13:29:42+00:00",
+      "last_seen": "2026-07-13T13:29:42+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-13T13:29:42+00:00",
           "price_eur": 1500,
           "rent_period": "month"
         }
