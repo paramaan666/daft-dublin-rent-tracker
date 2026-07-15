@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-14T06:22:45+00:00",
+  "updated_at": "2026-07-15T06:26:12+00:00",
   "filters": {
     "locations": [
       "Dublin 1",
@@ -1094,6 +1094,40 @@
         {
           "seen_at": "2026-07-09",
           "price_eur": 1400
+        }
+      ],
+      "change_history": []
+    },
+    {
+      "id": "daft-6620675",
+      "status": "active",
+      "needs_review": true,
+      "review_reasons": [
+        "double_bed_count_not_visible_in_email"
+      ],
+      "title": "Property Alert",
+      "location": "Dublin 16",
+      "postcode": "Dublin 16",
+      "price_eur": 1400,
+      "rent_period": "month",
+      "double_beds": null,
+      "url": "https://www.daft.ie/for-rent/moreen-avenue-dublin-16-dundrum-dublin-16/6620675?ea=1",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "daft_email",
+      "source_message_ids": [
+        "19f605cfdf1ca58b"
+      ],
+      "source_subjects": [
+        "Dundrum, Apartment To Let, €1,400 per month"
+      ],
+      "first_seen": "2026-07-14T11:22:14+00:00",
+      "last_seen": "2026-07-14T11:22:14+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-14T11:22:14+00:00",
+          "price_eur": 1400,
+          "rent_period": "month"
         }
       ],
       "change_history": []
