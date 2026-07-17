@@ -1,17 +1,17 @@
 {
-  "updated_at": "2026-07-17T19:52:06+00:00",
+  "updated_at": "2026-07-17T20:01:01+00:00",
   "feeds": [
     {
       "feed_url": "https://rss.rent.ie/houses-to-let/renting_dublin/",
-      "ok": false,
+      "ok": true,
       "kept": 0,
-      "detail": "RSS failed: HTTP Error 403: Forbidden; search fallback failed: HTTP Error 403: Forbidden"
+      "detail": "Reader fallback: 0 candidate listing(s), 0 kept; RSS failed: HTTP Error 403: Forbidden; direct search failed: HTTP Error 403: Forbidden"
     },
     {
       "feed_url": "https://rss.rent.ie/rooms-to-rent/renting_dublin/",
-      "ok": false,
+      "ok": true,
       "kept": 0,
-      "detail": "RSS failed: HTTP Error 403: Forbidden; search fallback failed: HTTP Error 403: Forbidden"
+      "detail": "Reader fallback: 0 candidate listing(s), 0 kept; RSS failed: HTTP Error 403: Forbidden; direct search failed: HTTP Error 403: Forbidden"
     }
   ]
 }
