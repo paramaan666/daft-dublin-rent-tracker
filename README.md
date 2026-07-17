@@ -14,7 +14,7 @@ Projekt neprochází detailní stránky jako hromadný crawler. Daft.ie data čt
 Výchozí konfigurace v `config.example.yaml`:
 
 - lokality: Dublin 1, 2, 4, 6, 7, 8, 9, 10, 12, 14, 16
-- maximální nájem: 1500 EUR za měsíc
+- maximální nájem: 1600 EUR za měsíc
 - minimum: 1 double bed, pokud je údaj ve zdroji rozpoznatelný
 
 Týdenní cena se pro kontrolu limitu přepočítává na měsíční ekvivalent `weekly × 52 / 12`.
