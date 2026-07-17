@@ -84,3 +84,76 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+
+      - name: Verify deployed dashboard contains Rent.ie listings
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import time
+          from urllib.request import Request, urlopen
+
+          base_url = os.environ["PAGE_URL"].rstrip("/")
+          expected_ids = {
+              "rentie-6597748",
+              "rentie-6597709",
+              "rentie-6597624",
+              "rentie-6596522",
+              "rentie-6597522",
+              "rentie-6596552",
+          }
+          last_error = None
+
+          for attempt in range(12):
+              cache_buster = int(time.time())
+              try:
+                  index_request = Request(
+                      f"{base_url}/?verify={cache_buster}",
+                      headers={"Cache-Control": "no-cache", "User-Agent": "rent-tracker-smoke-test"},
+                  )
+                  with urlopen(index_request, timeout=20) as response:
+                      index_html = response.read().decode("utf-8", errors="replace")
+                  if "Jen Rent.ie" not in index_html or "Nejnovější přidané první" not in index_html:
+                      raise RuntimeError("deployed dashboard is missing the Rent.ie or date controls")
+
+                  data_request = Request(
+                      f"{base_url}/data/listings.json?verify={cache_buster}",
+                      headers={"Cache-Control": "no-cache", "User-Agent": "rent-tracker-smoke-test"},
+                  )
+                  with urlopen(data_request, timeout=20) as response:
+                      payload = json.load(response)
+
+                  by_id = {
+                      str(item.get("id")): item
+                      for item in payload.get("listings", [])
+                      if item.get("id")
+                  }
+                  missing = sorted(expected_ids - set(by_id))
+                  if missing:
+                      raise RuntimeError(f"deployed dataset is missing Rent.ie IDs: {missing}")
+
+                  for listing_id in sorted(expected_ids):
+                      item = by_id[listing_id]
+                      if item.get("status") != "active":
+                          raise RuntimeError(f"{listing_id} is not active on deployed Pages")
+                      if int(item.get("double_beds") or 0) < 1:
+                          raise RuntimeError(f"{listing_id} has no confirmed double bed on deployed Pages")
+                      if "rent.ie/" not in str(item.get("url") or ""):
+                          raise RuntimeError(f"{listing_id} does not point to Rent.ie")
+
+                  print(f"Verified {len(expected_ids)} Rent.ie listings at {base_url}/")
+                  for listing_id in sorted(expected_ids):
+                      item = by_id[listing_id]
+                      print(f"- {listing_id}: {item.get('title')} — EUR {item.get('price_eur')} / {item.get('rent_period')}")
+                  break
+              except Exception as exc:
+                  last_error = exc
+                  if attempt == 11:
+                      raise
+                  print(f"Pages verification attempt {attempt + 1} failed: {exc}")
+                  time.sleep(5)
+          else:
+              raise RuntimeError(f"Pages verification failed: {last_error}")
+          PY
