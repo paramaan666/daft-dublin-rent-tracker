@@ -1,0 +1,53 @@
+{
+  "verified": true,
+  "page_url": "https://paramaan666.github.io/daft-dublin-rent-tracker/",
+  "dashboard_controls": [
+    "Rent.ie source filter",
+    "date-added filter",
+    "newest/oldest sorting"
+  ],
+  "rent_ie_listings": [
+    {
+      "id": "rentie-6596522",
+      "title": "South Gate Apartments, Cork Street, Dublin 8",
+      "price_eur": 1300,
+      "rent_period": "month",
+      "url": "https://www.rent.ie/rooms-to-rent/South-Gate-Apartmentscork-Streetdublin-8-The-Coombe-Dublin-8/6596522"
+    },
+    {
+      "id": "rentie-6596552",
+      "title": "New Row Place, Christchurch, Dublin 8",
+      "price_eur": 850,
+      "rent_period": "month",
+      "url": "https://www.rent.ie/rooms-to-rent/New-Row-Placenew-Row-Southdublin-8-Christchurch-Dublin-8/6596552"
+    },
+    {
+      "id": "rentie-6597522",
+      "title": "Rathlin House, Custom House Square, IFSC, Dublin 1",
+      "price_eur": 1380,
+      "rent_period": "month",
+      "url": "https://www.rent.ie/rooms-to-rent/Rathlin-House-Custom-House-Square-Mayor-Street-Lower-Ifsc-Dublin-1-IFSC-Dublin-1/6597522"
+    },
+    {
+      "id": "rentie-6597624",
+      "title": "Cooke Hall, Clancy Quay, Kilmainham, Dublin 8",
+      "price_eur": 960,
+      "rent_period": "month",
+      "url": "https://www.rent.ie/rooms-to-rent/Cooke-Hall-Clancy-Quay-Macken-Avenue-Dublin-8-Kilmainham-Dublin-8/6597624"
+    },
+    {
+      "id": "rentie-6597709",
+      "title": "Apartment 16, Sunnybank Court, Windy Arbour, Dublin 14",
+      "price_eur": 1200,
+      "rent_period": "month",
+      "url": "https://www.rent.ie/rooms-to-rent/Apartment-16-Sunnybank-Court-Dundrum-Road-Dundr-Windy-Arbour-Dublin-14/6597709"
+    },
+    {
+      "id": "rentie-6597748",
+      "title": "Fairfield Park, Rathgar, Dublin 6",
+      "price_eur": 250,
+      "rent_period": "week",
+      "url": "https://www.rent.ie/rooms-to-rent/Fairfield-Park-Rathgar-Dublin-6/6597748"
+    }
+  ]
+}
