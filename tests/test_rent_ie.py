@@ -2,7 +2,9 @@ from daft_tracker.config import TrackerConfig
 from daft_tracker.parser import apply_filters
 from daft_tracker.rent_ie import (
     parse_rent_ie_feed,
+    parse_rent_ie_reader_text,
     parse_rent_ie_search_page,
+    rent_ie_reader_url,
     rent_ie_search_url,
 )
 
@@ -65,6 +67,30 @@ SEARCH_HTML = """
 """
 
 
+READER_MARKDOWN = """
+Title: Rooms to Rent in Dublin
+
+URL Source: https://www.rent.ie/rooms-to-rent/renting_dublin/
+
+Markdown Content:
+## [1. Cooke Hall, Clancy Quay, Dublin 8](https://www.rent.ie/rooms-to-rent/Cooke-Hall-Clancy-Quay-Dublin-8/6561900/)
+
+#### €960 monthly
+
+### double bedroom €960 monthly
+
+Entered 10 hours ago
+
+## [2. Old County Road, Dublin 12](https://www.rent.ie/rooms-to-rent/Old-County-Road-Dublin-12/6561901/)
+
+#### €564 monthly
+
+### single bedroom €564 monthly
+
+Entered 1 day ago
+"""
+
+
 def test_parse_rent_ie_rss_and_filter():
     listings = parse_rent_ie_feed(
         RSS,
@@ -123,3 +149,32 @@ def test_feed_url_maps_to_public_search_page():
     assert rent_ie_search_url(
         "https://rss.rent.ie/rooms-to-rent/renting_dublin/"
     ) == "https://www.rent.ie/rooms-to-rent/renting_dublin/"
+
+
+def test_reader_fallback_parses_and_filters_rooms():
+    source_url = "https://www.rent.ie/rooms-to-rent/renting_dublin/"
+    listings = parse_rent_ie_reader_text(
+        READER_MARKDOWN,
+        source_url=source_url,
+        seen_at="2026-07-17T13:00:00+00:00",
+    )
+    assert len(listings) == 2
+
+    double_room = listings[0]
+    assert double_room.id == "rentie-6561900"
+    assert double_room.title == "Cooke Hall, Clancy Quay, Dublin 8"
+    assert double_room.postcode == "Dublin 8"
+    assert double_room.price_eur == 960
+    assert double_room.rent_period == "month"
+    assert double_room.double_beds == 1
+    assert double_room.source == "rent_ie_rss"
+    assert apply_filters(double_room, TrackerConfig()) is not None
+
+    assert listings[1].double_beds == 0
+    assert apply_filters(listings[1], TrackerConfig()) is None
+
+
+def test_public_search_url_maps_to_reader_url():
+    assert rent_ie_reader_url(
+        "https://www.rent.ie/rooms-to-rent/renting_dublin/"
+    ) == "https://r.jina.ai/https://www.rent.ie/rooms-to-rent/renting_dublin/"
