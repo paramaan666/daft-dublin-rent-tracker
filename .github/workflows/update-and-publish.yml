@@ -85,6 +85,12 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v5
 
+      - name: Checkout main for verification record
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+
       - name: Verify deployed dashboard contains Rent.ie listings
         env:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
@@ -93,6 +99,7 @@ jobs:
           import json
           import os
           import time
+          from pathlib import Path
           from urllib.request import Request, urlopen
 
           base_url = os.environ["PAGE_URL"].rstrip("/")
@@ -134,6 +141,7 @@ jobs:
                   if missing:
                       raise RuntimeError(f"deployed dataset is missing Rent.ie IDs: {missing}")
 
+                  verified = []
                   for listing_id in sorted(expected_ids):
                       item = by_id[listing_id]
                       if item.get("status") != "active":
@@ -142,11 +150,37 @@ jobs:
                           raise RuntimeError(f"{listing_id} has no confirmed double bed on deployed Pages")
                       if "rent.ie/" not in str(item.get("url") or ""):
                           raise RuntimeError(f"{listing_id} does not point to Rent.ie")
+                      verified.append({
+                          "id": listing_id,
+                          "title": item.get("title"),
+                          "price_eur": item.get("price_eur"),
+                          "rent_period": item.get("rent_period"),
+                          "url": item.get("url"),
+                      })
+
+                  record = {
+                      "verified": True,
+                      "page_url": f"{base_url}/",
+                      "dashboard_controls": [
+                          "Rent.ie source filter",
+                          "date-added filter",
+                          "newest/oldest sorting",
+                      ],
+                      "rent_ie_listings": verified,
+                  }
+                  output = Path(".verification/pages.json")
+                  output.parent.mkdir(parents=True, exist_ok=True)
+                  output.write_text(
+                      json.dumps(record, ensure_ascii=False, indent=2) + "\n",
+                      encoding="utf-8",
+                  )
 
                   print(f"Verified {len(expected_ids)} Rent.ie listings at {base_url}/")
-                  for listing_id in sorted(expected_ids):
-                      item = by_id[listing_id]
-                      print(f"- {listing_id}: {item.get('title')} — EUR {item.get('price_eur')} / {item.get('rent_period')}")
+                  for item in verified:
+                      print(
+                          f"- {item['id']}: {item['title']} — "
+                          f"EUR {item['price_eur']} / {item['rent_period']}"
+                      )
                   break
               except Exception as exc:
                   last_error = exc
@@ -157,3 +191,16 @@ jobs:
           else:
               raise RuntimeError(f"Pages verification failed: {last_error}")
           PY
+
+      - name: Record successful Pages verification
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .verification/pages.json
+          if git diff --cached --quiet; then
+            echo "Pages verification record is unchanged."
+          else
+            git commit -m "Record verified Pages deployment"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
