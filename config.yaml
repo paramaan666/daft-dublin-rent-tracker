@@ -1,5 +1,5 @@
 # Dublin rent tracker configuration
-# Daft.ie is imported from Gmail alerts. Rent.ie is imported from its public RSS feed.
+# Daft.ie is imported from Gmail alerts. Rent.ie is imported from its public RSS feeds.
 # The filters below are a common second safety layer for both sources.
 
 locations:
@@ -28,11 +28,12 @@ include_unknown_price: false
 gmail_query: '{from:(daft.ie) from:(rent.ie)} newer_than:30d (rent OR rental OR property OR Daft OR Rent)'
 gmail_max_messages: 50
 
-# Rent.ie exposes an RSS link from its search results. The default feed covers Dublin;
-# the common filters above narrow the imported listings.
+# Rent.ie publishes separate Dublin RSS feeds for whole properties and house shares.
+# Both feeds pass through the same location, price, and double-bed filters above.
 rent_ie_enabled: true
 rent_ie_feed_urls:
   - https://rss.rent.ie/houses-to-let/renting_dublin/
+  - https://rss.rent.ie/rooms-to-rent/renting_dublin/
 rent_ie_timeout_seconds: 20
 
 # Without a listing-status API, disappearance cannot be proven immediately.
