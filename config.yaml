@@ -15,7 +15,7 @@ locations:
   - Dublin 14
   - Dublin 16
 
-max_monthly_rent_eur: 1500
+max_monthly_rent_eur: 1600
 min_double_beds: 1
 
 # Source payloads sometimes omit postcode, price, or bed type.
