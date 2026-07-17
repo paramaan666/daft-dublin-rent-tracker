@@ -1,15 +1,62 @@
 from __future__ import annotations
 
 import argparse
+from datetime import datetime, timezone
 from pathlib import Path
 import sys
 
 from .config import load_config
 from .gmail_client import gmail_service_from_env, list_message_ids, fetch_message
 from .parser import parse_email_message, apply_filters, parse_seed_csv
-from .rent_ie import fetch_rent_ie_feed, parse_rent_ie_feed
-from .store import load_store, merge_listings, load_state, save_state
+from .rent_ie import (
+    fetch_rent_ie_feed,
+    fetch_rent_ie_search_page,
+    parse_rent_ie_feed,
+    parse_rent_ie_search_page,
+    rent_ie_search_url,
+)
+from .store import load_store, merge_listings, load_state, save_state, write_json
 from .site import build_site
+
+
+def _kept_after_filters(candidates: list, cfg) -> list:
+    return [item for item in (apply_filters(x, cfg) for x in candidates) if item]
+
+
+def _import_rent_ie(feed_url: str, cfg) -> tuple[list, str]:
+    feed_error: Exception | None = None
+    candidates = []
+    kept = []
+
+    try:
+        feed_xml = fetch_rent_ie_feed(feed_url, timeout_seconds=cfg.rent_ie_timeout_seconds)
+        candidates = parse_rent_ie_feed(feed_xml, feed_url=feed_url)
+        kept = _kept_after_filters(candidates, cfg)
+        if kept:
+            return kept, f"RSS: {len(candidates)} candidate listing(s), {len(kept)} kept"
+    except Exception as exc:
+        feed_error = exc
+
+    search_url = rent_ie_search_url(feed_url)
+    try:
+        page_html = fetch_rent_ie_search_page(search_url, timeout_seconds=cfg.rent_ie_timeout_seconds)
+        page_candidates = parse_rent_ie_search_page(page_html, source_url=search_url)
+        page_kept = _kept_after_filters(page_candidates, cfg)
+        detail = (
+            f"search fallback: {len(page_candidates)} candidate listing(s), "
+            f"{len(page_kept)} kept"
+        )
+        if feed_error is not None:
+            detail += f"; RSS failed: {feed_error}"
+        elif candidates:
+            detail += f"; RSS had {len(candidates)} candidate(s) but none matched"
+        else:
+            detail += "; RSS returned no parsable candidates"
+        return page_kept, detail
+    except Exception as page_exc:
+        if feed_error is not None:
+            raise RuntimeError(f"RSS failed: {feed_error}; search fallback failed: {page_exc}") from page_exc
+        raise RuntimeError(f"RSS returned no usable matches; search fallback failed: {page_exc}") from page_exc
 
 
 def run_update(args: argparse.Namespace) -> int:
@@ -25,15 +72,30 @@ def run_update(args: argparse.Namespace) -> int:
         print(f"Loaded {len(seed_listings)} seed listing(s) from {seed_path}")
 
     if cfg.rent_ie_enabled:
+        rent_ie_status = []
         for feed_url in cfg.rent_ie_feed_urls:
             try:
-                feed_xml = fetch_rent_ie_feed(feed_url, timeout_seconds=cfg.rent_ie_timeout_seconds)
-                candidates = parse_rent_ie_feed(feed_xml, feed_url=feed_url)
-                kept = [item for item in (apply_filters(x, cfg) for x in candidates) if item]
+                kept, detail = _import_rent_ie(feed_url, cfg)
                 parsed.extend(kept)
-                print(f"{feed_url}: {len(candidates)} Rent.ie candidate listing(s), {len(kept)} kept after filters")
+                rent_ie_status.append({
+                    "feed_url": feed_url,
+                    "ok": True,
+                    "kept": len(kept),
+                    "detail": detail,
+                })
+                print(f"{feed_url}: {detail}")
             except Exception as exc:
-                print(f"{feed_url}: Rent.ie feed import failed: {exc}", file=sys.stderr)
+                rent_ie_status.append({
+                    "feed_url": feed_url,
+                    "ok": False,
+                    "kept": 0,
+                    "detail": str(exc),
+                })
+                print(f"{feed_url}: Rent.ie import failed: {exc}", file=sys.stderr)
+        write_json(data_dir / "rent_ie_status.json", {
+            "updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            "feeds": rent_ie_status,
+        })
 
     state = load_state(data_dir)
     processed = set(state.get("processed_gmail_message_ids", []))
