@@ -86,8 +86,10 @@ def run_update(args: argparse.Namespace) -> int:
     site_dir = Path(args.site_dir)
     parsed = []
 
-    seed_path = Path(args.seed)
-    if seed_path.exists():
+    for raw_seed_path in [args.seed, args.rent_ie_seed]:
+        seed_path = Path(raw_seed_path)
+        if not seed_path.exists():
+            continue
         seed_listings = [item for item in (apply_filters(x, cfg) for x in parse_seed_csv(seed_path)) if item]
         parsed.extend(seed_listings)
         print(f"Loaded {len(seed_listings)} seed listing(s) from {seed_path}")
@@ -182,6 +184,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     update = sub.add_parser("update", parents=[common], help="Import seed + Rent.ie feeds + Gmail alerts, update data, build site")
     update.add_argument("--seed", default="seeds/listings_seed.csv", help="CSV seed file")
+    update.add_argument("--rent-ie-seed", default="seeds/rent_ie_seed.csv", help="Optional current Rent.ie seed CSV")
     update.set_defaults(func=run_update)
 
     seed = sub.add_parser("import-seed", parents=[common], help="Import only a seed CSV")
