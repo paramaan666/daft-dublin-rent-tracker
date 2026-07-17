@@ -1,5 +1,6 @@
-# Daft Dublin rent tracker configuration
-# Keep Daft filtering in Daft Saved Search itself. This config is a second safety layer.
+# Dublin rent tracker configuration
+# Daft.ie is imported from Gmail alerts. Rent.ie is imported from its public RSS feed.
+# The filters below are a common second safety layer for both sources.
 
 locations:
   - Dublin 1
@@ -17,17 +18,22 @@ locations:
 max_monthly_rent_eur: 1500
 min_double_beds: 1
 
-# Daft alert emails sometimes omit postcode/bed type in the email body.
-# Because the saved search is already filtered on Daft, these defaults keep likely matches
-# but mark them as needs_review=true when a field is not visible in the email.
+# Source payloads sometimes omit postcode, price, or bed type.
+# Unknown location/bed count is kept for manual review; unknown price is rejected.
 include_unknown_location: true
 include_unknown_bed_count: true
 include_unknown_price: false
 
-# Messages older than this are ignored by the Gmail query.
-gmail_query: 'from:(daft.ie) newer_than:30d (rent OR rental OR property OR Daft)'
+# Gmail can import both Daft.ie and Rent.ie alert emails.
+gmail_query: '{from:(daft.ie) from:(rent.ie)} newer_than:30d (rent OR rental OR property OR Daft OR Rent)'
 gmail_max_messages: 50
 
-# Without Daft API or crawling, disappearance cannot be proven. Listings only become
-# possibly_removed after this many days with no repeat signal.
+# Rent.ie exposes an RSS link from its search results. The default feed covers Dublin;
+# the common filters above narrow the imported listings.
+rent_ie_enabled: true
+rent_ie_feed_urls:
+  - https://rss.rent.ie/houses-to-let/renting_dublin/
+rent_ie_timeout_seconds: 20
+
+# Without a listing-status API, disappearance cannot be proven immediately.
 stale_after_days: 45

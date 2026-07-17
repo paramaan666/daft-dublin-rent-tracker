@@ -1,8 +1,6 @@
 from __future__ import annotations
 
 from pathlib import Path
-import html
-import json
 import shutil
 
 INDEX_HTML = """<!doctype html>
@@ -10,7 +8,7 @@ INDEX_HTML = """<!doctype html>
 <head>
   <meta charset=\"utf-8\" />
   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
-  <title>Daft Dublin Rent Tracker</title>
+  <title>Dublin Rent Tracker</title>
   <style>
     :root { font-family: system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif; color: #111827; background: #f8fafc; }
     body { margin: 0; padding: 24px; }
@@ -36,6 +34,8 @@ INDEX_HTML = """<!doctype html>
     .inactive { background: #f1f5f9; color: #475569; }
     .good { background: #ecfdf5; color: #065f46; }
     .danger { background: #fef2f2; color: #991b1b; }
+    .source-rent { background: #eff6ff; color: #1d4ed8; }
+    .source-daft { background: #f5f3ff; color: #6d28d9; }
     .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
     a.button { display: inline-block; padding: 9px 12px; background: #111827; color: white; border-radius: 10px; text-decoration: none; }
     .links { display: flex; gap: 12px; margin-top: 12px; }
@@ -44,11 +44,16 @@ INDEX_HTML = """<!doctype html>
 </head>
 <body>
   <header>
-    <h1>Daft Dublin Rent Tracker</h1>
+    <h1>Dublin Rent Tracker</h1>
     <div class=\"meta\" id=\"meta\">Načítám dataset…</div>
     <div class=\"links\"><a href=\"data/listings.json\">JSON</a><a href=\"data/listings.csv\">CSV</a></div>
     <div class=\"toolbar\">
       <input id=\"search\" placeholder=\"Hledat lokalitu / název / důvod…\" />
+      <select id=\"source\">
+        <option value=\"all\">Daft.ie + Rent.ie</option>
+        <option value=\"daft\">Jen Daft.ie</option>
+        <option value=\"rent_ie\">Jen Rent.ie</option>
+      </select>
       <select id=\"status\">
         <option value=\"active\">Jen aktivní</option>
         <option value=\"all\">Vše viditelné</option>
@@ -74,11 +79,18 @@ INDEX_HTML = """<!doctype html>
       updatedAt = payload.updated_at || 'zatím nikdy';
       render();
     }
+    function sourceSite(x) {
+      const raw = String(x.source || '').toLowerCase();
+      if (raw.includes('rent_ie') || String(x.url || '').includes('rent.ie/')) return 'rent_ie';
+      return 'daft';
+    }
+    function sourceLabel(x) { return sourceSite(x) === 'rent_ie' ? 'Rent.ie' : 'Daft.ie'; }
     function isConfirmedDouble(x) {
       return Number(x.double_beds || 0) >= 1 && !x.needs_review && x.status === 'active';
     }
     function render() {
       const q = document.getElementById('search').value.toLowerCase().trim();
+      const source = document.getElementById('source').value;
       const status = document.getElementById('status').value;
       const active = listings.filter(x => x.status === 'active').length;
       const visibleActive = listings.filter(x => x.status === 'active' && !isHidden(x)).length;
@@ -86,9 +98,12 @@ INDEX_HTML = """<!doctype html>
       const review = listings.filter(x => x.needs_review).length;
       const above = listings.filter(x => x.status === 'price_above_filter').length;
       const hidden = listings.filter(isHidden).length;
-      document.getElementById('meta').textContent = `${visibleActive} viditelných aktivních / ${active} aktivních / ${listings.length} celkem. Ověřený double: ${confirmed}. Ke kontrole: ${review}. Nad cenovým filtrem: ${above}. Skryté: ${hidden}. Aktualizováno: ${updatedAt}.`;
+      const daft = listings.filter(x => sourceSite(x) === 'daft').length;
+      const rent = listings.filter(x => sourceSite(x) === 'rent_ie').length;
+      document.getElementById('meta').textContent = `${visibleActive} viditelných aktivních / ${active} aktivních / ${listings.length} celkem. Daft.ie: ${daft}. Rent.ie: ${rent}. Ověřený double: ${confirmed}. Ke kontrole: ${review}. Nad cenovým filtrem: ${above}. Skryté: ${hidden}. Aktualizováno: ${updatedAt}.`;
       let rows = listings.filter(x => {
         const hiddenListing = isHidden(x);
+        if (source !== 'all' && sourceSite(x) !== source) return false;
         if (status === 'hidden') {
           if (!hiddenListing) return false;
         } else {
@@ -100,7 +115,7 @@ INDEX_HTML = """<!doctype html>
           if (status === 'possibly_removed' && x.status !== 'possibly_removed') return false;
         }
         if (q) {
-          const hay = `${x.title || ''} ${x.location || ''} ${x.postcode || ''} ${(x.review_reasons || []).join(' ')}`.toLowerCase();
+          const hay = `${x.title || ''} ${x.location || ''} ${x.postcode || ''} ${sourceLabel(x)} ${(x.review_reasons || []).join(' ')}`.toLowerCase();
           if (!hay.includes(q)) return false;
         }
         return true;
@@ -134,7 +149,9 @@ INDEX_HTML = """<!doctype html>
       const idArg = esc(JSON.stringify(id));
       const hiddenListing = isHidden(x);
       const statusClass = x.status === 'price_above_filter' ? 'danger' : (x.status === 'active' ? '' : 'inactive');
+      const sourceClass = sourceSite(x) === 'rent_ie' ? 'source-rent' : 'source-daft';
       const badges = [
+        `<span class=\"badge ${sourceClass}\">${sourceLabel(x)}</span>`,
         `<span class=\"badge ${statusClass}\">${esc(x.status || 'active')}</span>`,
         hiddenListing ? `<span class=\"badge inactive\">skryté</span>` : '',
         isConfirmedDouble(x) ? `<span class=\"badge good\">ověřený double</span>` : '',
@@ -148,12 +165,12 @@ INDEX_HTML = """<!doctype html>
         <div class=\"content\">
           <div class=\"price\">${esc(priceText(x))}</div>
           <div class=\"title\">${esc(x.title || x.url)}</div>
-          <div class=\"muted\">${esc(x.location || x.postcode || 'lokalita neviditelná v emailu')}</div>
+          <div class=\"muted\">${esc(x.location || x.postcode || 'lokalita není dostupná ze zdroje')}</div>
           <div class=\"badges\">${badges}</div>
           <div class=\"muted\" title=\"${esc(reasons)}\">${esc(reasons || 'bez poznámky')}</div>
           <div class=\"muted\">První: ${esc(x.first_seen || '')}<br>Poslední signál: ${esc(x.last_seen || '')}</div>
           <div class=\"actions\">
-            <a class=\"button\" href=\"${esc(x.url)}\" target=\"_blank\" rel=\"noopener noreferrer\">Otevřít na Daft</a>
+            <a class=\"button\" href=\"${esc(x.url)}\" target=\"_blank\" rel=\"noopener noreferrer\">Otevřít na ${sourceLabel(x)}</a>
             ${hiddenListing
               ? `<button class=\"action\" type=\"button\" onclick=\"restoreListing(${idArg})\">Obnovit</button>`
               : `<button class=\"action\" type=\"button\" onclick=\"hideListing(${idArg})\">Skrýt</button>`}
@@ -162,6 +179,7 @@ INDEX_HTML = """<!doctype html>
       </article>`;
     }
     document.getElementById('search').addEventListener('input', render);
+    document.getElementById('source').addEventListener('change', render);
     document.getElementById('status').addEventListener('change', render);
     load().catch(err => { document.getElementById('meta').textContent = 'Dataset se nepodařilo načíst: ' + err; });
   </script>

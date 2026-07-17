@@ -11,6 +11,9 @@ DEFAULT_LOCATIONS = [
     "Dublin 1", "Dublin 2", "Dublin 4", "Dublin 6", "Dublin 7", "Dublin 8",
     "Dublin 9", "Dublin 10", "Dublin 12", "Dublin 14", "Dublin 16",
 ]
+DEFAULT_RENT_IE_FEED_URLS = [
+    "https://rss.rent.ie/houses-to-let/renting_dublin/",
+]
 
 
 @dataclass(slots=True)
@@ -21,8 +24,11 @@ class TrackerConfig:
     include_unknown_location: bool = True
     include_unknown_bed_count: bool = True
     include_unknown_price: bool = False
-    gmail_query: str = 'from:(daft.ie) newer_than:30d (rent OR rental OR property OR Daft)'
+    gmail_query: str = '{from:(daft.ie) from:(rent.ie)} newer_than:30d (rent OR rental OR property OR Daft OR Rent)'
     gmail_max_messages: int = 50
+    rent_ie_enabled: bool = True
+    rent_ie_feed_urls: list[str] = field(default_factory=lambda: list(DEFAULT_RENT_IE_FEED_URLS))
+    rent_ie_timeout_seconds: int = 20
     stale_after_days: int = 45
 
     @property
@@ -37,6 +43,13 @@ def normalize_location(value: str | None) -> str:
     if not value:
         return ""
     return " ".join(value.strip().lower().replace(",", " ").split())
+
+
+def _env_bool(name: str, default: bool) -> bool:
+    raw = os.getenv(name)
+    if raw is None:
+        return default
+    return raw.strip().lower() in {"1", "true", "yes", "y", "on"}
 
 
 def load_config(path: str | Path | None) -> TrackerConfig:
@@ -57,6 +70,11 @@ def load_config(path: str | Path | None) -> TrackerConfig:
         cfg.gmail_query = os.environ["GMAIL_QUERY"]
     if os.getenv("GMAIL_MAX_MESSAGES"):
         cfg.gmail_max_messages = int(os.environ["GMAIL_MAX_MESSAGES"])
+    cfg.rent_ie_enabled = _env_bool("RENT_IE_ENABLED", cfg.rent_ie_enabled)
+    if os.getenv("RENT_IE_FEED_URLS"):
+        cfg.rent_ie_feed_urls = [url.strip() for url in os.environ["RENT_IE_FEED_URLS"].split(",") if url.strip()]
+    if os.getenv("RENT_IE_TIMEOUT_SECONDS"):
+        cfg.rent_ie_timeout_seconds = int(os.environ["RENT_IE_TIMEOUT_SECONDS"])
     if os.getenv("STALE_AFTER_DAYS"):
         cfg.stale_after_days = int(os.environ["STALE_AFTER_DAYS"])
 
