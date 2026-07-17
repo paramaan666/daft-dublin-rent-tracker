@@ -63,6 +63,17 @@ INDEX_HTML = """<!doctype html>
         <option value=\"possibly_removed\">Možná pryč</option>
         <option value=\"hidden\">Skryté</option>
       </select>
+      <select id=\"added\">
+        <option value=\"all\">Přidáno kdykoli</option>
+        <option value=\"today\">Přidáno dnes</option>
+        <option value=\"3\">Přidáno za poslední 3 dny</option>
+        <option value=\"7\">Přidáno za posledních 7 dní</option>
+        <option value=\"30\">Přidáno za posledních 30 dní</option>
+      </select>
+      <select id=\"sort\">
+        <option value=\"newest\">Nejnovější přidané první</option>
+        <option value=\"oldest\">Nejstarší přidané první</option>
+      </select>
     </div>
   </header>
   <main><div class=\"grid\" id=\"grid\"></div></main>
@@ -72,6 +83,7 @@ INDEX_HTML = """<!doctype html>
     const hiddenStorageKey = 'daft-hidden-listing-ids-v1';
     const hiddenIds = new Set(loadHiddenIds());
     const euro = new Intl.NumberFormat('en-IE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+    const dateFormatter = new Intl.DateTimeFormat('cs-CZ', { dateStyle: 'medium', timeStyle: 'short' });
     async function load() {
       const res = await fetch('data/listings.json', { cache: 'no-store' });
       const payload = await res.json();
@@ -88,10 +100,44 @@ INDEX_HTML = """<!doctype html>
     function isConfirmedDouble(x) {
       return Number(x.double_beds || 0) >= 1 && !x.needs_review && x.status === 'active';
     }
+    function timestamp(value) {
+      const parsed = Date.parse(value || '');
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+    function dateText(value) {
+      const time = timestamp(value);
+      return time ? dateFormatter.format(new Date(time)) : 'neznámé';
+    }
+    function addedWithin(x, period) {
+      if (period === 'all') return true;
+      const added = timestamp(x.first_seen);
+      if (!added) return false;
+      if (period === 'today') {
+        const now = new Date();
+        const addedDate = new Date(added);
+        return addedDate.getFullYear() === now.getFullYear()
+          && addedDate.getMonth() === now.getMonth()
+          && addedDate.getDate() === now.getDate();
+      }
+      const days = Number(period);
+      return Number.isFinite(days) && added >= Date.now() - days * 24 * 60 * 60 * 1000;
+    }
+    function compareAdded(a, b, direction) {
+      const aTime = timestamp(a.first_seen);
+      const bTime = timestamp(b.first_seen);
+      if (!aTime && !bTime) return String(a.id || a.url || '').localeCompare(String(b.id || b.url || ''));
+      if (!aTime) return 1;
+      if (!bTime) return -1;
+      const delta = aTime - bTime;
+      if (delta) return direction === 'oldest' ? delta : -delta;
+      return String(a.id || a.url || '').localeCompare(String(b.id || b.url || ''));
+    }
     function render() {
       const q = document.getElementById('search').value.toLowerCase().trim();
       const source = document.getElementById('source').value;
       const status = document.getElementById('status').value;
+      const added = document.getElementById('added').value;
+      const sort = document.getElementById('sort').value;
       const active = listings.filter(x => x.status === 'active').length;
       const visibleActive = listings.filter(x => x.status === 'active' && !isHidden(x)).length;
       const confirmed = listings.filter(isConfirmedDouble).length;
@@ -104,6 +150,7 @@ INDEX_HTML = """<!doctype html>
       let rows = listings.filter(x => {
         const hiddenListing = isHidden(x);
         if (source !== 'all' && sourceSite(x) !== source) return false;
+        if (!addedWithin(x, added)) return false;
         if (status === 'hidden') {
           if (!hiddenListing) return false;
         } else {
@@ -120,6 +167,7 @@ INDEX_HTML = """<!doctype html>
         }
         return true;
       });
+      rows.sort((a, b) => compareAdded(a, b, sort));
       document.getElementById('grid').innerHTML = rows.map(card).join('') || '<p>Žádné nabídky pro zvolený filtr.</p>';
     }
     function esc(s) { return String(s ?? '').replace(/[&<>\"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[ch])); }
@@ -168,7 +216,7 @@ INDEX_HTML = """<!doctype html>
           <div class=\"muted\">${esc(x.location || x.postcode || 'lokalita není dostupná ze zdroje')}</div>
           <div class=\"badges\">${badges}</div>
           <div class=\"muted\" title=\"${esc(reasons)}\">${esc(reasons || 'bez poznámky')}</div>
-          <div class=\"muted\">První: ${esc(x.first_seen || '')}<br>Poslední signál: ${esc(x.last_seen || '')}</div>
+          <div class=\"muted\">Přidáno: ${esc(dateText(x.first_seen))}<br>Poslední signál: ${esc(dateText(x.last_seen))}</div>
           <div class=\"actions\">
             <a class=\"button\" href=\"${esc(x.url)}\" target=\"_blank\" rel=\"noopener noreferrer\">Otevřít na ${sourceLabel(x)}</a>
             ${hiddenListing
@@ -181,6 +229,8 @@ INDEX_HTML = """<!doctype html>
     document.getElementById('search').addEventListener('input', render);
     document.getElementById('source').addEventListener('change', render);
     document.getElementById('status').addEventListener('change', render);
+    document.getElementById('added').addEventListener('change', render);
+    document.getElementById('sort').addEventListener('change', render);
     load().catch(err => { document.getElementById('meta').textContent = 'Dataset se nepodařilo načíst: ' + err; });
   </script>
 </body>
