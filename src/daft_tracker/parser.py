@@ -16,10 +16,17 @@ except Exception:  # pragma: no cover - fallback for minimal installs
 
 from .config import TrackerConfig, normalize_location
 
-DAFT_URL_RE = re.compile(r"https?://(?:www\.)?daft\.ie/[^\s<'\"\)]+", re.IGNORECASE)
-IMAGE_URL_RE = re.compile(r"https?://[^\s<'\"\)]+\.(?:jpg|jpeg|png|webp)(?:\?[^\s<'\"\)]*)?", re.IGNORECASE)
+SUPPORTED_URL_RE = re.compile(
+    r"https?://(?:www\.)?(?:daft\.ie|rent\.ie)/[^\s<'\"\)]+",
+    re.IGNORECASE,
+)
+IMAGE_URL_RE = re.compile(
+    r"https?://[^\s<'\"\)]+\.(?:jpg|jpeg|png|webp)(?:\?[^\s<'\"\)]*)?",
+    re.IGNORECASE,
+)
 PRICE_RE = re.compile(
-    r"(?:€|EUR\s*)(?P<amount>[0-9][0-9,]*(?:\.\d{2})?)\s*(?:per\s*month|/\s*month|monthly|p\.?m\.?|pm)?",
+    r"(?:€|EUR\s*)(?P<amount>[0-9][0-9,]*(?:\.\d{2})?)"
+    r"\s*(?P<period>per\s*(?:month|week)|/\s*(?:month|week)|monthly|weekly|p\.?m\.?|p\.?w\.?|pm|pw)?",
     re.IGNORECASE,
 )
 POSTCODE_RE = re.compile(r"\bDublin\s*(1|2|4|6|7|8|9|10|12|14|16)\b", re.IGNORECASE)
@@ -27,6 +34,7 @@ DOUBLE_BEDS_RE = re.compile(
     r"(?:(?P<count>\d+)\s*)?(?:double\s+(?:bed(?:room)?s?|room)s?|manželsk(?:á|e|é)\s+postel(?:e|í)?)",
     re.IGNORECASE,
 )
+PAREN_DOUBLE_RE = re.compile(r"\b(?P<count>\d+)\s+double\b", re.IGNORECASE)
 COUPLE_UNSUITABLE_RE = re.compile(
     r"\b(?:no\s+couples?|couples?\s+not\s+(?:allowed|accepted|considered)|not\s+suitable\s+for\s+(?:a\s+)?couple|single\s+occupancy|sole\s+occupancy|(?:one|1)\s+person\s+only|single\s+(?:person|tenant)\s+only|(?:one|1)\s+tenant\s+only)\b",
     re.IGNORECASE,
@@ -81,33 +89,58 @@ def clean_url(url: str) -> str:
     return urlunsplit((parts.scheme, parts.netloc.lower(), parts.path.rstrip("/"), urlencode(query), ""))
 
 
+def source_site_from_url(url: str) -> str | None:
+    host = urlsplit(url).netloc.lower().split(":", 1)[0]
+    if host == "daft.ie" or host.endswith(".daft.ie"):
+        return "daft"
+    if host == "rent.ie" or host.endswith(".rent.ie"):
+        return "rent_ie"
+    return None
+
+
 def is_listing_url(url: str) -> bool:
     path = urlsplit(url).path.lower()
-    return any(part in path for part in ("/for-rent/", "/share/", "/rooms-to-rent/", "/property-for-rent/"))
+    source_site = source_site_from_url(url)
+    if source_site == "daft":
+        return any(part in path for part in ("/for-rent/", "/share/", "/rooms-to-rent/", "/property-for-rent/"))
+    if source_site == "rent_ie":
+        return any(part in path for part in ("/houses-to-let/", "/rooms-to-rent/", "/house-sharing/", "/student-accommodation/"))
+    return False
 
 
 def listing_id_from_url(url: str) -> str | None:
     parts = urlsplit(url)
     match = AD_ID_RE.search(parts.path + "/")
-    if match:
+    if not match:
+        return None
+    source_site = source_site_from_url(url)
+    if source_site == "daft":
         return f"daft-{match.group('id')}"
+    if source_site == "rent_ie":
+        return f"rentie-{match.group('id')}"
     return None
 
 
-def extract_price(text: str) -> int | None:
-    candidates: list[int] = []
+def extract_price_and_period(text: str) -> tuple[int | None, str]:
+    candidates: list[tuple[int, str]] = []
     for match in PRICE_RE.finditer(text or ""):
         amount = match.group("amount").replace(",", "")
         try:
             value = int(round(float(amount)))
         except ValueError:
             continue
-        # Avoid tiny numbers mistakenly captured from image dimensions or ad ids.
-        if 250 <= value <= 10000:
-            candidates.append(value)
+        if not 250 <= value <= 20000:
+            continue
+        raw_period = (match.group("period") or "").lower().replace(" ", "").replace(".", "")
+        period = "week" if "week" in raw_period or raw_period in {"pw", "p/w"} else "month"
+        candidates.append((value, period))
     if not candidates:
-        return None
-    return min(candidates)
+        return None, "month"
+    return min(candidates, key=lambda item: item[0])
+
+
+def extract_price(text: str) -> int | None:
+    return extract_price_and_period(text)[0]
 
 
 def extract_postcode(text: str) -> tuple[str | None, str | None]:
@@ -125,6 +158,10 @@ def extract_double_beds(text: str) -> int | None:
     if SINGLE_BED_RE.search(text) and not DOUBLE_BEDS_RE.search(text):
         return 0
 
+    compact_match = PAREN_DOUBLE_RE.search(text)
+    if compact_match:
+        return int(compact_match.group("count"))
+
     match = DOUBLE_BEDS_RE.search(text)
     if match:
         raw = match.group("count")
@@ -136,9 +173,8 @@ def extract_double_beds(text: str) -> int | None:
 
 def extract_title(snippet: str, subject: str | None = None) -> str | None:
     lines = [" ".join(line.strip().split()) for line in snippet.splitlines()]
-    lines = [line for line in lines if line and "daft.ie" not in line.lower()]
-    # Prefer a nearby descriptive line, not a generic CTA.
-    banned = {"view", "view property", "see more", "daft.ie", "open", "click here"}
+    lines = [line for line in lines if line and "daft.ie" not in line.lower() and "rent.ie" not in line.lower()]
+    banned = {"view", "view property", "see more", "daft.ie", "rent.ie", "open", "click here"}
     for line in lines[:8]:
         clean = line.strip(" -–|•")
         if len(clean) >= 8 and clean.lower() not in banned and not PRICE_RE.search(clean):
@@ -155,6 +191,13 @@ def nearby_text(text: str, needle: str, radius: int = 900) -> str:
     return text[max(0, idx - radius): idx + len(needle) + radius]
 
 
+def _source_name_for_url(url: str, transport: str) -> str:
+    source_site = source_site_from_url(url)
+    if source_site == "rent_ie":
+        return f"rent_ie_{transport}"
+    return f"daft_{transport}"
+
+
 def parse_email_message(
     *,
     subject: str | None,
@@ -168,7 +211,7 @@ def parse_email_message(
     seen_at = received_at or datetime.now(timezone.utc).isoformat(timespec="seconds")
 
     urls: list[str] = []
-    for match in DAFT_URL_RE.finditer(raw + "\n" + body_text):
+    for match in SUPPORTED_URL_RE.finditer(raw + "\n" + body_text):
         url = clean_url(match.group(0))
         if is_listing_url(url) and url not in urls:
             urls.append(url)
@@ -181,7 +224,7 @@ def parse_email_message(
         snippet = nearby_text(body_text, url)
         if len(snippet) < 50:
             snippet = body_text[:1800]
-        postcode, location = extract_postcode(snippet) or (None, None)
+        postcode, location = extract_postcode(snippet)
         if not postcode:
             postcode, location = extract_postcode(body_text)
         image_urls = []
@@ -192,6 +235,9 @@ def parse_email_message(
         double_beds = extract_double_beds(snippet)
         if double_beds is None:
             double_beds = extract_double_beds(body_text)
+        price_eur, rent_period = extract_price_and_period(snippet)
+        if price_eur is None:
+            price_eur, rent_period = extract_price_and_period(body_text)
 
         listing = ParsedListing(
             id=listing_id,
@@ -199,10 +245,12 @@ def parse_email_message(
             title=extract_title(snippet, subject),
             postcode=postcode,
             location=location,
-            price_eur=extract_price(snippet) or extract_price(body_text),
+            price_eur=price_eur,
+            rent_period=rent_period,
             double_beds=double_beds,
             image_urls=image_urls[:10],
             thumbnail_url=image_urls[0] if image_urls else None,
+            source=_source_name_for_url(url, "email"),
             source_message_id=message_id,
             source_subject=subject,
             seen_at=seen_at,
@@ -214,28 +262,31 @@ def parse_email_message(
 def apply_filters(listing: ParsedListing, cfg: TrackerConfig) -> ParsedListing | None:
     reasons: list[str] = list(listing.review_reasons or [])
     preserve_manual_non_active = listing.source == "manual_seed" and listing.status not in ("active", "")
+    visibility_context = "feed" if listing.source.endswith("_rss") else "email"
 
     if listing.price_eur is None:
         if not cfg.include_unknown_price:
             return None
-        reasons.append("price_not_visible_in_email")
-    elif listing.price_eur > cfg.max_monthly_rent_eur:
-        if preserve_manual_non_active:
-            reasons.append("current_detail_price_above_filter")
-        else:
-            return None
+        reasons.append(f"price_not_visible_in_{visibility_context}")
+    else:
+        monthly_equivalent = listing.price_eur * 52 / 12 if listing.rent_period == "week" else listing.price_eur
+        if monthly_equivalent > cfg.max_monthly_rent_eur:
+            if preserve_manual_non_active:
+                reasons.append("current_detail_price_above_filter")
+            else:
+                return None
 
     if listing.postcode is None:
         if not cfg.include_unknown_location:
             return None
-        reasons.append("postcode_not_visible_in_email")
+        reasons.append(f"postcode_not_visible_in_{visibility_context}")
     elif normalize_location(listing.postcode) not in cfg.normalized_locations:
         return None
 
     if listing.double_beds is None:
         if not cfg.include_unknown_bed_count:
             return None
-        reasons.append("double_bed_count_not_visible_in_email")
+        reasons.append(f"double_bed_count_not_visible_in_{visibility_context}")
     elif listing.double_beds < cfg.min_double_beds:
         if preserve_manual_non_active:
             reasons.append("double_bed_below_filter")
@@ -283,7 +334,7 @@ def parse_seed_csv(path: str | Path, now_iso: str | None = None) -> list[ParsedL
                 double_beds=int(beds) if beds else None,
                 image_urls=[image] if image else [],
                 thumbnail_url=image,
-                source="manual_seed",
+                source=row.get("source") or "manual_seed",
                 source_message_id=None,
                 seen_at=row.get("last_seen") or row.get("first_seen") or now_iso,
                 status=status,

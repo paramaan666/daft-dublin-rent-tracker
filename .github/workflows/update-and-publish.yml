@@ -1,4 +1,4 @@
-name: Update Daft tracker and publish Pages
+name: Update Dublin rent tracker and publish Pages
 
 'on':
   workflow_dispatch:
@@ -10,11 +10,12 @@ name: Update Daft tracker and publish Pages
       - "site/**"
       - "seeds/**"
       - "src/**"
+      - "tests/**"
+      - "pyproject.toml"
       - "config.yaml"
       - "config.example.yaml"
       - ".github/workflows/update-and-publish.yml"
   schedule:
-    # GitHub schedules run in UTC by default. The timezone field is supported by current GitHub Actions docs.
     - cron: "15 6 * * *"
       timezone: "Europe/Prague"
 
@@ -41,9 +42,12 @@ jobs:
           cache: "pip"
 
       - name: Install dependencies
-        run: pip install -r requirements.txt -e .
+        run: pip install -r requirements.txt -e ".[dev]"
 
-      - name: Update dataset from seed and Gmail alerts
+      - name: Run tests
+        run: python -m pytest -q
+
+      - name: Update dataset from seed, Rent.ie RSS, and Gmail alerts
         env:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
@@ -56,7 +60,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if [[ -n "$(git status --porcelain data site)" ]]; then
             git add data site
-            git commit -m "Update Daft rental dataset"
+            git commit -m "Update Dublin rental dataset"
             git push
           else
             echo "No data changes to commit."

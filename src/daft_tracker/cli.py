@@ -3,11 +3,11 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 import sys
-from typing import Iterable
 
 from .config import load_config
 from .gmail_client import gmail_service_from_env, list_message_ids, fetch_message
 from .parser import parse_email_message, apply_filters, parse_seed_csv
+from .rent_ie import fetch_rent_ie_feed, parse_rent_ie_feed
 from .store import load_store, merge_listings, load_state, save_state
 from .site import build_site
 
@@ -23,6 +23,17 @@ def run_update(args: argparse.Namespace) -> int:
         seed_listings = [item for item in (apply_filters(x, cfg) for x in parse_seed_csv(seed_path)) if item]
         parsed.extend(seed_listings)
         print(f"Loaded {len(seed_listings)} seed listing(s) from {seed_path}")
+
+    if cfg.rent_ie_enabled:
+        for feed_url in cfg.rent_ie_feed_urls:
+            try:
+                feed_xml = fetch_rent_ie_feed(feed_url, timeout_seconds=cfg.rent_ie_timeout_seconds)
+                candidates = parse_rent_ie_feed(feed_xml, feed_url=feed_url)
+                kept = [item for item in (apply_filters(x, cfg) for x in candidates) if item]
+                parsed.extend(kept)
+                print(f"{feed_url}: {len(candidates)} Rent.ie candidate listing(s), {len(kept)} kept after filters")
+            except Exception as exc:
+                print(f"{feed_url}: Rent.ie feed import failed: {exc}", file=sys.stderr)
 
     state = load_state(data_dir)
     processed = set(state.get("processed_gmail_message_ids", []))
@@ -81,12 +92,12 @@ def build_parser() -> argparse.ArgumentParser:
     common.add_argument("--site-dir", default="site", help="Static site output directory")
 
     parser = argparse.ArgumentParser(
-        description="Track Daft Dublin rental listings from Gmail alerts.",
+        description="Track Dublin rental listings from Daft.ie alerts and Rent.ie feeds.",
         parents=[common],
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
-    update = sub.add_parser("update", parents=[common], help="Import seed + Gmail alerts, update data, build site")
+    update = sub.add_parser("update", parents=[common], help="Import seed + Rent.ie feeds + Gmail alerts, update data, build site")
     update.add_argument("--seed", default="seeds/listings_seed.csv", help="CSV seed file")
     update.set_defaults(func=run_update)
 
