@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-16T06:29:52+00:00",
+  "updated_at": "2026-07-17T06:25:53+00:00",
   "filters": {
     "locations": [
       "Dublin 1",
@@ -66,6 +66,40 @@
           }
         }
       ]
+    },
+    {
+      "id": "daft-6622320",
+      "status": "active",
+      "needs_review": true,
+      "review_reasons": [
+        "double_bed_count_not_visible_in_email"
+      ],
+      "title": "Property Alert",
+      "location": "Dublin 7",
+      "postcode": "Dublin 7",
+      "price_eur": 250,
+      "rent_period": "month",
+      "double_beds": null,
+      "url": "https://www.daft.ie/for-rent/-nelson-st-d7-arbour-hill-dublin-7/6622320?ea=1",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "daft_email",
+      "source_message_ids": [
+        "19f6a1a626315791"
+      ],
+      "source_subjects": [
+        "Arbour Hill, Apartment To Let, €250 per week"
+      ],
+      "first_seen": "2026-07-16T08:45:41+00:00",
+      "last_seen": "2026-07-16T08:45:41+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-16T08:45:41+00:00",
+          "price_eur": 250,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
     },
     {
       "id": "daft-6619596",
@@ -379,6 +413,40 @@
         {
           "seen_at": "2026-07-09",
           "price_eur": 850
+        }
+      ],
+      "change_history": []
+    },
+    {
+      "id": "daft-6622498",
+      "status": "active",
+      "needs_review": true,
+      "review_reasons": [
+        "double_bed_count_not_visible_in_email"
+      ],
+      "title": "Property Alert",
+      "location": "Dublin 4",
+      "postcode": "Dublin 4",
+      "price_eur": 950,
+      "rent_period": "month",
+      "double_beds": null,
+      "url": "https://www.daft.ie/for-rent/22-auburn-avenue-donnybrook-donnybrook-dublin-4/6622498?ea=1",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "daft_email",
+      "source_message_ids": [
+        "19f6a6d93d5874b6"
+      ],
+      "source_subjects": [
+        "Donnybrook, House To Let, €950 per month"
+      ],
+      "first_seen": "2026-07-16T10:16:33+00:00",
+      "last_seen": "2026-07-16T10:16:33+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-16T10:16:33+00:00",
+          "price_eur": 950,
+          "rent_period": "month"
         }
       ],
       "change_history": []
@@ -855,6 +923,75 @@
         {
           "seen_at": "2026-07-09",
           "price_eur": 1300
+        }
+      ],
+      "change_history": []
+    },
+    {
+      "id": "daft-6619691",
+      "status": "active",
+      "needs_review": true,
+      "review_reasons": [
+        "double_bed_count_not_visible_in_email"
+      ],
+      "title": "Property Alert",
+      "location": "Dublin 9",
+      "postcode": "Dublin 9",
+      "price_eur": 1300,
+      "rent_period": "month",
+      "double_beds": null,
+      "url": "https://www.daft.ie/for-rent/59-drumcondra-road-lower-drumcondra-dublin-9/6619691?ea=1",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "daft_email",
+      "source_message_ids": [
+        "19f6a5cd0415c6ed"
+      ],
+      "source_subjects": [
+        "Drumcondra, Apartment To Let, €1,300 per month"
+      ],
+      "first_seen": "2026-07-16T09:58:14+00:00",
+      "last_seen": "2026-07-16T09:58:14+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-16T09:58:14+00:00",
+          "price_eur": 1300,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
+      "id": "daft-6622751",
+      "status": "active",
+      "needs_review": true,
+      "review_reasons": [
+        "postcode_not_visible_in_email",
+        "double_bed_count_not_visible_in_email"
+      ],
+      "title": "Property Alert",
+      "location": null,
+      "postcode": null,
+      "price_eur": 1300,
+      "rent_period": "month",
+      "double_beds": null,
+      "url": "https://www.daft.ie/for-rent/clonliffe-road-drumcondra-drumcondra-co-dublin/6622751?ea=1",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "daft_email",
+      "source_message_ids": [
+        "19f6b03cf9bd007d"
+      ],
+      "source_subjects": [
+        "Drumcondra, Apartment To Let, €1,300 per month"
+      ],
+      "first_seen": "2026-07-16T13:00:38+00:00",
+      "last_seen": "2026-07-16T13:00:38+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-16T13:00:38+00:00",
+          "price_eur": 1300,
+          "rent_period": "month"
         }
       ],
       "change_history": []
