@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 import gzip
+import re
 from html import unescape
 from urllib.parse import urljoin, urlsplit, urlunsplit
 from urllib.request import Request, urlopen
@@ -36,17 +37,17 @@ def _fetch_text(
     timeout_seconds: int,
     accept: str,
     max_bytes: int,
+    extra_headers: dict[str, str] | None = None,
 ) -> str:
-    request = Request(
-        url,
-        headers={
-            "User-Agent": DEFAULT_USER_AGENT,
-            "Accept": accept,
-            "Accept-Language": "en-IE,en;q=0.9",
-            "Accept-Encoding": "gzip",
-            "Referer": "https://www.rent.ie/",
-        },
-    )
+    headers = {
+        "User-Agent": DEFAULT_USER_AGENT,
+        "Accept": accept,
+        "Accept-Language": "en-IE,en;q=0.9",
+        "Accept-Encoding": "gzip",
+        "Referer": "https://www.rent.ie/",
+    }
+    headers.update(extra_headers or {})
+    request = Request(url, headers=headers)
     with urlopen(request, timeout=timeout_seconds) as response:
         payload = response.read(max_bytes + 1)
         if len(payload) > max_bytes:
@@ -77,6 +78,30 @@ def fetch_rent_ie_search_page(url: str, *, timeout_seconds: int = 20) -> str:
         timeout_seconds=timeout_seconds,
         accept="text/html,application/xhtml+xml;q=0.9,*/*;q=0.1",
         max_bytes=MAX_SEARCH_PAGE_BYTES,
+    )
+
+
+MARKDOWN_LINK_RE = re.compile(
+    r"(?<!!)\[(?P<title>[^\]]+)\]\((?P<href>[^)\s]+)\)",
+    re.IGNORECASE,
+)
+
+
+def rent_ie_reader_url(search_url: str) -> str:
+    return f"https://r.jina.ai/{search_url}"
+
+
+def fetch_rent_ie_reader_page(search_url: str, *, timeout_seconds: int = 30) -> str:
+    return _fetch_text(
+        rent_ie_reader_url(search_url),
+        timeout_seconds=timeout_seconds,
+        accept="text/plain,text/markdown;q=0.9,*/*;q=0.1",
+        max_bytes=MAX_SEARCH_PAGE_BYTES,
+        extra_headers={
+            "X-Engine": "browser",
+            "X-No-Cache": "true",
+            "X-Timeout": str(timeout_seconds),
+        },
     )
 
 
@@ -259,6 +284,67 @@ def parse_rent_ie_search_page(
             rent_period=rent_period,
             double_beds=extract_double_beds(context_text),
             image_urls=images,
+            thumbnail_url=images[0] if images else None,
+            source="rent_ie_rss",
+            source_message_id=listing_id,
+            source_subject=source_url,
+            seen_at=page_seen_at,
+        ))
+
+    return listings
+
+
+def parse_rent_ie_reader_text(
+    markdown_text: str,
+    *,
+    source_url: str,
+    seen_at: str | None = None,
+) -> list[ParsedListing]:
+    page_seen_at = seen_at or datetime.now(timezone.utc).isoformat(timespec="seconds")
+    occurrences: list[tuple[re.Match[str], str, str]] = []
+
+    for match in MARKDOWN_LINK_RE.finditer(markdown_text or ""):
+        url = _listing_url_from_href(match.group("href"), source_url)
+        if not url:
+            continue
+        title = re.sub(r"^\s*\d+\.\s*", "", unescape(match.group("title"))).strip()
+        occurrences.append((match, url, title))
+
+    best_by_url: dict[str, tuple[re.Match[str], str]] = {}
+    for match, url, title in occurrences:
+        previous = best_by_url.get(url)
+        if previous is None or len(title) > len(previous[1]):
+            best_by_url[url] = (match, title)
+
+    listings: list[ParsedListing] = []
+    ordered = sorted(
+        ((match.start(), url, match, title) for url, (match, title) in best_by_url.items()),
+        key=lambda item: item[0],
+    )
+    for index, (start, url, match, title) in enumerate(ordered):
+        end = ordered[index + 1][0] if index + 1 < len(ordered) else min(len(markdown_text), start + 4000)
+        context = markdown_text[start:end]
+        listing_id = listing_id_from_url(url)
+        if not listing_id:
+            continue
+        postcode, location = extract_postcode(context)
+        price_eur, rent_period = extract_price_and_period(context)
+        images: list[str] = []
+        for raw_url in IMAGE_URL_RE.findall(context):
+            image_url = clean_url(raw_url)
+            if image_url not in images:
+                images.append(image_url)
+
+        listings.append(ParsedListing(
+            id=listing_id,
+            url=url,
+            title=title[:180] or None,
+            location=location,
+            postcode=postcode,
+            price_eur=price_eur,
+            rent_period=rent_period,
+            double_beds=extract_double_beds(context),
+            image_urls=images[:10],
             thumbnail_url=images[0] if images else None,
             source="rent_ie_rss",
             source_message_id=listing_id,
