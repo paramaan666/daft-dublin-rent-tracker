@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-17T19:32:01+00:00",
+  "updated_at": "2026-07-17T19:40:56+00:00",
   "filters": {
     "locations": [
       "Dublin 1",
@@ -23,7 +23,8 @@
     "gmail_max_messages": 50,
     "rent_ie_enabled": true,
     "rent_ie_feed_urls": [
-      "https://rss.rent.ie/houses-to-let/renting_dublin/"
+      "https://rss.rent.ie/houses-to-let/renting_dublin/",
+      "https://rss.rent.ie/rooms-to-rent/renting_dublin/"
     ],
     "rent_ie_timeout_seconds": 20,
     "stale_after_days": 45
