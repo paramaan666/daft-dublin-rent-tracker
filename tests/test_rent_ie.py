@@ -1,6 +1,10 @@
 from daft_tracker.config import TrackerConfig
 from daft_tracker.parser import apply_filters
-from daft_tracker.rent_ie import parse_rent_ie_feed
+from daft_tracker.rent_ie import (
+    parse_rent_ie_feed,
+    parse_rent_ie_search_page,
+    rent_ie_search_url,
+)
 
 
 RSS = """<?xml version="1.0" encoding="UTF-8"?>
@@ -33,6 +37,34 @@ RSS = """<?xml version="1.0" encoding="UTF-8"?>
 """
 
 
+SEARCH_HTML = """
+<html><body>
+  <div class="search-result">
+    <a href="/rooms-to-rent/Cooke-Hall-Clancy-Quay-Dublin-8/6561900/">
+      <img src="https://photos-a.propertyimages.ie/media/0/0/9/6561900/search.jpg">
+    </a>
+    <h2>
+      <a href="/rooms-to-rent/Cooke-Hall-Clancy-Quay-Dublin-8/6561900/">
+        Cooke Hall, Clancy Quay, Dublin 8
+      </a>
+    </h2>
+    <div>€960 monthly</div>
+    <div>double bedroom €960 monthly</div>
+    <p>Entered 10 hours ago</p>
+  </div>
+  <div class="search-result">
+    <h2>
+      <a href="/rooms-to-rent/Old-County-Road-Dublin-12/6561901/">
+        Old County Road, Dublin 12
+      </a>
+    </h2>
+    <div>€564 monthly</div>
+    <div>single bedroom €564 monthly</div>
+  </div>
+</body></html>
+"""
+
+
 def test_parse_rent_ie_rss_and_filter():
     listings = parse_rent_ie_feed(
         RSS,
@@ -62,3 +94,32 @@ def test_rss_missing_bed_count_is_marked_for_review():
     kept = apply_filters(listing, TrackerConfig())
     assert kept is not None
     assert "double_bed_count_not_visible_in_feed" in kept.review_reasons
+
+
+def test_search_page_fallback_parses_and_filters_rooms():
+    source_url = "https://www.rent.ie/rooms-to-rent/renting_dublin/"
+    listings = parse_rent_ie_search_page(
+        SEARCH_HTML,
+        source_url=source_url,
+        seen_at="2026-07-17T12:00:00+00:00",
+    )
+    assert len(listings) == 2
+
+    double_room = listings[0]
+    assert double_room.id == "rentie-6561900"
+    assert double_room.title == "Cooke Hall, Clancy Quay, Dublin 8"
+    assert double_room.postcode == "Dublin 8"
+    assert double_room.price_eur == 960
+    assert double_room.rent_period == "month"
+    assert double_room.double_beds == 1
+    assert double_room.thumbnail_url.endswith("/search.jpg")
+    assert apply_filters(double_room, TrackerConfig()) is not None
+
+    assert listings[1].double_beds == 0
+    assert apply_filters(listings[1], TrackerConfig()) is None
+
+
+def test_feed_url_maps_to_public_search_page():
+    assert rent_ie_search_url(
+        "https://rss.rent.ie/rooms-to-rent/renting_dublin/"
+    ) == "https://www.rent.ie/rooms-to-rent/renting_dublin/"
