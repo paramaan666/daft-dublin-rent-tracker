@@ -10,8 +10,10 @@ from .gmail_client import gmail_service_from_env, list_message_ids, fetch_messag
 from .parser import parse_email_message, apply_filters, parse_seed_csv
 from .rent_ie import (
     fetch_rent_ie_feed,
+    fetch_rent_ie_reader_page,
     fetch_rent_ie_search_page,
     parse_rent_ie_feed,
+    parse_rent_ie_reader_text,
     parse_rent_ie_search_page,
     rent_ie_search_url,
 )
@@ -24,9 +26,7 @@ def _kept_after_filters(candidates: list, cfg) -> list:
 
 
 def _import_rent_ie(feed_url: str, cfg) -> tuple[list, str]:
-    feed_error: Exception | None = None
-    candidates = []
-    kept = []
+    notes: list[str] = []
 
     try:
         feed_xml = fetch_rent_ie_feed(feed_url, timeout_seconds=cfg.rent_ie_timeout_seconds)
@@ -34,29 +34,50 @@ def _import_rent_ie(feed_url: str, cfg) -> tuple[list, str]:
         kept = _kept_after_filters(candidates, cfg)
         if kept:
             return kept, f"RSS: {len(candidates)} candidate listing(s), {len(kept)} kept"
+        if candidates:
+            notes.append(f"RSS had {len(candidates)} candidate(s) but none matched")
+        else:
+            notes.append("RSS returned no parsable candidates")
     except Exception as exc:
-        feed_error = exc
+        notes.append(f"RSS failed: {exc}")
 
     search_url = rent_ie_search_url(feed_url)
     try:
         page_html = fetch_rent_ie_search_page(search_url, timeout_seconds=cfg.rent_ie_timeout_seconds)
         page_candidates = parse_rent_ie_search_page(page_html, source_url=search_url)
         page_kept = _kept_after_filters(page_candidates, cfg)
-        detail = (
-            f"search fallback: {len(page_candidates)} candidate listing(s), "
-            f"{len(page_kept)} kept"
-        )
-        if feed_error is not None:
-            detail += f"; RSS failed: {feed_error}"
-        elif candidates:
-            detail += f"; RSS had {len(candidates)} candidate(s) but none matched"
+        if page_kept:
+            detail = (
+                f"direct search fallback: {len(page_candidates)} candidate listing(s), "
+                f"{len(page_kept)} kept"
+            )
+            if notes:
+                detail += "; " + "; ".join(notes)
+            return page_kept, detail
+        if page_candidates:
+            notes.append(f"direct search had {len(page_candidates)} candidate(s) but none matched")
         else:
-            detail += "; RSS returned no parsable candidates"
-        return page_kept, detail
-    except Exception as page_exc:
-        if feed_error is not None:
-            raise RuntimeError(f"RSS failed: {feed_error}; search fallback failed: {page_exc}") from page_exc
-        raise RuntimeError(f"RSS returned no usable matches; search fallback failed: {page_exc}") from page_exc
+            notes.append("direct search returned no parsable candidates")
+    except Exception as exc:
+        notes.append(f"direct search failed: {exc}")
+
+    try:
+        reader_text = fetch_rent_ie_reader_page(
+            search_url,
+            timeout_seconds=cfg.rent_ie_timeout_seconds,
+        )
+        reader_candidates = parse_rent_ie_reader_text(reader_text, source_url=search_url)
+        reader_kept = _kept_after_filters(reader_candidates, cfg)
+        detail = (
+            f"Reader fallback: {len(reader_candidates)} candidate listing(s), "
+            f"{len(reader_kept)} kept"
+        )
+        if notes:
+            detail += "; " + "; ".join(notes)
+        return reader_kept, detail
+    except Exception as exc:
+        notes.append(f"Reader fallback failed: {exc}")
+        raise RuntimeError("; ".join(notes)) from exc
 
 
 def run_update(args: argparse.Namespace) -> int:
