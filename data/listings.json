@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-17T20:01:02+00:00",
+  "updated_at": "2026-07-17T20:06:24+00:00",
   "filters": {
     "locations": [
       "Dublin 1",
@@ -103,6 +103,34 @@
           "seen_at": "2026-07-16T08:45:41+00:00",
           "price_eur": 250,
           "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
+      "id": "rentie-6597748",
+      "status": "active",
+      "needs_review": false,
+      "review_reasons": [],
+      "title": "Fairfield Park, Rathgar, Dublin 6",
+      "location": "Rathgar, Dublin 6",
+      "postcode": "Dublin 6",
+      "price_eur": 250,
+      "rent_period": "week",
+      "double_beds": 1,
+      "url": "https://www.rent.ie/rooms-to-rent/Fairfield-Park-Rathgar-Dublin-6/6597748",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "manual_seed",
+      "source_message_ids": [],
+      "source_subjects": [],
+      "first_seen": "2026-07-17T20:03:11+00:00",
+      "last_seen": "2026-07-17T20:03:11+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-17T20:03:11+00:00",
+          "price_eur": 250,
+          "rent_period": "week"
         }
       ],
       "change_history": []
@@ -424,6 +452,34 @@
       "change_history": []
     },
     {
+      "id": "rentie-6596552",
+      "status": "active",
+      "needs_review": false,
+      "review_reasons": [],
+      "title": "New Row Place, Christchurch, Dublin 8",
+      "location": "Christchurch, Dublin 8",
+      "postcode": "Dublin 8",
+      "price_eur": 850,
+      "rent_period": "month",
+      "double_beds": 1,
+      "url": "https://www.rent.ie/rooms-to-rent/New-Row-Placenew-Row-Southdublin-8-Christchurch-Dublin-8/6596552",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "manual_seed",
+      "source_message_ids": [],
+      "source_subjects": [],
+      "first_seen": "2026-07-17T20:03:11+00:00",
+      "last_seen": "2026-07-17T20:03:11+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-17T20:03:11+00:00",
+          "price_eur": 850,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
       "id": "daft-6622498",
       "status": "active",
       "needs_review": true,
@@ -452,6 +508,34 @@
         {
           "seen_at": "2026-07-16T10:16:33+00:00",
           "price_eur": 950,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
+      "id": "rentie-6597624",
+      "status": "active",
+      "needs_review": false,
+      "review_reasons": [],
+      "title": "Cooke Hall, Clancy Quay, Kilmainham, Dublin 8",
+      "location": "Kilmainham, Dublin 8",
+      "postcode": "Dublin 8",
+      "price_eur": 960,
+      "rent_period": "month",
+      "double_beds": 1,
+      "url": "https://www.rent.ie/rooms-to-rent/Cooke-Hall-Clancy-Quay-Macken-Avenue-Dublin-8-Kilmainham-Dublin-8/6597624",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "manual_seed",
+      "source_message_ids": [],
+      "source_subjects": [],
+      "first_seen": "2026-07-17T20:03:11+00:00",
+      "last_seen": "2026-07-17T20:03:11+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-17T20:03:11+00:00",
+          "price_eur": 960,
           "rent_period": "month"
         }
       ],
@@ -740,6 +824,34 @@
       "change_history": []
     },
     {
+      "id": "rentie-6597709",
+      "status": "active",
+      "needs_review": false,
+      "review_reasons": [],
+      "title": "Apartment 16, Sunnybank Court, Windy Arbour, Dublin 14",
+      "location": "Windy Arbour, Dublin 14",
+      "postcode": "Dublin 14",
+      "price_eur": 1200,
+      "rent_period": "month",
+      "double_beds": 1,
+      "url": "https://www.rent.ie/rooms-to-rent/Apartment-16-Sunnybank-Court-Dundrum-Road-Dundr-Windy-Arbour-Dublin-14/6597709",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "manual_seed",
+      "source_message_ids": [],
+      "source_subjects": [],
+      "first_seen": "2026-07-17T20:03:11+00:00",
+      "last_seen": "2026-07-17T20:03:11+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-17T20:03:11+00:00",
+          "price_eur": 1200,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
       "id": "daft-6564653",
       "status": "active",
       "needs_review": true,
@@ -1003,6 +1115,34 @@
       "change_history": []
     },
     {
+      "id": "rentie-6596522",
+      "status": "active",
+      "needs_review": false,
+      "review_reasons": [],
+      "title": "South Gate Apartments, Cork Street, Dublin 8",
+      "location": "The Coombe, Dublin 8",
+      "postcode": "Dublin 8",
+      "price_eur": 1300,
+      "rent_period": "month",
+      "double_beds": 1,
+      "url": "https://www.rent.ie/rooms-to-rent/South-Gate-Apartmentscork-Streetdublin-8-The-Coombe-Dublin-8/6596522",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "manual_seed",
+      "source_message_ids": [],
+      "source_subjects": [],
+      "first_seen": "2026-07-17T20:03:11+00:00",
+      "last_seen": "2026-07-17T20:03:11+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-17T20:03:11+00:00",
+          "price_eur": 1300,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
       "id": "daft-6562672",
       "status": "active",
       "needs_review": true,
@@ -1137,6 +1277,34 @@
         {
           "seen_at": "2026-07-09",
           "price_eur": 1350
+        }
+      ],
+      "change_history": []
+    },
+    {
+      "id": "rentie-6597522",
+      "status": "active",
+      "needs_review": false,
+      "review_reasons": [],
+      "title": "Rathlin House, Custom House Square, IFSC, Dublin 1",
+      "location": "IFSC, Dublin 1",
+      "postcode": "Dublin 1",
+      "price_eur": 1380,
+      "rent_period": "month",
+      "double_beds": 1,
+      "url": "https://www.rent.ie/rooms-to-rent/Rathlin-House-Custom-House-Square-Mayor-Street-Lower-Ifsc-Dublin-1-IFSC-Dublin-1/6597522",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "manual_seed",
+      "source_message_ids": [],
+      "source_subjects": [],
+      "first_seen": "2026-07-17T20:03:11+00:00",
+      "last_seen": "2026-07-17T20:03:11+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-17T20:03:11+00:00",
+          "price_eur": 1380,
+          "rent_period": "month"
         }
       ],
       "change_history": []
