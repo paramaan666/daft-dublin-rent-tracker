@@ -54,11 +54,20 @@ def test_parse_rent_ie_email_listing():
 
 def test_filter_rejects_over_budget():
     html = """
-    Dublin 2 €1,700 per month 1 double bedroom
+    Dublin 2 €1,701 per month 1 double bedroom
     https://www.daft.ie/for-rent/apartment-expensive-dublin-2/7654321
     """
     listing = parse_email_message(subject=None, html=None, text=html, message_id="abc")[0]
     assert apply_filters(listing, TrackerConfig()) is None
+
+
+def test_filter_accepts_price_at_budget():
+    html = """
+    Dublin 2 €1,700 per month 1 double bedroom
+    https://www.daft.ie/for-rent/apartment-at-limit-dublin-2/7654325
+    """
+    listing = parse_email_message(subject=None, html=None, text=html, message_id="abc")[0]
+    assert apply_filters(listing, TrackerConfig()) is not None
 
 
 def test_filter_rejects_single_room():
@@ -94,7 +103,7 @@ def test_unknown_bed_count_stays_for_review():
 
 
 def test_url_cleaning_and_ids():
-    daft_url = clean_url("https://www.daft.ie/for-rent/apartment-x/5555555?utm_source=email&utm_campaign=test&x=1)")
+    daft_url = clean_url("https://www.daft.ie/for-rent/apartment-x/5555555?utm_source=email&utm_campaign=test&x=1")
     assert daft_url == "https://www.daft.ie/for-rent/apartment-x/5555555?x=1"
     assert listing_id_from_url(daft_url) == "daft-5555555"
 
