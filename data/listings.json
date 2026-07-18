@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-18T05:54:45+00:00",
+  "updated_at": "2026-07-18T06:05:28+00:00",
   "filters": {
     "locations": [
       "Dublin 1",
@@ -2307,7 +2307,7 @@
     },
     {
       "id": "daft-6529240",
-      "status": "price_above_filter",
+      "status": "active",
       "needs_review": true,
       "review_reasons": [
         "current_detail_price_above_filter",
@@ -2317,21 +2317,26 @@
       "title": "Flat 9, 102 North Circular Road, Stoneybatter, Dublin 7",
       "location": "Stoneybatter, Dublin 7",
       "postcode": "Dublin 7",
-      "price_eur": 1700,
+      "price_eur": 1650,
       "rent_period": "month",
       "double_beds": 1,
-      "url": "https://www.daft.ie/for-rent/flat-9-102-north-circular-road-stoneybatter-dublin-7/6529240",
+      "url": "https://www.daft.ie/for-rent/flat-flat-9-102-north-circular-road-dublin-7-stoneybatter-dublin-7/6529240",
       "thumbnail_url": null,
       "image_urls": [],
       "source": "manual_seed",
       "source_message_ids": [],
       "source_subjects": [],
       "first_seen": "2026-07-09",
-      "last_seen": "2026-07-09",
+      "last_seen": "2026-07-18T05:55:00+00:00",
       "price_history": [
         {
           "seen_at": "2026-07-09",
           "price_eur": 1700
+        },
+        {
+          "seen_at": "2026-07-18T05:55:00+00:00",
+          "price_eur": 1650,
+          "rent_period": "month"
         }
       ],
       "change_history": [
@@ -2343,8 +2348,81 @@
               "new": "price_above_filter"
             }
           }
+        },
+        {
+          "at": "2026-07-18T06:05:28+00:00",
+          "changes": {
+            "status": {
+              "old": "price_above_filter",
+              "new": "active"
+            },
+            "url": {
+              "old": "https://www.daft.ie/for-rent/flat-9-102-north-circular-road-stoneybatter-dublin-7/6529240",
+              "new": "https://www.daft.ie/for-rent/flat-flat-9-102-north-circular-road-dublin-7-stoneybatter-dublin-7/6529240"
+            },
+            "price_eur": {
+              "old": 1700,
+              "new": 1650
+            }
+          }
         }
       ]
+    },
+    {
+      "id": "daft-6610161",
+      "status": "active",
+      "needs_review": false,
+      "review_reasons": [],
+      "title": "Apartment 47, Block C, Old Kilmainham Village, Kilmainham, Dublin 8",
+      "location": "Kilmainham, Dublin 8",
+      "postcode": "Dublin 8",
+      "price_eur": 1700,
+      "rent_period": "month",
+      "double_beds": 1,
+      "url": "https://www.daft.ie/for-rent/apartment-47-block-c-old-kilmainham-village-kilmainham-dublin-8/6610161",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "manual_seed",
+      "source_message_ids": [],
+      "source_subjects": [],
+      "first_seen": "2026-07-18T05:55:00+00:00",
+      "last_seen": "2026-07-18T05:55:00+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-18T05:55:00+00:00",
+          "price_eur": 1700,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
+      "id": "daft-6617977",
+      "status": "active",
+      "needs_review": false,
+      "review_reasons": [],
+      "title": "Flat 3, 46 South Circular Road, Dublin 8",
+      "location": "Dublin 8",
+      "postcode": "Dublin 8",
+      "price_eur": 1700,
+      "rent_period": "month",
+      "double_beds": 1,
+      "url": "https://www.daft.ie/for-rent/flat-3-46-south-circular-road-adare-dublin-8-dublin-8/6617977",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "manual_seed",
+      "source_message_ids": [],
+      "source_subjects": [],
+      "first_seen": "2026-07-18T05:55:00+00:00",
+      "last_seen": "2026-07-18T05:55:00+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-18T05:55:00+00:00",
+          "price_eur": 1700,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
     }
   ]
 }

@@ -94,3 +94,6 @@
 {"at": "2026-07-18T05:54:45+00:00", "type": "new_listing", "listing_id": "rentie-6619524", "url": "https://www.rent.ie/rooms-to-rent/Harrington-Street-Dublin-8-Portobello-Dublin-8/6619524", "price_eur": 810}
 {"at": "2026-07-18T05:54:45+00:00", "type": "new_listing", "listing_id": "rentie-6568527", "url": "https://www.rent.ie/rooms-to-rent/Lower-Ballymount-Road-Ballymount-Dublin-12/6568527", "price_eur": 800}
 {"at": "2026-07-18T05:54:45+00:00", "type": "new_listing", "listing_id": "rentie-6571309", "url": "https://www.rent.ie/rooms-to-rent/Ranelagh-Roaddublin-6-Ranelagh-Dublin-6/6571309", "price_eur": 1450}
+{"at": "2026-07-18T06:05:28+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1700, "new": 1650}}
+{"at": "2026-07-18T06:05:28+00:00", "type": "new_listing", "listing_id": "daft-6610161", "url": "https://www.daft.ie/for-rent/apartment-47-block-c-old-kilmainham-village-kilmainham-dublin-8/6610161", "price_eur": 1700}
+{"at": "2026-07-18T06:05:28+00:00", "type": "new_listing", "listing_id": "daft-6617977", "url": "https://www.daft.ie/for-rent/flat-3-46-south-circular-road-adare-dublin-8-dublin-8/6617977", "price_eur": 1700}
