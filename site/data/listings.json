@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-17T20:15:28+00:00",
+  "updated_at": "2026-07-18T05:54:45+00:00",
   "filters": {
     "locations": [
       "Dublin 1",
@@ -14,7 +14,7 @@
       "Dublin 14",
       "Dublin 16"
     ],
-    "max_monthly_rent_eur": 1500,
+    "max_monthly_rent_eur": 1700,
     "min_double_beds": 1,
     "include_unknown_location": true,
     "include_unknown_bed_count": true,
@@ -103,34 +103,6 @@
           "seen_at": "2026-07-16T08:45:41+00:00",
           "price_eur": 250,
           "rent_period": "month"
-        }
-      ],
-      "change_history": []
-    },
-    {
-      "id": "rentie-6597748",
-      "status": "active",
-      "needs_review": false,
-      "review_reasons": [],
-      "title": "Fairfield Park, Rathgar, Dublin 6",
-      "location": "Rathgar, Dublin 6",
-      "postcode": "Dublin 6",
-      "price_eur": 250,
-      "rent_period": "week",
-      "double_beds": 1,
-      "url": "https://www.rent.ie/rooms-to-rent/Fairfield-Park-Rathgar-Dublin-6/6597748",
-      "thumbnail_url": null,
-      "image_urls": [],
-      "source": "manual_seed",
-      "source_message_ids": [],
-      "source_subjects": [],
-      "first_seen": "2026-07-17T20:03:11+00:00",
-      "last_seen": "2026-07-17T20:03:11+00:00",
-      "price_history": [
-        {
-          "seen_at": "2026-07-17T20:03:11+00:00",
-          "price_eur": 250,
-          "rent_period": "week"
         }
       ],
       "change_history": []
@@ -420,6 +392,90 @@
       "change_history": []
     },
     {
+      "id": "rentie-6568527",
+      "status": "active",
+      "needs_review": false,
+      "review_reasons": [],
+      "title": "Lower Ballymount Road, Ballymount, Dublin 12",
+      "location": "Ballymount, Dublin 12",
+      "postcode": "Dublin 12",
+      "price_eur": 800,
+      "rent_period": "month",
+      "double_beds": 1,
+      "url": "https://www.rent.ie/rooms-to-rent/Lower-Ballymount-Road-Ballymount-Dublin-12/6568527",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "manual_seed",
+      "source_message_ids": [],
+      "source_subjects": [],
+      "first_seen": "2026-07-18T05:35:00+00:00",
+      "last_seen": "2026-07-18T05:35:00+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-18T05:35:00+00:00",
+          "price_eur": 800,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
+      "id": "rentie-6619524",
+      "status": "active",
+      "needs_review": false,
+      "review_reasons": [],
+      "title": "Harrington Street, Dublin 8",
+      "location": "Portobello, Dublin 8",
+      "postcode": "Dublin 8",
+      "price_eur": 810,
+      "rent_period": "month",
+      "double_beds": 1,
+      "url": "https://www.rent.ie/rooms-to-rent/Harrington-Street-Dublin-8-Portobello-Dublin-8/6619524",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "manual_seed",
+      "source_message_ids": [],
+      "source_subjects": [],
+      "first_seen": "2026-07-18T05:35:00+00:00",
+      "last_seen": "2026-07-18T05:35:00+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-18T05:35:00+00:00",
+          "price_eur": 810,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
+      "id": "rentie-6620255",
+      "status": "active",
+      "needs_review": false,
+      "review_reasons": [],
+      "title": "Oxmantown Road, Dublin 7",
+      "location": "Arbour Hill, Dublin 7",
+      "postcode": "Dublin 7",
+      "price_eur": 840,
+      "rent_period": "month",
+      "double_beds": 1,
+      "url": "https://www.rent.ie/rooms-to-rent/Oxmantown-Road-Dublin-7-Arbour-Hill-Dublin-7/6620255",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "manual_seed",
+      "source_message_ids": [],
+      "source_subjects": [],
+      "first_seen": "2026-07-18T05:35:00+00:00",
+      "last_seen": "2026-07-18T05:35:00+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-18T05:35:00+00:00",
+          "price_eur": 840,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
       "id": "daft-6611573",
       "status": "active",
       "needs_review": true,
@@ -452,28 +508,28 @@
       "change_history": []
     },
     {
-      "id": "rentie-6596552",
+      "id": "rentie-6620321",
       "status": "active",
       "needs_review": false,
       "review_reasons": [],
-      "title": "New Row Place, Christchurch, Dublin 8",
-      "location": "Christchurch, Dublin 8",
-      "postcode": "Dublin 8",
-      "price_eur": 850,
+      "title": "245 Plums Road, Dublin 16",
+      "location": "Dundrum, Dublin 16",
+      "postcode": "Dublin 16",
+      "price_eur": 900,
       "rent_period": "month",
       "double_beds": 1,
-      "url": "https://www.rent.ie/rooms-to-rent/New-Row-Placenew-Row-Southdublin-8-Christchurch-Dublin-8/6596552",
+      "url": "https://www.rent.ie/rooms-to-rent/245-Plums-Road-Dublin-16-Dundrum-Dublin-16/6620321",
       "thumbnail_url": null,
       "image_urls": [],
       "source": "manual_seed",
       "source_message_ids": [],
       "source_subjects": [],
-      "first_seen": "2026-07-17T20:03:11+00:00",
-      "last_seen": "2026-07-17T20:03:11+00:00",
+      "first_seen": "2026-07-18T05:35:00+00:00",
+      "last_seen": "2026-07-18T05:35:00+00:00",
       "price_history": [
         {
-          "seen_at": "2026-07-17T20:03:11+00:00",
-          "price_eur": 850,
+          "seen_at": "2026-07-18T05:35:00+00:00",
+          "price_eur": 900,
           "rent_period": "month"
         }
       ],
@@ -508,34 +564,6 @@
         {
           "seen_at": "2026-07-16T10:16:33+00:00",
           "price_eur": 950,
-          "rent_period": "month"
-        }
-      ],
-      "change_history": []
-    },
-    {
-      "id": "rentie-6597624",
-      "status": "active",
-      "needs_review": false,
-      "review_reasons": [],
-      "title": "Cooke Hall, Clancy Quay, Kilmainham, Dublin 8",
-      "location": "Kilmainham, Dublin 8",
-      "postcode": "Dublin 8",
-      "price_eur": 960,
-      "rent_period": "month",
-      "double_beds": 1,
-      "url": "https://www.rent.ie/rooms-to-rent/Cooke-Hall-Clancy-Quay-Macken-Avenue-Dublin-8-Kilmainham-Dublin-8/6597624",
-      "thumbnail_url": null,
-      "image_urls": [],
-      "source": "manual_seed",
-      "source_message_ids": [],
-      "source_subjects": [],
-      "first_seen": "2026-07-17T20:03:11+00:00",
-      "last_seen": "2026-07-17T20:03:11+00:00",
-      "price_history": [
-        {
-          "seen_at": "2026-07-17T20:03:11+00:00",
-          "price_eur": 960,
           "rent_period": "month"
         }
       ],
@@ -637,6 +665,34 @@
       "change_history": []
     },
     {
+      "id": "rentie-6622894",
+      "status": "active",
+      "needs_review": false,
+      "review_reasons": [],
+      "title": "Sussex Terrace, Mespil Rd, Ballsbridge, Dublin 4",
+      "location": "Ballsbridge, Dublin 4",
+      "postcode": "Dublin 4",
+      "price_eur": 1110,
+      "rent_period": "month",
+      "double_beds": 1,
+      "url": "https://www.rent.ie/rooms-to-rent/Sussex-Terrace-Mespil-Rd-Ballsbridge-Dublin-4/6622894",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "manual_seed",
+      "source_message_ids": [],
+      "source_subjects": [],
+      "first_seen": "2026-07-18T05:35:00+00:00",
+      "last_seen": "2026-07-18T05:35:00+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-18T05:35:00+00:00",
+          "price_eur": 1110,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
       "id": "daft-6616769",
       "status": "active",
       "needs_review": true,
@@ -733,6 +789,34 @@
       "change_history": []
     },
     {
+      "id": "rentie-6620301",
+      "status": "active",
+      "needs_review": false,
+      "review_reasons": [],
+      "title": "Portland Lock, Portland Place, Dublin 1",
+      "location": "North Circular Road, Dublin 1",
+      "postcode": "Dublin 1",
+      "price_eur": 1165,
+      "rent_period": "month",
+      "double_beds": 1,
+      "url": "https://www.rent.ie/rooms-to-rent/Portland-Lock-Portland-Place-Dublin-1-North-Circular-Road-Dublin-1/6620301",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "manual_seed",
+      "source_message_ids": [],
+      "source_subjects": [],
+      "first_seen": "2026-07-18T05:35:00+00:00",
+      "last_seen": "2026-07-18T05:35:00+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-18T05:35:00+00:00",
+          "price_eur": 1165,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
       "id": "daft-6598648",
       "status": "active",
       "needs_review": false,
@@ -819,34 +903,6 @@
         {
           "seen_at": "2026-07-09",
           "price_eur": 1200
-        }
-      ],
-      "change_history": []
-    },
-    {
-      "id": "rentie-6597709",
-      "status": "active",
-      "needs_review": false,
-      "review_reasons": [],
-      "title": "Apartment 16, Sunnybank Court, Windy Arbour, Dublin 14",
-      "location": "Windy Arbour, Dublin 14",
-      "postcode": "Dublin 14",
-      "price_eur": 1200,
-      "rent_period": "month",
-      "double_beds": 1,
-      "url": "https://www.rent.ie/rooms-to-rent/Apartment-16-Sunnybank-Court-Dundrum-Road-Dundr-Windy-Arbour-Dublin-14/6597709",
-      "thumbnail_url": null,
-      "image_urls": [],
-      "source": "manual_seed",
-      "source_message_ids": [],
-      "source_subjects": [],
-      "first_seen": "2026-07-17T20:03:11+00:00",
-      "last_seen": "2026-07-17T20:03:11+00:00",
-      "price_history": [
-        {
-          "seen_at": "2026-07-17T20:03:11+00:00",
-          "price_eur": 1200,
-          "rent_period": "month"
         }
       ],
       "change_history": []
@@ -1115,34 +1171,6 @@
       "change_history": []
     },
     {
-      "id": "rentie-6596522",
-      "status": "active",
-      "needs_review": false,
-      "review_reasons": [],
-      "title": "South Gate Apartments, Cork Street, Dublin 8",
-      "location": "The Coombe, Dublin 8",
-      "postcode": "Dublin 8",
-      "price_eur": 1300,
-      "rent_period": "month",
-      "double_beds": 1,
-      "url": "https://www.rent.ie/rooms-to-rent/South-Gate-Apartmentscork-Streetdublin-8-The-Coombe-Dublin-8/6596522",
-      "thumbnail_url": null,
-      "image_urls": [],
-      "source": "manual_seed",
-      "source_message_ids": [],
-      "source_subjects": [],
-      "first_seen": "2026-07-17T20:03:11+00:00",
-      "last_seen": "2026-07-17T20:03:11+00:00",
-      "price_history": [
-        {
-          "seen_at": "2026-07-17T20:03:11+00:00",
-          "price_eur": 1300,
-          "rent_period": "month"
-        }
-      ],
-      "change_history": []
-    },
-    {
       "id": "daft-6562672",
       "status": "active",
       "needs_review": true,
@@ -1277,34 +1305,6 @@
         {
           "seen_at": "2026-07-09",
           "price_eur": 1350
-        }
-      ],
-      "change_history": []
-    },
-    {
-      "id": "rentie-6597522",
-      "status": "active",
-      "needs_review": false,
-      "review_reasons": [],
-      "title": "Rathlin House, Custom House Square, IFSC, Dublin 1",
-      "location": "IFSC, Dublin 1",
-      "postcode": "Dublin 1",
-      "price_eur": 1380,
-      "rent_period": "month",
-      "double_beds": 1,
-      "url": "https://www.rent.ie/rooms-to-rent/Rathlin-House-Custom-House-Square-Mayor-Street-Lower-Ifsc-Dublin-1-IFSC-Dublin-1/6597522",
-      "thumbnail_url": null,
-      "image_urls": [],
-      "source": "manual_seed",
-      "source_message_ids": [],
-      "source_subjects": [],
-      "first_seen": "2026-07-17T20:03:11+00:00",
-      "last_seen": "2026-07-17T20:03:11+00:00",
-      "price_history": [
-        {
-          "seen_at": "2026-07-17T20:03:11+00:00",
-          "price_eur": 1380,
-          "rent_period": "month"
         }
       ],
       "change_history": []
@@ -1535,6 +1535,34 @@
       "price_history": [
         {
           "seen_at": "2026-07-15T15:51:50+00:00",
+          "price_eur": 1450,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
+      "id": "rentie-6571309",
+      "status": "active",
+      "needs_review": false,
+      "review_reasons": [],
+      "title": "Ranelagh Road, Dublin 6",
+      "location": "Ranelagh, Dublin 6",
+      "postcode": "Dublin 6",
+      "price_eur": 1450,
+      "rent_period": "month",
+      "double_beds": 1,
+      "url": "https://www.rent.ie/rooms-to-rent/Ranelagh-Roaddublin-6-Ranelagh-Dublin-6/6571309",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "manual_seed",
+      "source_message_ids": [],
+      "source_subjects": [],
+      "first_seen": "2026-07-18T05:35:00+00:00",
+      "last_seen": "2026-07-18T05:35:00+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-18T05:35:00+00:00",
           "price_eur": 1450,
           "rent_period": "month"
         }
@@ -2243,6 +2271,34 @@
       "price_history": [
         {
           "seen_at": "2026-07-13T13:29:42+00:00",
+          "price_eur": 1500,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
+      "id": "rentie-6620242",
+      "status": "active",
+      "needs_review": false,
+      "review_reasons": [],
+      "title": "Charlemont Street, Dublin 2",
+      "location": "Dublin 2",
+      "postcode": "Dublin 2",
+      "price_eur": 1500,
+      "rent_period": "month",
+      "double_beds": 1,
+      "url": "https://www.rent.ie/rooms-to-rent/Charlemont-Street-Dublin-2/6620242",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "manual_seed",
+      "source_message_ids": [],
+      "source_subjects": [],
+      "first_seen": "2026-07-18T05:35:00+00:00",
+      "last_seen": "2026-07-18T05:35:00+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-18T05:35:00+00:00",
           "price_eur": 1500,
           "rent_period": "month"
         }
