@@ -1,53 +1,69 @@
 {
   "verified": true,
   "page_url": "https://paramaan666.github.io/daft-dublin-rent-tracker/",
+  "max_monthly_rent_eur": 1700,
   "dashboard_controls": [
     "Rent.ie source filter",
     "date-added filter",
-    "newest/oldest sorting"
+    "newest/oldest sorting",
+    "canonical Rent.ie detail links"
   ],
   "rent_ie_listings": [
     {
-      "id": "rentie-6596522",
-      "title": "South Gate Apartments, Cork Street, Dublin 8",
-      "price_eur": 1300,
+      "id": "rentie-6568527",
+      "title": "Lower Ballymount Road, Ballymount, Dublin 12",
+      "price_eur": 800,
       "rent_period": "month",
-      "url": "https://www.rent.ie/rooms-to-rent/South-Gate-Apartmentscork-Streetdublin-8-The-Coombe-Dublin-8/6596522"
+      "url": "https://www.rent.ie/rooms-to-rent/Lower-Ballymount-Road-Ballymount-Dublin-12/6568527/"
     },
     {
-      "id": "rentie-6596552",
-      "title": "New Row Place, Christchurch, Dublin 8",
-      "price_eur": 850,
+      "id": "rentie-6571309",
+      "title": "Ranelagh Road, Dublin 6",
+      "price_eur": 1450,
       "rent_period": "month",
-      "url": "https://www.rent.ie/rooms-to-rent/New-Row-Placenew-Row-Southdublin-8-Christchurch-Dublin-8/6596552"
+      "url": "https://www.rent.ie/rooms-to-rent/Ranelagh-Roaddublin-6-Ranelagh-Dublin-6/6571309/"
     },
     {
-      "id": "rentie-6597522",
-      "title": "Rathlin House, Custom House Square, IFSC, Dublin 1",
-      "price_eur": 1380,
+      "id": "rentie-6619524",
+      "title": "Harrington Street, Dublin 8",
+      "price_eur": 810,
       "rent_period": "month",
-      "url": "https://www.rent.ie/rooms-to-rent/Rathlin-House-Custom-House-Square-Mayor-Street-Lower-Ifsc-Dublin-1-IFSC-Dublin-1/6597522"
+      "url": "https://www.rent.ie/rooms-to-rent/Harrington-Street-Dublin-8-Portobello-Dublin-8/6619524/"
     },
     {
-      "id": "rentie-6597624",
-      "title": "Cooke Hall, Clancy Quay, Kilmainham, Dublin 8",
-      "price_eur": 960,
+      "id": "rentie-6620242",
+      "title": "Charlemont Street, Dublin 2",
+      "price_eur": 1500,
       "rent_period": "month",
-      "url": "https://www.rent.ie/rooms-to-rent/Cooke-Hall-Clancy-Quay-Macken-Avenue-Dublin-8-Kilmainham-Dublin-8/6597624"
+      "url": "https://www.rent.ie/rooms-to-rent/Charlemont-Street-Dublin-2/6620242/"
     },
     {
-      "id": "rentie-6597709",
-      "title": "Apartment 16, Sunnybank Court, Windy Arbour, Dublin 14",
-      "price_eur": 1200,
+      "id": "rentie-6620255",
+      "title": "Oxmantown Road, Dublin 7",
+      "price_eur": 840,
       "rent_period": "month",
-      "url": "https://www.rent.ie/rooms-to-rent/Apartment-16-Sunnybank-Court-Dundrum-Road-Dundr-Windy-Arbour-Dublin-14/6597709"
+      "url": "https://www.rent.ie/rooms-to-rent/Oxmantown-Road-Dublin-7-Arbour-Hill-Dublin-7/6620255/"
     },
     {
-      "id": "rentie-6597748",
-      "title": "Fairfield Park, Rathgar, Dublin 6",
-      "price_eur": 250,
-      "rent_period": "week",
-      "url": "https://www.rent.ie/rooms-to-rent/Fairfield-Park-Rathgar-Dublin-6/6597748"
+      "id": "rentie-6620301",
+      "title": "Portland Lock, Portland Place, Dublin 1",
+      "price_eur": 1165,
+      "rent_period": "month",
+      "url": "https://www.rent.ie/rooms-to-rent/Portland-Lock-Portland-Place-Dublin-1-North-Circular-Road-Dublin-1/6620301/"
+    },
+    {
+      "id": "rentie-6620321",
+      "title": "245 Plums Road, Dublin 16",
+      "price_eur": 900,
+      "rent_period": "month",
+      "url": "https://www.rent.ie/rooms-to-rent/245-Plums-Road-Dublin-16-Dundrum-Dublin-16/6620321/"
+    },
+    {
+      "id": "rentie-6622894",
+      "title": "Sussex Terrace, Mespil Rd, Ballsbridge, Dublin 4",
+      "price_eur": 1110,
+      "rent_period": "month",
+      "url": "https://www.rent.ie/rooms-to-rent/Sussex-Terrace-Mespil-Rd-Ballsbridge-Dublin-4/6622894/"
     }
   ]
 }
