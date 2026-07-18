@@ -13,13 +13,14 @@ DEFAULT_LOCATIONS = [
 ]
 DEFAULT_RENT_IE_FEED_URLS = [
     "https://rss.rent.ie/houses-to-let/renting_dublin/",
+    "https://rss.rent.ie/rooms-to-rent/renting_dublin/",
 ]
 
 
 @dataclass(slots=True)
 class TrackerConfig:
     locations: list[str] = field(default_factory=lambda: list(DEFAULT_LOCATIONS))
-    max_monthly_rent_eur: int = 1500
+    max_monthly_rent_eur: int = 1700
     min_double_beds: int = 1
     include_unknown_location: bool = True
     include_unknown_bed_count: bool = True
