@@ -97,6 +97,11 @@ INDEX_HTML = """<!doctype html>
       return 'daft';
     }
     function sourceLabel(x) { return sourceSite(x) === 'rent_ie' ? 'Rent.ie' : 'Daft.ie'; }
+    function listingUrl(x) {
+      const raw = String(x.url || '');
+      if (sourceSite(x) === 'rent_ie' && raw && !raw.endsWith('/')) return `${raw}/`;
+      return raw;
+    }
     function isConfirmedDouble(x) {
       return Number(x.double_beds || 0) >= 1 && !x.needs_review && x.status === 'active';
     }
@@ -196,6 +201,7 @@ INDEX_HTML = """<!doctype html>
       const id = listingKey(x);
       const idArg = esc(JSON.stringify(id));
       const hiddenListing = isHidden(x);
+      const openUrl = listingUrl(x);
       const statusClass = x.status === 'price_above_filter' ? 'danger' : (x.status === 'active' ? '' : 'inactive');
       const sourceClass = sourceSite(x) === 'rent_ie' ? 'source-rent' : 'source-daft';
       const badges = [
@@ -212,13 +218,13 @@ INDEX_HTML = """<!doctype html>
         <div class=\"thumb\">${x.thumbnail_url ? `<img src=\"${esc(x.thumbnail_url)}\" alt=\"\" loading=\"lazy\">` : 'bez fotky'}</div>
         <div class=\"content\">
           <div class=\"price\">${esc(priceText(x))}</div>
-          <div class=\"title\">${esc(x.title || x.url)}</div>
+          <div class=\"title\">${esc(x.title || openUrl)}</div>
           <div class=\"muted\">${esc(x.location || x.postcode || 'lokalita není dostupná ze zdroje')}</div>
           <div class=\"badges\">${badges}</div>
           <div class=\"muted\" title=\"${esc(reasons)}\">${esc(reasons || 'bez poznámky')}</div>
           <div class=\"muted\">Přidáno: ${esc(dateText(x.first_seen))}<br>Poslední signál: ${esc(dateText(x.last_seen))}</div>
           <div class=\"actions\">
-            <a class=\"button\" href=\"${esc(x.url)}\" target=\"_blank\" rel=\"noopener noreferrer\">Otevřít na ${sourceLabel(x)}</a>
+            <a class=\"button\" href=\"${esc(openUrl)}\" target=\"_blank\" rel=\"noopener noreferrer\">Otevřít na ${sourceLabel(x)}</a>
             ${hiddenListing
               ? `<button class=\"action\" type=\"button\" onclick=\"restoreListing(${idArg})\">Obnovit</button>`
               : `<button class=\"action\" type=\"button\" onclick=\"hideListing(${idArg})\">Skrýt</button>`}

@@ -3,18 +3,18 @@
 Automatický tracker nájmů v Dublinu, který spojuje:
 
 - **Daft.ie Saved Search + Gmail alerty**
-- **Rent.ie veřejný RSS feed**
+- **Rent.ie veřejné RSS feedy a Gmail alerty**
 - ruční seed CSV
 - GitHub Actions a GitHub Pages
 
-Projekt neprochází detailní stránky jako hromadný crawler. Daft.ie data čte z emailových alertů a Rent.ie data z RSS odkazu, který Rent.ie nabízí na stránce výsledků vyhledávání. Metadata a URL obrázků se ukládají do společného datasetu; obrázky se nekopírují ani nerehostují.
+Projekt neprochází detailní stránky jako hromadný crawler. Daft.ie data čte z emailových alertů a Rent.ie se nejprve pokouší načíst z veřejných výsledků/RSS; aktuální ověřené odkazy lze držet také v samostatném seed CSV. Metadata a URL obrázků se ukládají do společného datasetu; obrázky se nekopírují ani nerehostují.
 
 ## Společné filtry
 
 Výchozí konfigurace v `config.example.yaml`:
 
 - lokality: Dublin 1, 2, 4, 6, 7, 8, 9, 10, 12, 14, 16
-- maximální nájem: 1500 EUR za měsíc
+- maximální nájem: **1700 EUR za měsíc**
 - minimum: 1 double bed, pokud je údaj ve zdroji rozpoznatelný
 
 Týdenní cena se pro kontrolu limitu přepočítává na měsíční ekvivalent `weekly × 52 / 12`.
@@ -29,15 +29,18 @@ Vytvoř na Daft.ie Saved Search se stejnými filtry a zapni emailové alerty. Gm
 
 ### Rent.ie
 
-Rent.ie RSS je zapnuté automaticky:
+Rent.ie zdroje jsou zapnuté automaticky:
 
 ```yaml
 rent_ie_enabled: true
 rent_ie_feed_urls:
   - https://rss.rent.ie/houses-to-let/renting_dublin/
+  - https://rss.rent.ie/rooms-to-rent/renting_dublin/
 ```
 
-Lze přidat více RSS URL. Každý feed se načte samostatně; chyba jednoho feedu nezastaví import seedů ani Gmail alertů.
+Každý feed se načte samostatně; chyba jednoho feedu nezastaví import seedů ani Gmail alertů. Aktuální ručně ověřené nabídky jsou v `seeds/rent_ie_seed.csv`.
+
+Rent.ie detailní URL používají koncové `/`. Dashboard ho při otevírání automaticky doplní, aby odkaz vedl na konkrétní inzerát místo obecného přehledu nabídek.
 
 ## Co se publikuje
 
@@ -46,9 +49,10 @@ Po každém běhu vzniknou:
 - `data/listings.json`
 - `data/listings.csv`
 - `data/events.jsonl`
+- `data/rent_ie_status.json`
 - `site/index.html`
 
-Web zobrazuje Daft.ie a Rent.ie v jednom seznamu, přidává badge zdroje a umožňuje filtrovat jen jeden portál.
+Web zobrazuje Daft.ie a Rent.ie v jednom seznamu, přidává badge zdroje a umožňuje filtrovat jen jeden portál, datum přidání i stav nabídky.
 
 Veřejná stránka:
 
@@ -82,11 +86,14 @@ Refresh token lze vytvořit:
 python scripts/get_google_refresh_token.py --client-secret client_secret.json
 ```
 
-Bez Gmail credentials se Gmail import přeskočí, ale Rent.ie RSS a seed CSV dál fungují.
+Bez Gmail credentials se Gmail import přeskočí, ale Rent.ie zdroje a seed CSV dál fungují.
 
 ## Ruční seed
 
-`seeds/listings_seed.csv` podporuje Daft.ie i Rent.ie URL. ID může zůstat prázdné, pokud URL končí číselným ID inzerátu; doplní se prefix `daft-` nebo `rentie-`.
+- `seeds/listings_seed.csv` — hlavní ruční seed
+- `seeds/rent_ie_seed.csv` — aktuální ověřené Rent.ie odkazy
+
+Oba soubory podporují Daft.ie i Rent.ie URL. ID může zůstat prázdné, pokud URL končí číselným ID inzerátu; doplní se prefix `daft-` nebo `rentie-`.
 
 ## Datový model
 
@@ -113,7 +120,7 @@ Důležitá pole:
 
 ## Omezení
 
-RSS zpravidla obsahuje jen nejnovější položky a nemusí obsahovat všechny detaily. Zmizelý inzerát nelze bez stavového API potvrdit okamžitě; po `stale_after_days` dostane stav `possibly_removed`.
+RSS zpravidla obsahuje jen nejnovější položky a nemusí obsahovat všechny detaily. Rent.ie může blokovat automatické požadavky z GitHub Actions; proto se stav zdrojů zapisuje do `data/rent_ie_status.json` a lze použít ověřený seed. Zmizelý inzerát nelze bez stavového API potvrdit okamžitě; po `stale_after_days` dostane stav `possibly_removed`.
 
 ## Bezpečnost a práva
 
