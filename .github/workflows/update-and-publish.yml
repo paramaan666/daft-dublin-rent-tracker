@@ -91,11 +91,12 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Verify deployed dashboard contains Rent.ie listings
+      - name: Verify deployed dashboard contains current Rent.ie listings
         env:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
         run: |
           python - <<'PY'
+          import csv
           import json
           import os
           import time
@@ -103,16 +104,19 @@ jobs:
           from urllib.request import Request, urlopen
 
           base_url = os.environ["PAGE_URL"].rstrip("/")
-          expected_ids = {
-              "rentie-6597748",
-              "rentie-6597709",
-              "rentie-6597624",
-              "rentie-6596522",
-              "rentie-6597522",
-              "rentie-6596552",
-          }
-          last_error = None
+          max_monthly_rent_eur = 1700
+          seed_path = Path("seeds/rent_ie_seed.csv")
+          with seed_path.open("r", encoding="utf-8-sig", newline="") as handle:
+              seed_rows = {
+                  row["id"].strip(): row
+                  for row in csv.DictReader(handle)
+                  if row.get("id") and row["id"].strip().startswith("rentie-")
+              }
+          expected_ids = set(seed_rows)
+          if not expected_ids:
+              raise RuntimeError("Rent.ie verification seed is empty")
 
+          last_error = None
           for attempt in range(12):
               cache_buster = int(time.time())
               try:
@@ -122,8 +126,14 @@ jobs:
                   )
                   with urlopen(index_request, timeout=20) as response:
                       index_html = response.read().decode("utf-8", errors="replace")
-                  if "Jen Rent.ie" not in index_html or "Nejnovější přidané první" not in index_html:
-                      raise RuntimeError("deployed dashboard is missing the Rent.ie or date controls")
+                  required_ui = [
+                      "Jen Rent.ie",
+                      "Nejnovější přidané první",
+                      "function listingUrl(x)",
+                  ]
+                  missing_ui = [text for text in required_ui if text not in index_html]
+                  if missing_ui:
+                      raise RuntimeError(f"deployed dashboard is missing controls/link fix: {missing_ui}")
 
                   data_request = Request(
                       f"{base_url}/data/listings.json?verify={cache_buster}",
@@ -131,6 +141,12 @@ jobs:
                   )
                   with urlopen(data_request, timeout=20) as response:
                       payload = json.load(response)
+
+                  deployed_cap = int((payload.get("filters") or {}).get("max_monthly_rent_eur") or 0)
+                  if deployed_cap != max_monthly_rent_eur:
+                      raise RuntimeError(
+                          f"deployed price cap is EUR {deployed_cap}, expected EUR {max_monthly_rent_eur}"
+                      )
 
                   by_id = {
                       str(item.get("id")): item
@@ -148,23 +164,43 @@ jobs:
                           raise RuntimeError(f"{listing_id} is not active on deployed Pages")
                       if int(item.get("double_beds") or 0) < 1:
                           raise RuntimeError(f"{listing_id} has no confirmed double bed on deployed Pages")
-                      if "rent.ie/" not in str(item.get("url") or ""):
-                          raise RuntimeError(f"{listing_id} does not point to Rent.ie")
+
+                      raw_url = str(item.get("url") or "")
+                      deployed_url = raw_url.rstrip("/") + "/"
+                      expected_url = str(seed_rows[listing_id].get("url") or "").rstrip("/") + "/"
+                      if deployed_url != expected_url:
+                          raise RuntimeError(
+                              f"{listing_id} URL differs from the verified seed: {deployed_url} != {expected_url}"
+                          )
+                      ad_id = listing_id.split("-", 1)[1]
+                      if "/rooms-to-rent/" not in deployed_url or not deployed_url.endswith(f"/{ad_id}/"):
+                          raise RuntimeError(f"{listing_id} is not a direct Rent.ie detail URL: {deployed_url}")
+
+                      price = int(item.get("price_eur") or 0)
+                      period = str(item.get("rent_period") or "month")
+                      monthly_equivalent = price * 52 / 12 if period == "week" else price
+                      if monthly_equivalent > max_monthly_rent_eur:
+                          raise RuntimeError(
+                              f"{listing_id} exceeds the EUR {max_monthly_rent_eur} monthly cap"
+                          )
+
                       verified.append({
                           "id": listing_id,
                           "title": item.get("title"),
-                          "price_eur": item.get("price_eur"),
-                          "rent_period": item.get("rent_period"),
-                          "url": item.get("url"),
+                          "price_eur": price,
+                          "rent_period": period,
+                          "url": deployed_url,
                       })
 
                   record = {
                       "verified": True,
                       "page_url": f"{base_url}/",
+                      "max_monthly_rent_eur": max_monthly_rent_eur,
                       "dashboard_controls": [
                           "Rent.ie source filter",
                           "date-added filter",
                           "newest/oldest sorting",
+                          "canonical Rent.ie detail links",
                       ],
                       "rent_ie_listings": verified,
                   }
