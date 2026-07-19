@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-18T06:16:18+00:00",
+  "updated_at": "2026-07-19T06:41:38+00:00",
   "filters": {
     "locations": [
       "Dublin 1",
@@ -2347,6 +2347,16 @@
           "seen_at": "2026-07-18T05:55:00+00:00",
           "price_eur": 1650,
           "rent_period": "month"
+        },
+        {
+          "seen_at": "2026-07-09",
+          "price_eur": 1700,
+          "rent_period": "month"
+        },
+        {
+          "seen_at": "2026-07-18T05:55:00+00:00",
+          "price_eur": 1650,
+          "rent_period": "month"
         }
       ],
       "change_history": [
@@ -2395,6 +2405,40 @@
         },
         {
           "at": "2026-07-18T06:16:18+00:00",
+          "changes": {
+            "status": {
+              "old": "price_above_filter",
+              "new": "active"
+            },
+            "url": {
+              "old": "https://www.daft.ie/for-rent/flat-9-102-north-circular-road-stoneybatter-dublin-7/6529240",
+              "new": "https://www.daft.ie/for-rent/flat-flat-9-102-north-circular-road-dublin-7-stoneybatter-dublin-7/6529240"
+            },
+            "price_eur": {
+              "old": 1700,
+              "new": 1650
+            }
+          }
+        },
+        {
+          "at": "2026-07-19T06:41:38+00:00",
+          "changes": {
+            "status": {
+              "old": "active",
+              "new": "price_above_filter"
+            },
+            "url": {
+              "old": "https://www.daft.ie/for-rent/flat-flat-9-102-north-circular-road-dublin-7-stoneybatter-dublin-7/6529240",
+              "new": "https://www.daft.ie/for-rent/flat-9-102-north-circular-road-stoneybatter-dublin-7/6529240"
+            },
+            "price_eur": {
+              "old": 1650,
+              "new": 1700
+            }
+          }
+        },
+        {
+          "at": "2026-07-19T06:41:38+00:00",
           "changes": {
             "status": {
               "old": "price_above_filter",

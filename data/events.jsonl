@@ -99,3 +99,5 @@
 {"at": "2026-07-18T06:05:28+00:00", "type": "new_listing", "listing_id": "daft-6617977", "url": "https://www.daft.ie/for-rent/flat-3-46-south-circular-road-adare-dublin-8-dublin-8/6617977", "price_eur": 1700}
 {"at": "2026-07-18T06:16:18+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1650, "new": 1700}}
 {"at": "2026-07-18T06:16:18+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1700, "new": 1650}}
+{"at": "2026-07-19T06:41:38+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1650, "new": 1700}}
+{"at": "2026-07-19T06:41:38+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1700, "new": 1650}}
