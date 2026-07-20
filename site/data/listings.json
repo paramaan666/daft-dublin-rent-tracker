@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-19T06:41:38+00:00",
+  "updated_at": "2026-07-20T07:26:16+00:00",
   "filters": {
     "locations": [
       "Dublin 1",
@@ -2306,6 +2306,40 @@
       "change_history": []
     },
     {
+      "id": "daft-6624451",
+      "status": "active",
+      "needs_review": true,
+      "review_reasons": [
+        "double_bed_count_not_visible_in_email"
+      ],
+      "title": "Property Alert",
+      "location": "Dublin 12",
+      "postcode": "Dublin 12",
+      "price_eur": 1500,
+      "rent_period": "month",
+      "double_beds": null,
+      "url": "https://www.daft.ie/for-rent/mourne-road-drimnagh-dublin-12/6624451?ea=1",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "daft_email",
+      "source_message_ids": [
+        "19f7b9890be647d0"
+      ],
+      "source_subjects": [
+        "Drimnagh, Apartment To Let, €1,500 per month"
+      ],
+      "first_seen": "2026-07-19T18:17:03+00:00",
+      "last_seen": "2026-07-19T18:17:03+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-19T18:17:03+00:00",
+          "price_eur": 1500,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
       "id": "daft-6529240",
       "status": "active",
       "needs_review": true,
@@ -2332,6 +2366,16 @@
         {
           "seen_at": "2026-07-09",
           "price_eur": 1700
+        },
+        {
+          "seen_at": "2026-07-18T05:55:00+00:00",
+          "price_eur": 1650,
+          "rent_period": "month"
+        },
+        {
+          "seen_at": "2026-07-09",
+          "price_eur": 1700,
+          "rent_period": "month"
         },
         {
           "seen_at": "2026-07-18T05:55:00+00:00",
@@ -2439,6 +2483,40 @@
         },
         {
           "at": "2026-07-19T06:41:38+00:00",
+          "changes": {
+            "status": {
+              "old": "price_above_filter",
+              "new": "active"
+            },
+            "url": {
+              "old": "https://www.daft.ie/for-rent/flat-9-102-north-circular-road-stoneybatter-dublin-7/6529240",
+              "new": "https://www.daft.ie/for-rent/flat-flat-9-102-north-circular-road-dublin-7-stoneybatter-dublin-7/6529240"
+            },
+            "price_eur": {
+              "old": 1700,
+              "new": 1650
+            }
+          }
+        },
+        {
+          "at": "2026-07-20T07:26:16+00:00",
+          "changes": {
+            "status": {
+              "old": "active",
+              "new": "price_above_filter"
+            },
+            "url": {
+              "old": "https://www.daft.ie/for-rent/flat-flat-9-102-north-circular-road-dublin-7-stoneybatter-dublin-7/6529240",
+              "new": "https://www.daft.ie/for-rent/flat-9-102-north-circular-road-stoneybatter-dublin-7/6529240"
+            },
+            "price_eur": {
+              "old": 1650,
+              "new": 1700
+            }
+          }
+        },
+        {
+          "at": "2026-07-20T07:26:16+00:00",
           "changes": {
             "status": {
               "old": "price_above_filter",
