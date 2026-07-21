@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-20T07:26:16+00:00",
+  "updated_at": "2026-07-21T06:39:53+00:00",
   "filters": {
     "locations": [
       "Dublin 1",
@@ -136,6 +136,40 @@
         {
           "seen_at": "2026-07-13T10:34:04+00:00",
           "price_eur": 285,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
+      "id": "daft-6625384",
+      "status": "active",
+      "needs_review": true,
+      "review_reasons": [
+        "double_bed_count_not_visible_in_email"
+      ],
+      "title": "Property Alert",
+      "location": "Dublin 7",
+      "postcode": "Dublin 7",
+      "price_eur": 300,
+      "rent_period": "month",
+      "double_beds": null,
+      "url": "https://www.daft.ie/for-rent/prussia-street-dublin-7/6625384?ea=1",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "daft_email",
+      "source_message_ids": [
+        "19f8058887978708"
+      ],
+      "source_subjects": [
+        "Dublin 7, Apartment To Let, €300 per month"
+      ],
+      "first_seen": "2026-07-20T16:25:12+00:00",
+      "last_seen": "2026-07-20T16:25:12+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-20T16:25:12+00:00",
+          "price_eur": 300,
           "rent_period": "month"
         }
       ],
@@ -2340,6 +2374,41 @@
       "change_history": []
     },
     {
+      "id": "daft-6624657",
+      "status": "active",
+      "needs_review": true,
+      "review_reasons": [
+        "postcode_not_visible_in_email",
+        "double_bed_count_not_visible_in_email"
+      ],
+      "title": "Property Alert",
+      "location": null,
+      "postcode": null,
+      "price_eur": 1500,
+      "rent_period": "month",
+      "double_beds": null,
+      "url": "https://www.daft.ie/for-rent/phibsborough-road-phibsborough-co-dublin/6624657?ea=1",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "daft_email",
+      "source_message_ids": [
+        "19f7ebd52e3eb961"
+      ],
+      "source_subjects": [
+        "Phibsborough, Apartment To Let, €1,500 per month"
+      ],
+      "first_seen": "2026-07-20T08:56:04+00:00",
+      "last_seen": "2026-07-20T08:56:04+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-20T08:56:04+00:00",
+          "price_eur": 1500,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
       "id": "daft-6529240",
       "status": "active",
       "needs_review": true,
@@ -2366,6 +2435,16 @@
         {
           "seen_at": "2026-07-09",
           "price_eur": 1700
+        },
+        {
+          "seen_at": "2026-07-18T05:55:00+00:00",
+          "price_eur": 1650,
+          "rent_period": "month"
+        },
+        {
+          "seen_at": "2026-07-09",
+          "price_eur": 1700,
+          "rent_period": "month"
         },
         {
           "seen_at": "2026-07-18T05:55:00+00:00",
@@ -2517,6 +2596,40 @@
         },
         {
           "at": "2026-07-20T07:26:16+00:00",
+          "changes": {
+            "status": {
+              "old": "price_above_filter",
+              "new": "active"
+            },
+            "url": {
+              "old": "https://www.daft.ie/for-rent/flat-9-102-north-circular-road-stoneybatter-dublin-7/6529240",
+              "new": "https://www.daft.ie/for-rent/flat-flat-9-102-north-circular-road-dublin-7-stoneybatter-dublin-7/6529240"
+            },
+            "price_eur": {
+              "old": 1700,
+              "new": 1650
+            }
+          }
+        },
+        {
+          "at": "2026-07-21T06:39:53+00:00",
+          "changes": {
+            "status": {
+              "old": "active",
+              "new": "price_above_filter"
+            },
+            "url": {
+              "old": "https://www.daft.ie/for-rent/flat-flat-9-102-north-circular-road-dublin-7-stoneybatter-dublin-7/6529240",
+              "new": "https://www.daft.ie/for-rent/flat-9-102-north-circular-road-stoneybatter-dublin-7/6529240"
+            },
+            "price_eur": {
+              "old": 1650,
+              "new": 1700
+            }
+          }
+        },
+        {
+          "at": "2026-07-21T06:39:53+00:00",
           "changes": {
             "status": {
               "old": "price_above_filter",

@@ -104,3 +104,7 @@
 {"at": "2026-07-20T07:26:16+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1650, "new": 1700}}
 {"at": "2026-07-20T07:26:16+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1700, "new": 1650}}
 {"at": "2026-07-20T07:26:16+00:00", "type": "new_listing", "listing_id": "daft-6624451", "url": "https://www.daft.ie/for-rent/mourne-road-drimnagh-dublin-12/6624451?ea=1", "price_eur": 1500}
+{"at": "2026-07-21T06:39:53+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1650, "new": 1700}}
+{"at": "2026-07-21T06:39:53+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1700, "new": 1650}}
+{"at": "2026-07-21T06:39:53+00:00", "type": "new_listing", "listing_id": "daft-6625384", "url": "https://www.daft.ie/for-rent/prussia-street-dublin-7/6625384?ea=1", "price_eur": 300}
+{"at": "2026-07-21T06:39:53+00:00", "type": "new_listing", "listing_id": "daft-6624657", "url": "https://www.daft.ie/for-rent/phibsborough-road-phibsborough-co-dublin/6624657?ea=1", "price_eur": 1500}
