@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-22T06:41:11+00:00",
+  "updated_at": "2026-07-23T06:38:59+00:00",
   "filters": {
     "locations": [
       "Dublin 1",
@@ -635,6 +635,75 @@
       "change_history": []
     },
     {
+      "id": "daft-6627208",
+      "status": "active",
+      "needs_review": true,
+      "review_reasons": [
+        "double_bed_count_not_visible_in_email"
+      ],
+      "title": "Property Alert",
+      "location": "Dublin 10",
+      "postcode": "Dublin 10",
+      "price_eur": 1000,
+      "rent_period": "month",
+      "double_beds": null,
+      "url": "https://www.daft.ie/for-rent/colepark-drive-ballyfermot-dublin-10-room-to-rent-/6627208?ea=1",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "daft_email",
+      "source_message_ids": [
+        "19f8a227ed97532b"
+      ],
+      "source_subjects": [
+        "Ballyfermot, House To Let, €1,000 per month"
+      ],
+      "first_seen": "2026-07-22T14:02:22+00:00",
+      "last_seen": "2026-07-22T14:02:22+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-22T14:02:22+00:00",
+          "price_eur": 1000,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
+      "id": "daft-6590481",
+      "status": "active",
+      "needs_review": true,
+      "review_reasons": [
+        "postcode_not_visible_in_email",
+        "double_bed_count_not_visible_in_email"
+      ],
+      "title": "Property Alert",
+      "location": null,
+      "postcode": null,
+      "price_eur": 1030,
+      "rent_period": "month",
+      "double_beds": null,
+      "url": "https://www.daft.ie/for-rent/brighton-square-rathgar-co-dublin/6590481?ea=1",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "daft_email",
+      "source_message_ids": [
+        "19f88b072a14f46e"
+      ],
+      "source_subjects": [
+        "Rathgar, Apartment To Let, €1,030 per month"
+      ],
+      "first_seen": "2026-07-22T07:18:12+00:00",
+      "last_seen": "2026-07-22T07:18:12+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-22T07:18:12+00:00",
+          "price_eur": 1030,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
       "id": "daft-6616306",
       "status": "active",
       "needs_review": true,
@@ -1198,6 +1267,41 @@
       "price_history": [
         {
           "seen_at": "2026-07-16T13:00:38+00:00",
+          "price_eur": 1300,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
+      "id": "daft-6627642",
+      "status": "active",
+      "needs_review": true,
+      "review_reasons": [
+        "postcode_not_visible_in_email",
+        "double_bed_count_not_visible_in_email"
+      ],
+      "title": "Property Alert",
+      "location": null,
+      "postcode": null,
+      "price_eur": 1300,
+      "rent_period": "month",
+      "double_beds": null,
+      "url": "https://www.daft.ie/for-rent/st-conleths-road-greenhills-co-dublin/6627642?ea=1",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "daft_email",
+      "source_message_ids": [
+        "19f8d6020f05f41f"
+      ],
+      "source_subjects": [
+        "Greenhills, Apartment To Let, €1,300 per month"
+      ],
+      "first_seen": "2026-07-23T05:08:34+00:00",
+      "last_seen": "2026-07-23T05:08:34+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-23T05:08:34+00:00",
           "price_eur": 1300,
           "rent_period": "month"
         }
@@ -2490,6 +2594,16 @@
           "seen_at": "2026-07-18T05:55:00+00:00",
           "price_eur": 1650,
           "rent_period": "month"
+        },
+        {
+          "seen_at": "2026-07-09",
+          "price_eur": 1700,
+          "rent_period": "month"
+        },
+        {
+          "seen_at": "2026-07-18T05:55:00+00:00",
+          "price_eur": 1650,
+          "rent_period": "month"
         }
       ],
       "change_history": [
@@ -2674,6 +2788,40 @@
         },
         {
           "at": "2026-07-22T06:41:11+00:00",
+          "changes": {
+            "status": {
+              "old": "price_above_filter",
+              "new": "active"
+            },
+            "url": {
+              "old": "https://www.daft.ie/for-rent/flat-9-102-north-circular-road-stoneybatter-dublin-7/6529240",
+              "new": "https://www.daft.ie/for-rent/flat-flat-9-102-north-circular-road-dublin-7-stoneybatter-dublin-7/6529240"
+            },
+            "price_eur": {
+              "old": 1700,
+              "new": 1650
+            }
+          }
+        },
+        {
+          "at": "2026-07-23T06:38:59+00:00",
+          "changes": {
+            "status": {
+              "old": "active",
+              "new": "price_above_filter"
+            },
+            "url": {
+              "old": "https://www.daft.ie/for-rent/flat-flat-9-102-north-circular-road-dublin-7-stoneybatter-dublin-7/6529240",
+              "new": "https://www.daft.ie/for-rent/flat-9-102-north-circular-road-stoneybatter-dublin-7/6529240"
+            },
+            "price_eur": {
+              "old": 1650,
+              "new": 1700
+            }
+          }
+        },
+        {
+          "at": "2026-07-23T06:38:59+00:00",
           "changes": {
             "status": {
               "old": "price_above_filter",

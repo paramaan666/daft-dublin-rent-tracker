@@ -110,3 +110,8 @@
 {"at": "2026-07-21T06:39:53+00:00", "type": "new_listing", "listing_id": "daft-6624657", "url": "https://www.daft.ie/for-rent/phibsborough-road-phibsborough-co-dublin/6624657?ea=1", "price_eur": 1500}
 {"at": "2026-07-22T06:41:11+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1650, "new": 1700}}
 {"at": "2026-07-22T06:41:11+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1700, "new": 1650}}
+{"at": "2026-07-23T06:38:59+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1650, "new": 1700}}
+{"at": "2026-07-23T06:38:59+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1700, "new": 1650}}
+{"at": "2026-07-23T06:38:59+00:00", "type": "new_listing", "listing_id": "daft-6627642", "url": "https://www.daft.ie/for-rent/st-conleths-road-greenhills-co-dublin/6627642?ea=1", "price_eur": 1300}
+{"at": "2026-07-23T06:38:59+00:00", "type": "new_listing", "listing_id": "daft-6627208", "url": "https://www.daft.ie/for-rent/colepark-drive-ballyfermot-dublin-10-room-to-rent-/6627208?ea=1", "price_eur": 1000}
+{"at": "2026-07-23T06:38:59+00:00", "type": "new_listing", "listing_id": "daft-6590481", "url": "https://www.daft.ie/for-rent/brighton-square-rathgar-co-dublin/6590481?ea=1", "price_eur": 1030}
