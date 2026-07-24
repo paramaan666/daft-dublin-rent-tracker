@@ -115,3 +115,7 @@
 {"at": "2026-07-23T06:38:59+00:00", "type": "new_listing", "listing_id": "daft-6627642", "url": "https://www.daft.ie/for-rent/st-conleths-road-greenhills-co-dublin/6627642?ea=1", "price_eur": 1300}
 {"at": "2026-07-23T06:38:59+00:00", "type": "new_listing", "listing_id": "daft-6627208", "url": "https://www.daft.ie/for-rent/colepark-drive-ballyfermot-dublin-10-room-to-rent-/6627208?ea=1", "price_eur": 1000}
 {"at": "2026-07-23T06:38:59+00:00", "type": "new_listing", "listing_id": "daft-6590481", "url": "https://www.daft.ie/for-rent/brighton-square-rathgar-co-dublin/6590481?ea=1", "price_eur": 1030}
+{"at": "2026-07-24T06:38:06+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1650, "new": 1700}}
+{"at": "2026-07-24T06:38:06+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1700, "new": 1650}}
+{"at": "2026-07-24T06:38:06+00:00", "type": "new_listing", "listing_id": "daft-6628898", "url": "https://www.daft.ie/for-rent/north-circular-road-phoenix-park-end-north-circular-road-dublin-7/6628898?ea=1", "price_eur": 1500}
+{"at": "2026-07-24T06:38:06+00:00", "type": "new_listing", "listing_id": "daft-6628338", "url": "https://www.daft.ie/for-rent/apartment-4-205-north-circular-road-north-circular-road-dublin-7/6628338?ea=1", "price_eur": 1400}
