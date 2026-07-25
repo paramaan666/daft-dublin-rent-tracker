@@ -119,3 +119,6 @@
 {"at": "2026-07-24T06:38:06+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1700, "new": 1650}}
 {"at": "2026-07-24T06:38:06+00:00", "type": "new_listing", "listing_id": "daft-6628898", "url": "https://www.daft.ie/for-rent/north-circular-road-phoenix-park-end-north-circular-road-dublin-7/6628898?ea=1", "price_eur": 1500}
 {"at": "2026-07-24T06:38:06+00:00", "type": "new_listing", "listing_id": "daft-6628338", "url": "https://www.daft.ie/for-rent/apartment-4-205-north-circular-road-north-circular-road-dublin-7/6628338?ea=1", "price_eur": 1400}
+{"at": "2026-07-25T06:27:54+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1650, "new": 1700}}
+{"at": "2026-07-25T06:27:54+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1700, "new": 1650}}
+{"at": "2026-07-25T06:27:54+00:00", "type": "new_listing", "listing_id": "daft-6629830", "url": "https://www.daft.ie/for-rent/broombridge-road-cabra-dublin-7-granny-flat-/6629830?ea=1", "price_eur": 1250}
