@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-27T07:47:44+00:00",
+  "updated_at": "2026-07-28T06:38:40+00:00",
   "filters": {
     "locations": [
       "Dublin 1",
@@ -259,6 +259,40 @@
           }
         }
       ]
+    },
+    {
+      "id": "daft-6631114",
+      "status": "active",
+      "needs_review": true,
+      "review_reasons": [
+        "double_bed_count_not_visible_in_email"
+      ],
+      "title": "Property Alert",
+      "location": "Dublin 7",
+      "postcode": "Dublin 7",
+      "price_eur": 500,
+      "rent_period": "month",
+      "double_beds": null,
+      "url": "https://www.daft.ie/for-rent/3bed-prussia-street-dublin-7/6631114?ea=1",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "daft_email",
+      "source_message_ids": [
+        "19fa3f5ead7d8219"
+      ],
+      "source_subjects": [
+        "Dublin 7, Apartment To Let, €500 per month"
+      ],
+      "first_seen": "2026-07-27T14:23:49+00:00",
+      "last_seen": "2026-07-27T14:23:49+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-27T14:23:49+00:00",
+          "price_eur": 500,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
     },
     {
       "id": "daft-5382570",
@@ -855,6 +889,40 @@
         {
           "seen_at": "2026-07-09",
           "price_eur": 1150
+        }
+      ],
+      "change_history": []
+    },
+    {
+      "id": "daft-6630634",
+      "status": "active",
+      "needs_review": true,
+      "review_reasons": [
+        "double_bed_count_not_visible_in_email"
+      ],
+      "title": "Property Alert",
+      "location": "Dublin 10",
+      "postcode": "Dublin 10",
+      "price_eur": 1150,
+      "rent_period": "month",
+      "double_beds": null,
+      "url": "https://www.daft.ie/for-rent/le-fanu-road-ballyfermot-dublin-10/6630634?ea=1",
+      "thumbnail_url": null,
+      "image_urls": [],
+      "source": "daft_email",
+      "source_message_ids": [
+        "19fa2dc26b9dd658"
+      ],
+      "source_subjects": [
+        "Ballyfermot, Apartment To Let, €1,150 per month"
+      ],
+      "first_seen": "2026-07-27T09:16:04+00:00",
+      "last_seen": "2026-07-27T09:16:04+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-07-27T09:16:04+00:00",
+          "price_eur": 1150,
+          "rent_period": "month"
         }
       ],
       "change_history": []
@@ -2785,6 +2853,16 @@
           "seen_at": "2026-07-18T05:55:00+00:00",
           "price_eur": 1650,
           "rent_period": "month"
+        },
+        {
+          "seen_at": "2026-07-09",
+          "price_eur": 1700,
+          "rent_period": "month"
+        },
+        {
+          "seen_at": "2026-07-18T05:55:00+00:00",
+          "price_eur": 1650,
+          "rent_period": "month"
         }
       ],
       "change_history": [
@@ -3139,6 +3217,40 @@
         },
         {
           "at": "2026-07-27T07:47:44+00:00",
+          "changes": {
+            "status": {
+              "old": "price_above_filter",
+              "new": "active"
+            },
+            "url": {
+              "old": "https://www.daft.ie/for-rent/flat-9-102-north-circular-road-stoneybatter-dublin-7/6529240",
+              "new": "https://www.daft.ie/for-rent/flat-flat-9-102-north-circular-road-dublin-7-stoneybatter-dublin-7/6529240"
+            },
+            "price_eur": {
+              "old": 1700,
+              "new": 1650
+            }
+          }
+        },
+        {
+          "at": "2026-07-28T06:38:40+00:00",
+          "changes": {
+            "status": {
+              "old": "active",
+              "new": "price_above_filter"
+            },
+            "url": {
+              "old": "https://www.daft.ie/for-rent/flat-flat-9-102-north-circular-road-dublin-7-stoneybatter-dublin-7/6529240",
+              "new": "https://www.daft.ie/for-rent/flat-9-102-north-circular-road-stoneybatter-dublin-7/6529240"
+            },
+            "price_eur": {
+              "old": 1650,
+              "new": 1700
+            }
+          }
+        },
+        {
+          "at": "2026-07-28T06:38:40+00:00",
           "changes": {
             "status": {
               "old": "price_above_filter",
