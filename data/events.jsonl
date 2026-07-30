@@ -134,3 +134,5 @@
 {"at": "2026-07-29T06:43:21+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1650, "new": 1700}}
 {"at": "2026-07-29T06:43:21+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1700, "new": 1650}}
 {"at": "2026-07-29T06:43:21+00:00", "type": "new_listing", "listing_id": "daft-6632462", "url": "https://www.daft.ie/for-rent/ranelagh-road-ranelagh-dublin-6/6632462?ea=1", "price_eur": 1395}
+{"at": "2026-07-30T06:39:28+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1650, "new": 1700}}
+{"at": "2026-07-30T06:39:28+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1700, "new": 1650}}
