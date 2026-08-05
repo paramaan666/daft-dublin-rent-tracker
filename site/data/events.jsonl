@@ -148,3 +148,7 @@
 {"at": "2026-08-04T06:39:00+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1650, "new": 1700}}
 {"at": "2026-08-04T06:39:00+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1700, "new": 1650}}
 {"at": "2026-08-04T06:39:00+00:00", "type": "new_listing", "listing_id": "daft-6636376", "url": "https://www.daft.ie/for-rent/flat-3-105-grove-park-rathmines-rathmines-dublin-6/6636376?ea=1", "price_eur": 910}
+{"at": "2026-08-05T06:40:03+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1650, "new": 1700}}
+{"at": "2026-08-05T06:40:03+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1700, "new": 1650}}
+{"at": "2026-08-05T06:40:03+00:00", "type": "new_listing", "listing_id": "daft-6637135", "url": "https://www.daft.ie/for-rent/apartment-4-5-old-cabra-road-north-circular-road-dublin-7/6637135?ea=1", "price_eur": 1500}
+{"at": "2026-08-05T06:40:03+00:00", "type": "new_listing", "listing_id": "daft-6637064", "url": "https://www.daft.ie/for-rent/flat-6-4-grosvenor-place-rathmines-dublin-6/6637064?ea=1", "price_eur": 1325}

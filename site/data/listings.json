@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-04T06:39:00+00:00",
+  "updated_at": "2026-08-05T06:40:03+00:00",
   "filters": {
     "locations": [
       "Dublin 1",
@@ -1556,6 +1556,44 @@
       "change_history": []
     },
     {
+      "id": "daft-6637064",
+      "status": "active",
+      "needs_review": true,
+      "review_reasons": [
+        "double_bed_count_not_visible_in_email"
+      ],
+      "title": "Property Alert",
+      "location": "Dublin 6",
+      "postcode": "Dublin 6",
+      "price_eur": 1325,
+      "rent_period": "month",
+      "double_beds": null,
+      "url": "https://www.daft.ie/for-rent/flat-6-4-grosvenor-place-rathmines-dublin-6/6637064?ea=1",
+      "thumbnail_url": "https://mailassets.distilled.ie/email/daft/daft-logox2.png",
+      "image_urls": [
+        "https://mailassets.distilled.ie/email/daft/daft-logox2.png",
+        "https://mailassets.distilled.ie/email/daft/ber/SI_666.png",
+        "https://mailassets.distilled.ie/email/daft/daft-logo-updated.png"
+      ],
+      "source": "daft_email",
+      "source_message_ids": [
+        "19fcccd0886b3d5d"
+      ],
+      "source_subjects": [
+        "Rathmines, Property To Let, €1,325 per month"
+      ],
+      "first_seen": "2026-08-04T12:43:36+00:00",
+      "last_seen": "2026-08-04T12:43:36+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-08-04T12:43:36+00:00",
+          "price_eur": 1325,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
       "id": "daft-6584957",
       "status": "active",
       "needs_review": true,
@@ -2832,6 +2870,44 @@
       "change_history": []
     },
     {
+      "id": "daft-6637135",
+      "status": "active",
+      "needs_review": true,
+      "review_reasons": [
+        "double_bed_count_not_visible_in_email"
+      ],
+      "title": "Property Alert",
+      "location": "Dublin 7",
+      "postcode": "Dublin 7",
+      "price_eur": 1500,
+      "rent_period": "month",
+      "double_beds": null,
+      "url": "https://www.daft.ie/for-rent/apartment-4-5-old-cabra-road-north-circular-road-dublin-7/6637135?ea=1",
+      "thumbnail_url": "https://mailassets.distilled.ie/email/daft/daft-logox2.png",
+      "image_urls": [
+        "https://mailassets.distilled.ie/email/daft/daft-logox2.png",
+        "https://mailassets.distilled.ie/email/daft/ber/F.png",
+        "https://mailassets.distilled.ie/email/daft/daft-logo-updated.png"
+      ],
+      "source": "daft_email",
+      "source_message_ids": [
+        "19fcd0534de817f1"
+      ],
+      "source_subjects": [
+        "North Circular Road, Apartment To Let, €1,500 per month"
+      ],
+      "first_seen": "2026-08-04T13:44:57+00:00",
+      "last_seen": "2026-08-04T13:44:57+00:00",
+      "price_history": [
+        {
+          "seen_at": "2026-08-04T13:44:57+00:00",
+          "price_eur": 1500,
+          "rent_period": "month"
+        }
+      ],
+      "change_history": []
+    },
+    {
       "id": "daft-6529240",
       "status": "active",
       "needs_review": true,
@@ -2858,6 +2934,16 @@
         {
           "seen_at": "2026-07-09",
           "price_eur": 1700
+        },
+        {
+          "seen_at": "2026-07-18T05:55:00+00:00",
+          "price_eur": 1650,
+          "rent_period": "month"
+        },
+        {
+          "seen_at": "2026-07-09",
+          "price_eur": 1700,
+          "rent_period": "month"
         },
         {
           "seen_at": "2026-07-18T05:55:00+00:00",
@@ -3669,6 +3755,40 @@
         },
         {
           "at": "2026-08-04T06:39:00+00:00",
+          "changes": {
+            "status": {
+              "old": "price_above_filter",
+              "new": "active"
+            },
+            "url": {
+              "old": "https://www.daft.ie/for-rent/flat-9-102-north-circular-road-stoneybatter-dublin-7/6529240",
+              "new": "https://www.daft.ie/for-rent/flat-flat-9-102-north-circular-road-dublin-7-stoneybatter-dublin-7/6529240"
+            },
+            "price_eur": {
+              "old": 1700,
+              "new": 1650
+            }
+          }
+        },
+        {
+          "at": "2026-08-05T06:40:03+00:00",
+          "changes": {
+            "status": {
+              "old": "active",
+              "new": "price_above_filter"
+            },
+            "url": {
+              "old": "https://www.daft.ie/for-rent/flat-flat-9-102-north-circular-road-dublin-7-stoneybatter-dublin-7/6529240",
+              "new": "https://www.daft.ie/for-rent/flat-9-102-north-circular-road-stoneybatter-dublin-7/6529240"
+            },
+            "price_eur": {
+              "old": 1650,
+              "new": 1700
+            }
+          }
+        },
+        {
+          "at": "2026-08-05T06:40:03+00:00",
           "changes": {
             "status": {
               "old": "price_above_filter",
