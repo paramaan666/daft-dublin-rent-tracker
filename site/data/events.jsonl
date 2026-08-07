@@ -154,3 +154,6 @@
 {"at": "2026-08-05T06:40:03+00:00", "type": "new_listing", "listing_id": "daft-6637064", "url": "https://www.daft.ie/for-rent/flat-6-4-grosvenor-place-rathmines-dublin-6/6637064?ea=1", "price_eur": 1325}
 {"at": "2026-08-06T06:43:33+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1650, "new": 1700}}
 {"at": "2026-08-06T06:43:33+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1700, "new": 1650}}
+{"at": "2026-08-07T05:49:27+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1650, "new": 1700}}
+{"at": "2026-08-07T05:49:27+00:00", "type": "price_changed", "listing_id": "daft-6529240", "change": {"old": 1700, "new": 1650}}
+{"at": "2026-08-07T05:49:27+00:00", "type": "new_listing", "listing_id": "daft-6632734", "url": "https://www.daft.ie/for-rent/kinvara-road-navan-road-dublin-7-ashtown-dublin-7/6632734?ea=1", "price_eur": 675}
